@@ -1,0 +1,466 @@
+{
+  "user": [
+    {
+      "id": 1,
+      "name": "Đặng Hải Thanh",
+      "phonenumber": "0348948389",
+      "email": "dangthanhan@gmail.com",
+      "password": "123456",
+      "role": "customer"
+    },
+    {
+      "id": 2,
+      "name": "Đặng Thành An",
+      "phonenumber": "0339541266",
+      "email": "dangthanhan.c2ap@gmail.com",
+      "password": "123456",
+      "role": "customer"
+    },
+    {
+      "id": 3,
+      "name": "admin",
+      "phonenumber": "0339541266",
+      "email": "admin",
+      "password": "admin",
+      "role": "admin"
+    },
+    {
+      "id": 4
+    },
+    {
+      "email": "dangthanhan.c2ap@gmail.com",
+      "password": "123456",
+      "id": 5
+    },
+    {
+      "email": "dangthanhan.c2ap@gmail.com",
+      "password": "123456",
+      "id": 6
+    },
+    {
+      "email": "dangthanhan.c2ap@gmail.com",
+      "password": "123456",
+      "id": 7
+    },
+    {
+      "email": "dangthanhan.c2ap@gmail.com",
+      "password": "123456",
+      "id": 8
+    },
+    {
+      "email": "topfancoolmate2@gmail.com",
+      "password": "123456",
+      "id": 9
+    },
+    {
+      "email": "dangthanhan.c2ap@gmail.com",
+      "password": "123456",
+      "id": 10
+    }
+  ],
+  "product": [
+    {
+      "productID": 1,
+      "productName": "Áo thun Marvel Oversize Graffiti Warrior King",
+      "color": [
+        {
+          "colorText": "Tím",
+          "colorImg": "https://media.coolmate.me/cdn-cgi/image/width=160,height=160,quality=80,format=auto/uploads/November2022/mau-tim-1-new_97.jpg"
+        },
+        {
+          "colorText": "Đen",
+          "colorImg": "https://media.coolmate.me/cdn-cgi/image/width=160,height=160,quality=80,format=auto/uploads/November2022/mau-den-black-panther_42.jpg"
+        }
+      ],
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "sale": "Mua 2 được giảm thêm 10%",
+      "imgUrl": [
+        [
+          "https://media.coolmate.me/cdn-cgi/image/width=672,height=990,quality=85,format=auto/uploads/November2022/ao-thun-black-panther-warriorking1_61.jpg",
+          "https://media.coolmate.me/cdn-cgi/image/width=672,height=990,quality=80/image/November2022/ao-thun-Marvel-Oversize-Graffiti-Warrior-King-1_2_21.jpg",
+          "https://media.coolmate.me/cdn-cgi/image/width=672,height=990,quality=80/image/November2022/ao-thun-Marvel-Oversize-Graffiti-Warrior-King-1_2_21.jpg"
+        ],
+        [
+          "https://media.coolmate.me/cdn-cgi/image/quality=100/uploads/November2022/ao-thun-black-panther-warrior-king222.jpg",
+          "https://media.coolmate.me/cdn-cgi/image/quality=100/uploads/November2022/ao-thun-Marvel-Oversize-Graffiti-Warrior-King-1_22_50.jpg",
+          "https://media.coolmate.me/cdn-cgi/image/quality=100/uploads/November2022/ao-thun-Marvel-Oversize-Graffiti-Warrior-King-1_22_50.jpg"
+        ]
+      ],
+      "quanlityAvailable": 100,
+      "price": 259000,
+      "decription": "",
+      "cataloryID": "1"
+    },
+    {
+      "productID": 2,
+      "productName": "Áo thun Marvel Oversize Wakanda Forever - Panther Pride",
+      "color": [
+        {
+          "colorText": "Đen",
+          "colorImg": "https://media.coolmate.me/cdn-cgi/image/width=160,height=160,quality=80,format=auto/uploads/November2022/mau-den-black-panther_42.jpg"
+        }
+      ],
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "sale": "Mua 2 được giảm thêm 10%",
+      "imgUrl": [
+        [
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/ao-thun-black-panther-wakanda4ever1.jpg",
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/October2022/ao-thun-Marvel-Oversize-Wakanda-Forever-8.jpg"
+        ],
+        [
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/ao-thun-black-panther-wakanda4ever4.jpg",
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/ao-thun-black-panther-wakanda4ever6.jpg"
+        ]
+      ],
+      "quanlityAvailable": 100,
+      "price": 259000,
+      "decription": "",
+      "cataloryID": "1"
+    },
+    {
+      "productID": 3,
+      "productName": "Áo thun Marvel Oversize Black Panther - Energy Pulse",
+      "color": [
+        {
+          "colorText": "Đen",
+          "colorImg": "https://media.coolmate.me/cdn-cgi/image/width=160,height=160,quality=80,format=auto/uploads/November2022/mau-den-black-panther_42.jpg"
+        }
+      ],
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "sale": "Mua 2 được giảm thêm 10%",
+      "imgUrl": [
+        [
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/ao-thun-black-panther-energypulse2.jpg",
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/ao-thun-black-panther-pulse22_27.jpg"
+        ],
+        [
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/ao-thun-black-panther-energypulse5.jpg",
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/ao-thun-black-panther-energypulse4.jpg"
+        ]
+      ],
+      "quanlityAvailable": 100,
+      "price": 259000,
+      "decription": "",
+      "cataloryID": "1"
+    },
+    {
+      "productID": 4,
+      "productName": "Áo thun Marvel Oversize Pride Wakanda",
+      "color": [
+        {
+          "colorText": "Tím",
+          "colorImg": "https://media.coolmate.me/cdn-cgi/image/width=160,height=160,quality=80,format=auto/uploads/November2022/mau-tim-1-new_97.jpg"
+        },
+        {
+          "colorText": "Đen",
+          "colorImg": "https://media.coolmate.me/cdn-cgi/image/width=160,height=160,quality=80,format=auto/uploads/November2022/mau-den-black-panther_42.jpg"
+        }
+      ],
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "sale": "Mua 2 được giảm thêm 10%",
+      "imgUrl": [
+        [
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/DSC00871_copy.jpg",
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/October2022/ao-thun-Marvel-Oversize-King4ever-1_63.jpg"
+        ],
+        [
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/DSC00873_copy.jpg",
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/DSC00869_copy.jpg"
+        ]
+      ],
+      "quanlityAvailable": 100,
+      "price": 259000,
+      "decription": "",
+      "cataloryID": "1"
+    },
+    {
+      "productID": 5,
+      "productName": "Mũ len thêu logo Coolmate",
+      "color": [
+        {
+          "colorText": "Kem",
+          "colorImg": "https://media.coolmate.me/cdn-cgi/image/width=160,height=160,quality=80,format=auto/uploads/October2022/mu-len-theu-logo-coolmate-mau-kem5.jpg"
+        },
+        {
+          "colorText": "Đen",
+          "colorImg": "https://media.coolmate.me/cdn-cgi/image/width=160,height=160,quality=80,format=auto/uploads/November2022/mau-den-black-panther_42.jpg"
+        },
+        {
+          "colorText": "Xám",
+          "colorImg": "https://media.coolmate.me/cdn-cgi/image/width=160,height=160,quality=80,format=auto/uploads/October2022/mu-len-theu-logo-coolmate-mau-xam4.jpg"
+        }
+      ],
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "sale": "Mua 2 được giảm thêm 10%",
+      "imgUrl": [
+        [
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/October2022/mu-len-theu-logo-coolmate-mau-kem1.jpg",
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/October2022/mu-beanie2_96.jpg"
+        ],
+        [
+          "https://media.coolmate.me/cdn-cgi/image/quality=100/uploads/October2022/mu-beanie-2.jpg",
+          "https://media.coolmate.me/cdn-cgi/image/quality=100/uploads/October2022/mu-beanie-cm2.jpg"
+        ]
+      ],
+      "quanlityAvailable": 100,
+      "price": 259000,
+      "decription": "",
+      "cataloryID": "2"
+    },
+    {
+      "productID": 6,
+      "productName": "Áo thun thể thao dài tay nam Recycle Active",
+      "color": [
+        {
+          "colorText": "Xanh rêu",
+          "colorImg": "https://media.coolmate.me/cdn-cgi/image/width=160,height=160,quality=80,format=auto/uploads/October2022/ao-thun-the-thao_-dai-tay-nam-Recycle-Active-V2-mau-xanh-reu1.jpg"
+        },
+        {
+          "colorText": "Xanh navy",
+          "colorImg": "https://media.coolmate.me/cdn-cgi/image/width=160,height=160,quality=80,format=auto/uploads/October2022/ao-thun-the-thao_-dai-tay-nam-Recycle-Active-V2-mau-xanh-navy2.jpg"
+        },
+        {
+          "colorText": "Đen",
+          "colorImg": "https://media.coolmate.me/cdn-cgi/image/width=160,height=160,quality=80,format=auto/uploads/October2022/ao-thun-the-thao_-dai-tay-nam-Recycle-Active-V2-mau-den1.jpg"
+        }
+      ],
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "sale": "Mua 2 được giảm thêm 10%",
+      "imgUrl": [
+        [
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/anh-mau-ao-thun-dai-tay-recycle-active-xam-dam-7.jpg",
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/October2022/ao-thun-the-thao-dai-tay-recycle-active-xam-dam-1.jpg"
+        ],
+        [
+          "https://media.coolmate.me/cdn-cgi/image/quality=100/uploads/November2022/up2anh-mau-ao-thun-dai-tay-recycle-active-xanh-navy-1-1_41.jpg",
+          "https://media.coolmate.me/cdn-cgi/image/quality=100/uploads/October2022/ao-thun-the-thao-dai-tay-recycle-active-navy-1.jpg"
+        ]
+      ],
+      "quanlityAvailable": 100,
+      "price": 259000,
+      "decription": "",
+      "cataloryID": "2"
+    },
+    {
+      "productID": 7,
+      "productName": "Áo nỉ oversize Youth Culture - màu Be",
+      "color": [
+        {
+          "colorText": "Bee",
+          "colorImg": "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/ao-ni-youth-culture.jpg"
+        }
+      ],
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "sale": "Mua 2 được giảm thêm 10%",
+      "imgUrl": [
+        [
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/ao-ni-youth-culture.jpg",
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/84_rising_chi-tiet-3.jpg"
+        ],
+        [
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/December2022/sweater-youth-culture-15.jpg",
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/December2022/sweater-youth-culture-16.jpg"
+        ]
+      ],
+      "quanlityAvailable": 100,
+      "price": 259000,
+      "decription": "",
+      "cataloryID": "2"
+    },
+    {
+      "productID": 8,
+      "productName": "Áo Hoodie oversize YOUTH CULTURE",
+      "color": [
+        {
+          "colorText": "Đen",
+          "colorImg": "https://media.coolmate.me/cdn-cgi/image/width=160,height=160,quality=80,format=auto/uploads/October2022/ao-thun-the-thao_-dai-tay-nam-Recycle-Active-V2-mau-den1.jpg"
+        }
+      ],
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "sale": "Mua 2 được giảm thêm 10%",
+      "imgUrl": [
+        [
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/October2022/84rising-oversize-hoodie-YOUTH-CULTURE-Truoc.png",
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/ao-hoodie-youth-culture-11.jpg"
+        ],
+        [
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/ao-hoodie-youth-culture-12.jpg",
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/ao-hoodie-youth-culture-13.jpg"
+        ]
+      ],
+      "quanlityAvailable": 100,
+      "price": 259000,
+      "decription": "",
+      "cataloryID": "2"
+    }
+  ],
+  "catalory": [
+    {
+      "cataloryID": 1,
+      "cataloryName": "BST Black Panther"
+    },
+    {
+      "cataloryID": 2,
+      "cataloryName": "BST Mùa đông"
+    },
+    {
+      "cataloryID": 3,
+      "cataloryName": "Phụ kiện"
+    }
+  ],
+  "cart": [
+    {
+      "productID": 7,
+      "productName": "Áo nỉ oversize Youth Culture - màu Be",
+      "color": [
+        "Đen",
+        "Tím"
+      ],
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "sale": "Mua 2 được giảm thêm 10%",
+      "imgUrl": [
+        [
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/ao-ni-youth-culture.jpg",
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/84_rising_chi-tiet-3.jpg"
+        ],
+        [
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/December2022/sweater-youth-culture-15.jpg",
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/December2022/sweater-youth-culture-16.jpg"
+        ]
+      ],
+      "quanlityAvailable": 100,
+      "price": 259000,
+      "decription": "",
+      "cataloryID": "2",
+      "colorCurrent": "Đen",
+      "quanlity": 1,
+      "sizeCurrent": "M",
+      "id": 4
+    },
+    {
+      "productID": 4,
+      "productName": "Áo thun Marvel Oversize Pride Wakanda",
+      "color": [
+        {
+          "colorText": "Tím",
+          "colorImg": "https://media.coolmate.me/cdn-cgi/image/width=160,height=160,quality=80,format=auto/uploads/November2022/mau-tim-1-new_97.jpg"
+        },
+        {
+          "colorText": "Đen",
+          "colorImg": "https://media.coolmate.me/cdn-cgi/image/width=160,height=160,quality=80,format=auto/uploads/November2022/mau-den-black-panther_42.jpg"
+        }
+      ],
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "sale": "Mua 2 được giảm thêm 10%",
+      "imgUrl": [
+        [
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/DSC00871_copy.jpg",
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/October2022/ao-thun-Marvel-Oversize-King4ever-1_63.jpg"
+        ],
+        [
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/DSC00873_copy.jpg",
+          "https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/November2022/DSC00869_copy.jpg"
+        ]
+      ],
+      "quanlityAvailable": 100,
+      "price": 259000,
+      "decription": "",
+      "cataloryID": "1",
+      "quanlity": 2,
+      "colorCurrent": "Đen",
+      "sizeCurrent": "L",
+      "id": 5
+    },
+    {
+      "productID": 1,
+      "productName": "Áo thun Marvel Oversize Graffiti Warrior King",
+      "color": [
+        {
+          "colorText": "Tím",
+          "colorImg": "https://media.coolmate.me/cdn-cgi/image/width=160,height=160,quality=80,format=auto/uploads/November2022/mau-tim-1-new_97.jpg"
+        },
+        {
+          "colorText": "Đen",
+          "colorImg": "https://media.coolmate.me/cdn-cgi/image/width=160,height=160,quality=80,format=auto/uploads/November2022/mau-den-black-panther_42.jpg"
+        }
+      ],
+      "size": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "sale": "Mua 2 được giảm thêm 10%",
+      "imgUrl": [
+        [
+          "https://media.coolmate.me/cdn-cgi/image/width=672,height=990,quality=85,format=auto/uploads/November2022/ao-thun-black-panther-warriorking1_61.jpg",
+          "https://media.coolmate.me/cdn-cgi/image/width=672,height=990,quality=80/image/November2022/ao-thun-Marvel-Oversize-Graffiti-Warrior-King-1_2_21.jpg",
+          "https://media.coolmate.me/cdn-cgi/image/width=672,height=990,quality=80/image/November2022/ao-thun-Marvel-Oversize-Graffiti-Warrior-King-1_2_21.jpg"
+        ],
+        [
+          "https://media.coolmate.me/cdn-cgi/image/quality=100/uploads/November2022/ao-thun-black-panther-warrior-king222.jpg",
+          "https://media.coolmate.me/cdn-cgi/image/quality=100/uploads/November2022/ao-thun-Marvel-Oversize-Graffiti-Warrior-King-1_22_50.jpg",
+          "https://media.coolmate.me/cdn-cgi/image/quality=100/uploads/November2022/ao-thun-Marvel-Oversize-Graffiti-Warrior-King-1_22_50.jpg"
+        ]
+      ],
+      "quanlityAvailable": 100,
+      "price": 259000,
+      "decription": "",
+      "cataloryID": "1",
+      "quanlity": 3,
+      "colorCurrent": "Tím",
+      "sizeCurrent": "M",
+      "id": 6
+    }
+  ]
+}

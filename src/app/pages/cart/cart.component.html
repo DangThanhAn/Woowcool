@@ -1,0 +1,144 @@
+<div class="container">
+  <!-- Nội dung trang bên trái -->
+  <div class="content--left">
+    <div class="inf--oder">
+      <div class="oder__title">
+        <div class="title">Thông tin vận chuyển</div>
+        <div class="action">Bạn đã có tài khoản? <a href="#">Đăng nhập ngay</a></div>
+      </div>
+      <!-- Thông tin nhập vào -->
+      <form [formGroup]="inforCustomer" (ngSubmit)="onSubmit()">
+        <div class="grid">
+          <div class="grid__column width50">
+            <input type="text" formControlName="name"
+              [ngClass]="{'error':inforCustomer.get('name')?.errors?.required && inforCustomer.get('name')?.touched}"
+              name="" placeholder="Họ tên" class="form-control">
+            <div class="alert alert-custom text-danger"
+              *ngIf="inforCustomer.get('name')?.errors?.required && inforCustomer.get('name')?.touched">Vui lòng nhập họ
+              tên!</div>
+          </div>
+
+          <div class="grid__column width50">
+            <input type="tel" name="phonenumber" formControlName="phonenumber"
+              [ngClass]="{'error':inforCustomer.get('phonenumber')?.errors?.required && inforCustomer.get('phonenumber')?.touched}"
+              placeholder="Số điện thoại" class="form-control">
+            <div class="alert alert-custom text-danger"
+              *ngIf="inforCustomer.get('phonenumber')?.errors?.required && inforCustomer.get('phonenumber')?.touched">
+              Vui lòng nhập số điện thoại!</div>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="grid__column"><input type="email"
+              [ngClass]="{'error':inforCustomer.get('email')?.errors?.required && inforCustomer.get('email')?.touched}"
+              name="" placeholder="Email" class="form-control" formControlName="email">
+            <div class="alert alert-custom text-danger"
+              *ngIf="inforCustomer.get('email')?.errors?.required && inforCustomer.get('email')?.touched">Vui lòng nhập
+              email!</div>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="grid__column"><input type="text"
+              [ngClass]="{'error':inforCustomer.get('address')?.errors?.required && inforCustomer.get('address')?.touched}"
+              name="" placeholder="Địa chỉ (ví dụ: xóm 13, Trực Thái)" class="form-control" formControlName="address">
+            <div class="alert alert-custom text-danger"
+              *ngIf="inforCustomer.get('address')?.errors?.required && inforCustomer.get('address')?.touched">Vui lòng
+              nhập địa chỉ!</div>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="grid__column width33">
+            <select class="form-select" id="city" aria-label=".form-select-sm">
+              <option value="" selected>Chọn tỉnh thành</option>
+            </select>
+          </div>
+          <div class="grid__column width33">
+            <select class="form-select" id="district" aria-label=".form-select-sm">
+              <option value="" selected>Chọn quận huyện</option>
+            </select>
+          </div>
+          <div class="grid__column width33">
+            <select class="form-select " id="ward" aria-label=".form-select-sm">
+              <option value="" selected>Chọn phường xã</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="grid__column"><input type="text" name="" placeholder="Ghi chú (ví dụ: Giao hàng giờ hành chính)"
+              class="form-control" formControlName="note">
+          </div>
+        </div>
+        <button class="btn btn-success" type="submit">Thanh toán</button>
+      </form>
+    </div>
+    <!-- <app-button contentButton="Tìm hiểu thêm"></app-button> -->
+  </div>
+  <!-- End nội dung trang bên phải -->
+  <div class="content--right">
+    <div class="inf--oder">
+      <div class="oder__title title">Giỏ hàng</div>
+      <div class="cart--items">
+        <div class="cart--item" *ngFor="let item of dataSource">
+          <span class="cart--item__remove" (click)="deleteAProduct(item.id)">✕</span>
+          <div class="cart--item__img">
+            <img src="{{item.imgUrl[0].at(0)}}" alt="Áo thun Marvel Oversize Black Panther - Outline">
+            <span class="cart--item__count">{{item.quanlity}}</span>
+          </div>
+          <div class="cart--item__details">
+            <div class="cart--item__info">
+              <div class="cart--item__name">{{item.productName}}</div>
+              <div class="cart--item__option">{{item.colorCurrent}} / {{item.sizeCurrent}}</div>
+            </div>
+            <div class="cart--item__action">
+              <label class="choose--size__item ">
+                <input type="radio" name="size" value="m">
+                <span class="checkmark">{{item.colorCurrent}}</span>
+              </label>
+              <label class="option">v</label>
+              <label class="choose--size__item size">
+                <input type="radio" name="" value="m">
+                <span class="checkmark">{{item.sizeCurrent}}</span>
+              </label>
+              <label class="option optsize">v</label>
+              <div class="action--bottom">
+                <div class="action--count">
+                  <a style="cursor: pointer;" class="quantity__reduce" (click)="countSub(item.id)">-</a>
+                  <input type="number" value="{{item.quanlity}}" max="99" min="1" class="quantity__control" [(ngModel)]="item.quanlity">
+                  <a style="cursor: pointer;" class="quantity__augure" (click)="countAdd(item.id)">+</a>
+                </div>
+                <div class="action--price">{{item.price*item.quanlity | FormatVndPipe}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Thông tin giảm giá -->
+      <div class="discount">
+        <!-- <app-textfield [contentPlacehoder] ="'Nhập mã giảm giá'" [widthExp]="'370px'" style="z-index: 1;">
+        </app-textfield> -->
+        <button class="btn--apply">Áp dụng</button>
+      </div>
+      <!-- Thanh toán -->
+      <div class="divider"></div>
+      <div class="pricing-info">
+        <div class="pricing-info__item">
+          <p>Tạm tính</p>
+          <p>{{this.totalCoin | FormatVndPipe}} </p>
+        </div>
+        <div class="pricing-info__item">
+          <p>Giảm giá</p>
+          <p>0đ</p>
+        </div>
+        <div class="pricing-info__item">
+          <p>Phí giao hàng</p>
+          <p>Miễn phí</p>
+        </div>
+        <div class="divider"></div>
+        <div class="pricing-info__item">
+          <p>Tổng</p>
+          <p style="font-size: 18px;">{{this.totalCoin | FormatVndPipe}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

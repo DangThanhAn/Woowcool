@@ -1,0 +1,37 @@
+<div class="notify notify" [ngClass]="{'is-active':isShowToast,'error':hasError}">
+  <a class="notify__close">x</a>
+  <div class="notify__wrapper">
+    <div class="notify__content">
+      <h4 class="notify__message" [style]="{'color': hasError ? '#ff3102' : ''}">
+        {{content}}
+      </h4>
+      <div *ngIf="product">
+      <div class="notify__product" *ngIf="!hasError">
+        <div class="notify-product">
+          <div class="notify-product__thumbnail">
+            <img
+              src="{{product.imgUrl[0].at(0)}}"
+              alt="
+              {{product.productName}}
+              ">
+          </div>
+          <div class="notify-product__content">
+            <span class="notify-product__title">
+
+            {{product.productName}}
+
+            </span>
+            <span class="notify-product__option">
+              {{product.colorCurrent}}/{{product.sizeCurrent}}
+            </span>
+            <span class="notify-product__prices">
+              <ins>{{product.price}}đ </ins>
+            </span>
+          </div>
+        </div>
+      </div>
+      <a href="/cart" class="btn btn--outline btn--small" *ngIf="!hasError">Xem giỏ hàng</a>
+    </div>
+    </div>
+  </div>
+</div>

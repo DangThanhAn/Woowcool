@@ -1,0 +1,133 @@
+.notify {
+  position: fixed;
+  top: 20px;
+  right: -300px;
+  width: 300px;
+  transition: all .2s;
+  box-sizing: border-box;
+  z-index: 99999;
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  box-shadow: 0 0 8px rgb(0 0 0 / 15%);
+  border-radius: 16px;
+  padding: 18px;
+  animation: slide-in 0.5s ease-in-out;
+}
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* áp dụng animation vào element */
+.element {
+  animation: slide-and-spin 2s ease-in-out infinite;
+}
+.notify__close {
+  display: none;
+}
+a {
+  background-color: transparent;
+  text-decoration: none;
+  color: inherit;
+  transition: all .2s;
+}
+.notify__message {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: .03em;
+  color: #000;
+  margin-bottom: 0;
+}
+.notify .btn {
+  margin-top: 10px;
+  font-size: 16px;
+  width: 100%;
+}
+.btn--outline {
+  background-color: transparent;
+  color: #000;
+}
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  border-radius: 16px;
+  border: 2px solid #000;
+  background-color: #000;
+  color: #fff;
+  padding: 0 30px;
+  transition: all .2s;
+  cursor: pointer;
+}
+.notify-product {
+  display: flex;
+  padding-top: 15px;
+  border-top: 1px solid #d9d9d9;
+  margin-top: 15px;
+  padding-bottom: 5px;
+}
+.notify-product__thumbnail {
+  width: 25%;
+  overflow: hidden;
+  border-radius: 10px;
+  position: relative;
+}
+.notify-product__content {
+  display: flex;
+  flex-flow: column;
+  width: 75%;
+  padding-left: 10px;
+}
+.notify-product__thumbnail:before {
+  content: "";
+  display: block;
+  padding-top: 147.26507714%;
+  height: 0;
+  width: 100%;
+}
+.notify-product__thumbnail img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+.notify-product__title {
+  flex: 1;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 115%;
+  letter-spacing: .03em;
+  color: #000;
+}
+.notify-product__prices {
+  display: flex;
+  flex-flow: row-reverse;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.notify-product__options, .notify-product__prices {
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: .03em;
+  color: #000;
+}
+.notify-product__prices ins {
+  text-decoration: none;
+}
+.notify.is-active {
+  right: 20px;
+}
+.notify.error {
+  border: 2px solid #ff3102;
+  box-shadow: none;
+}

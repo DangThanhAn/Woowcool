@@ -1,0 +1,186 @@
+<div class="product--single">
+  <div class="container-top">
+    <div class="top--nav">
+      <ul>
+        <li>Trang chủ</li>
+        <li> / Black panther</li>
+      </ul>
+    </div>
+    <!-- Thông tin chi tiết -->
+    <div class="container container--medium">
+      <div class="product--single__wrapper" *ngIf="product">
+        <div class="product--single__images">
+          <div *ngFor="let imgUrl of product.imgUrl; let i = index">
+            <div class="none" [ngClass]="{'isActive': isActive === i}">
+              <div class="product--img">
+                <img src="{{imgUrl[0]}}" alt="Ảnh" width="740" height="1090"
+                 *ngIf="!imgBindding">
+                <img src="{{imgBindding}}">
+              </div>
+              <div class="product--option">
+                <div class="product--option__item"
+                *ngFor="let item of imgUrl; let i = index"
+                [ngClass]="{'is-current': isCurrent === i}"
+                (click)="chooseImgItem(i,item)"
+                 >
+                  <img src="{{item}}" alt="Ảnh" >
+                </div>
+                <!-- <div class="product--option__item"
+                [ngClass]="{'is-current': !isCurrent}"
+                (click)="!isCurrent"
+                  >
+                  <img src="{{item}}" alt="Áo thun Marvel">
+                </div> -->
+              </div>
+            </div>
+            <span class="previous" [ngClass]="{'isActive': isActive === i}"></span>
+            <span class="next" [ngClass]="{'isActive': isActive === i}"></span>
+          </div>
+        </div>
+
+        <div class="product--single__details">
+          <h1 class="product--single__title">{{product.productName}}</h1>
+          <div class="product--single__review">Chưa có đánh giá!</div>
+          <div class="product--single__price">{{product.price}}đ</div>
+          <div class="product--single__addToCart">
+            <div class="product--single__option">
+              <div class="option__item">
+                <div class="option--title">Màu sắc: <span style="font-weight: bold;">{{colorConvert}}</span></div>
+                <div class="option--select">
+                  <label class="option--select__item" *ngFor="let color of product.color; let i = index">
+                    <input type="radio" name="color" value="{{product.color[i].colorText}}">
+                    <span class="checkmark " [ngClass]="{'is-active': selectedIndex === i}"
+                      style="margin-right:16px;background-image: url('{{product.color[i].colorImg}}')"
+                      (click)="selectedColor(i)"
+                      >
+                    </span>
+                  </label>
+                </div>
+                <div class="guide--user" [ngClass]="{'is-error':isShowToast}">
+                  <div class="option--heading">
+                    <span>Kích thước:
+                      <span type="text" style="font-weight: bold;">{{size}}</span>
+                    </span>
+                    <span style="color: #2f5acf;">Hướng dẫn chọn size</span>
+                  </div>
+                  <div class="choose--size">
+                    <label class="choose--size__item"
+                    *ngFor="let size of product.size; let i = index">
+                      <input type="radio" name="size" value="{{size}}" (click)="setSize($event)">
+                      <span class="checkmark" [ngClass]="{'is-choose': this.size === '{{size}}'}">{{size}}</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="product--single__action">
+              <div class="product--single__quality">
+                <a style="cursor: pointer;" class="quantity__reduce" (click)="countSub()" >-</a>
+                <input type="number" value="1" max="99" min="1" class="quantity__control" [(ngModel)]="count"  >
+                <a style="cursor: pointer;" class="quantity__augure" (click)="countAdd()">+</a>
+              </div>
+              <div class="product-single__button" >
+                <a class="btnCustom">
+                  <p *ngIf="!result" (click)="showError()">Chọn kích thước</p>
+                  <p *ngIf="result"  (click)="addToCart(product)">Thêm vào giỏ hàng</p>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="product-single__policy">
+            <div class="product-policy">
+              <div class="product-policy__item">
+                <div class="product-policy__icon"><img src="https://www.coolmate.me/images/icons/icon3.svg"
+                    alt="Đổi trả với số điện thoại"></div> <span class="product-policy__title">
+                  Đổi trả cực dễ<br> chỉ cần số điện thoại
+                </span>
+              </div>
+              <div class="product-policy__item">
+                <div class="product-policy__icon"><img src="https://www.coolmate.me/images/icons/icon4.svg"
+                    alt="Miễn phí vận chuyển"></div> <span class="product-policy__title">
+                  Miễn phí vận chuyển<br> cho đơn hàng trên 200k
+                </span>
+              </div>
+              <div class="product-policy__item">
+                <div class="product-policy__icon"><img src="https://www.coolmate.me/images/icons/icon5.svg"
+                    alt="Đổi hàng trong 60 ngày"></div> <span class="product-policy__title">
+                  60 ngày đổi trả<br> vì bất kỳ lý do gì
+                </span>
+              </div>
+              <div class="product-policy__item">
+                <div class="product-policy__icon"><img src="https://www.coolmate.me/images/icons/icon2.svg"
+                    alt="Hotline 1900.27.27.37" style="width: 25px;"></div> <span class="product-policy__title">
+                  Hotline 1900.27.27.37 <br>
+                  hỗ trợ từ 8h30 - 22h mỗi ngày
+                </span>
+              </div>
+              <div class="product-policy__item">
+                <div class="product-policy__icon"><img src="https://www.coolmate.me/images/icons/icon1.svg"
+                    alt="Trả hàng tận nơi"></div> <span class="product-policy__title">
+                  Đến tận nơi nhận hàng trả,<br> hoàn tiền trong 24h
+                </span>
+              </div>
+              <div class="product-policy__item">
+                <div class="product-policy__icon"><img src="https://www.coolmate.me/images/icons/icon6.svg"
+                    alt="Giao hàng"></div>
+                <span class="product-policy__title">
+                  Giao hàng nhanh toàn quốc
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="product-single__features">
+            <div class="product-features"><a href="#features-listing" class="product-features__heading  is-active "
+                rel-script="features-toggle">
+                Đặc điểm nổi bật
+              </a>
+              <div id="features-listing" class="product-features__listing" style="display: block">
+                <div class="product-features__item">
+                  Là sản phẩm của sự hợp tác giữa Coolmate và Disney - đơn vị sở hữu bản quyền Marvel
+                </div>
+                <div class="product-features__item">
+                  Chất liệu 100% Cotton tạo sự mềm mại ngay lần đầu chạm
+                </div>
+                <div class="product-features__item">
+                  Định lượng vải 245gsm dày dặn
+                </div>
+                <div class="product-features__item">
+                  Phù hợp với: đi làm, đi chơi, mặc ở nhà
+                </div>
+                <div class="product-features__item">
+                  Kiểu dáng: oversize dáng rộng
+                </div>
+                <div class="product-features__item">
+                  Tự hào sản xuất tại Việt Nam
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- End  -->
+    <!-- Phần mô tả -->
+    <div class="product--decriptions" *ngIf="product">
+      <div class="dct--header">Chi tiết sản phẩm</div>
+      <div class="dct--title">{{product.name}}</div>
+      <div class="info--box">
+        Được truyền cảm hứng từ hình ảnh vị vua T'Challa kết hợp với phong cách đường phố graffiti bắt nguồn từ những
+        góc phố của người da màu. Nhà vua T'Challa - vị lãnh đạo của vương quốc Wakanda được phác họa với hình ảnh tự do
+        cùng dòng chữ "WARRIOR KING" thể hiện sự mạnh mẽ, tinh thần chiến đấu mãnh liệt của một chiến binh trước những
+        thù địch đe dọa lên vương quốc của mình.
+      </div>
+      <p><img style="display: block; margin-left: auto; margin-right: auto;"
+          src="https://mcdn.coolmate.me/image/October2022/anh-thiet-ke-ao-in-Graffiti-Warrior-King-den-2_30.jpg" alt=""
+          width="550"></p>
+    </div>
+    <!-- End -->
+  </div>
+</div>
+
+<app-toast-message
+ [isShowToast]="isShowToast"
+ [result]="result"
+ [product]="product"
+></app-toast-message>

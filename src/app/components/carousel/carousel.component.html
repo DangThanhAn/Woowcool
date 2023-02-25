@@ -1,0 +1,53 @@
+<div class="banner">
+  <div *ngIf="images && images.length > 0" class="carousel-container">
+    <img *ngFor="let image of images; let i = index"
+    [src] = "image.imageSrc" [alt] ="image.imageAlt"
+    [ngClass]="{'image-active': selectedIndex === i}"
+    class="fade"
+    style="object-fit: cover;"
+    >
+    <div *ngIf="indicators" class="carousel-dot-container">
+      <span *ngFor="let dot of images;let i = index"
+       class="dot"
+       [ngClass]="{'active': selectedIndex === i}"
+       (click)="selectedImage(i)"
+       >
+      </span>
+    </div>
+
+    <button *ngIf="controls" class="btn-carousel btn-prev"
+    (click)="onPrevClick()"
+    >
+      <i class="fas fa-arrow-circle-left icon-carousel icon-prev"></i>
+    </button>
+    <button *ngIf="controls" class="btn-carousel btn-next"
+    (click)="onNextClick()"
+    >
+      <i class="fas fa-arrow-circle-right icon-carousel icon-next"></i>
+    </button>
+  </div>
+  <div class="banner--policy">
+    <div class="banner--policy--wrapper">
+      <div class="banner--policy__item">
+        Miễn phí vận chuyển cho
+        <br>
+        đơn hàng trên 200k
+      </div>
+      <div class="banner--policy__item">
+        60 ngày đổi trả vì
+        <br>
+        bất cứ lí do gì
+      </div>
+      <div class="banner--policy__item">
+        Đến tận nơi nhận hàng trả
+        <br>
+        hoàn tiền trong 24h
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="banner">
+  <img class="banner--dashbroad" src="https://media.coolmate.me/cdn-cgi/image/width=1920,quality=90,format=auto/uploads/November2022/black-panther-hero-banner-des.jpg">
+
+</div> -->

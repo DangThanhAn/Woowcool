@@ -1,0 +1,82 @@
+
+<app-carousel [images]="images" [autoSlide]="true" [indicators]="false"></app-carousel>
+<div class="container container--full">
+  <h2 class="container--title">Bạn tìm gì hôm nay?</h2>
+  <!-- TAB INDEX -->
+  <div class="home--tap">
+    <div class="home--tap--header">
+      <a class="home--tap__item" style="text-align: left;" [ngClass]="{'is-active' : isActive}" (click)="changeTab(1)">Black Panther</a>
+      <a class="home--tap__item" [ngClass]="{'is-active' : isActive2}" (click)="changeTab(2)">Đồ thu đông</a>
+      <a class="home--tap__item" style="text-align: right;" [ngClass]="{'is-active' : isActive3}" (click)="changeTab(3)">Phụ kiện</a>
+    </div>
+    <!-- End Tab Index -->
+    <div [ngSwitch]="tabIndex">
+      <template *ngSwitchCase="1"></template>
+      <template *ngSwitchCase="2"></template>
+      <template *ngSwitchCase="3"></template>
+       <!-- CONTENT PAGE 1  -->
+      <ng-container *ngSwitchCase="1">
+        <div class="home--tap--wrapper">
+          <div class="grid grid--five-columns1 large-grid--four-columns1 tablet-grid--three-columns mobile-grid--two-columns product-list">
+            <app-product
+            *ngFor="let product of productsWakanda"
+             [product]="product"
+             [isBestSeller]="true" [isNew]="false" [isProductAtDashboard]="true"
+              class="grid__column" style="position:relative;"></app-product>
+          </div>
+        </div>
+      </ng-container>
+       <!-- CONTENT PAGE 2 -->
+       <ng-container *ngSwitchCase="2">
+        <div class="home--tap--wrapper">
+          <div class="grid grid--five-columns1 large-grid--four-columns1 tablet-grid--three-columns mobile-grid--two-columns product-list">
+            <app-product [isProductAtDashboard]="true" *ngFor="let product of productsWinter" [product]="product" class="grid__column" style="position:relative;"></app-product>
+          </div>
+        <!-- <app-product [products]="productsWinter" [bgColor]="'white'" [color]="'black'" [bgColorSale]="'white'" [ColorSale]="'#2f5acf'"></app-product> -->
+        </div>
+      </ng-container>
+       <!-- CONTENT PAGE 3 -->
+       <ng-container *ngSwitchCase="3">
+        <div class="home--tap--wrapper">
+        <!-- <app-product [products]="productsAccessory" [bgColor]="'white'" [color]="'black'" [bgColorSale]="'white'" [ColorSale]="'#2f5acf'"></app-product> -->
+        </div>
+      </ng-container>
+    </div>
+    <!-- End ngSwitch -->
+  </div>
+  <!-- End home Tab -->
+
+</div>
+<!-- End container -->
+
+
+<div class="container--foryou">
+  <div class="about--card">
+    <div class="about--card__content">
+      <h2 class="about--card__heading">Dành cho chính bạn</h2>
+      <div class="about--card__description">
+        <p>
+          Người đàn ông tốt là người tự biết chăm sóc bản thân anh ấy. Vì đàn ông cũng có quyền được<br> nhận
+          quà, và nếu như bạn chưa có QUÀ, thì hãy tự tin tự sắm cho mình một hộp đồ Coolmate.
+          </p>
+      </div>
+      <div class="about--card__button">
+        <a href="/lp/coolgift-bo-suu-tap-yeu-thuong-va-gan-ket?itm_source=home" class="btn btn--white">
+          Tìm hiểu thêm
+          </a>
+      </div>
+    </div>
+    <div class="about--card__image">
+      <img src="https://mcdn.coolmate.me/image/December2022/_CMM6258-Recovered_(2).jpg" alt="Image" >
+    </div>
+  </div>
+</div>
+
+
+<div class="container--foryou">
+  <div class="home--collectionbanner">
+    <img src="https://mcdn.coolmate.me/image/December2022/mceclip0_32.jpg" alt="Image" width="100%" >
+  </div>
+</div>
+
+

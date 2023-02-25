@@ -1,0 +1,48 @@
+
+<div class="popup" *ngIf="isShow">
+  <div class="background"></div>
+  <div class="popup-body">
+    <span class="close-popup" (click)="closePopup()">✕</span>
+    <div>
+      <div class="form-title">
+        <h2 style="margin-bottom:1rem;">Đăng kí</h2>
+        <p>Nếu đã từng mua hàng trên website trước đây, bạn có thể dùng tính năng <a (click)="clickedForgotPassword()">"Lấy mật khẩu"</a><br> để có thể truy cập vào tài khoản bằng email nhé.</p>
+      </div>
+      <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <input id="name" type="text" formControlName="name" placeholder="Tên của bạn">
+        </div>
+        <div class="form-group">
+          <input id="phonenumber" type="text" formControlName="phonenumber" placeholder="SĐT của bạn">
+        </div>
+        <div class="form-group">
+          <input id="email" type="text" formControlName="email" placeholder="Email của bạn">
+        </div>
+        <div class="form-group">
+          <input id="password" type="text" formControlName="password" placeholder="Mật khẩu">
+        </div>
+        <div class="form-group">
+          <input id="repassword" type="text" formControlName="repassword" placeholder="Nhập lại mật khẩu">
+        </div>
+
+        <app-button style="width:100%" type="submit" contentButton="Đăng kí" backgroundColor="#000"></app-button>
+      </form>
+      <div class="login-or-diver">
+        <span>Hoặc</span>
+      </div>
+      <div class="form-group">
+        <app-button border="none" backgroundColor="#3B5998" contentButton="Đăng kí với Facebook">
+          <img style="margin-left: 5px;" src="https://www.coolmate.me/images/google.svg">
+        </app-button>
+      </div>
+      <div class="form-group">
+        <app-button border="1px solid var(--border-input-button)" colorText="#000" contentButton="Đăng kí với Google">
+          <img style="margin-left: 5px;" src="https://www.coolmate.me/images/google.svg">
+        </app-button>
+      </div>
+      <div class="form-group" style="text-align: center;">
+        <a (click)="clickedLogin()">Đăng nhập</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  border-radius: 16px;
+  border: 2px solid #000;
+  background-color: #fff;
+  color: #fff;
+  padding: 0 30px;
+  transition: all .2s;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+}
+/* .btn:not(.is-loading) {
+  position: relative !important;
+  border: 4px solid #53918e !important;
+  box-shadow: 0 0 10px 0 #0001;
+  background-color: #fff !important;
+  color: #000 !important;
+} */
+.btn--primary {
+  background-color: #f9f86c;
+  color: #000;
+  border: 2px solid #f9f86c;
+}
