@@ -1,3 +1,5 @@
+import { Emitters } from './../../emitters/emitters';
+import { AuthService } from './../../features/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,14 +9,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent {
 
-  constructor() { }
+  constructor(private authService:AuthService) { }
 
   ngOnInit(): void {
+    this.authService.user().subscribe(
+      (res)=>{
+      Emitters.authEmitter.emit(true);
+    },
+      err =>{
+      Emitters.authEmitter.emit(false);
+    }
+    );
+    Emitters.authEmitter.subscribe(
+      (auth:boolean) =>{
+        this.isAuthenticated = auth;
+      })
   }
+  status ='';
   isLogin = false;
   isNewPassword = false;
   isRegister = false;
 
+  isAuthenticated: boolean = false;
+  logout():void{
+    this.authService.logout().subscribe(()=>
+    Emitters.authEmitter.emit(false)
+    );
+  }
   /**
    * Author: DT An
    * 28/12/22

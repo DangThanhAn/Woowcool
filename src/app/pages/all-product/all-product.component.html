@@ -22,7 +22,9 @@
             <div
               class="grid grid--five-columns large-grid--four-columns tablet-grid--three-columns mobile-grid--two-columns product-list">
               <!-- vòng lặp  -->
+              <app-product [isCollectionImg]="true" class="grid__column" style="position:relative;"></app-product>
               <app-product *ngFor="let product of products" [product]="product" class="grid__column" style="position:relative;"></app-product>
+              <app-product [isLoadmore]="true" class="grid__column" style="position:relative;"></app-product>
               <!-- end vòng lặp -->
             </div>
             <!-- end -->

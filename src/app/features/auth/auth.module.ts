@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 
 import { RegisterComponent } from './register/register.component';
 import { NewPasswordComponent } from './new-password/new-password.component';
+import { ShareComponentModule } from 'src/app/modules/share-component/share-component.module';
 
 @NgModule({
   declarations: [
@@ -17,12 +18,12 @@ import { NewPasswordComponent } from './new-password/new-password.component';
   ],
   imports: [
     CommonModule,ButtonModule,FormsModule,BrowserModule,ReactiveFormsModule
+    ,ShareComponentModule
   ],
   exports: [
     LoginComponent,
     RegisterComponent,
     NewPasswordComponent,
-
   ],
 })
 export class AuthModule { }

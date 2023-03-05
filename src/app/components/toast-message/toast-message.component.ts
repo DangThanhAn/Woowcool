@@ -1,6 +1,11 @@
 import { Product } from './../../models/product';
 import { Component, Input, Output, EventEmitter, ElementRef } from '@angular/core';
 
+export interface ToastMessage {
+  textMessage: string;
+  type: 'success' | 'error' | 'warning' | 'info';
+}
+
 @Component({
   selector: 'app-toast-message',
   templateUrl: './toast-message.component.html',
@@ -16,11 +21,15 @@ export class ToastMessageComponent {
   @Input() product : Product | any;
 
   @Input() isShowToast = false;
+
   @Input() result = true;
   content: string = "Initial content";
-  hasError: boolean = false;
-  changeH4Content(newContent: string,hasError:boolean) {
+
+  addSuccessProduct?: boolean = false;
+
+  changeH4Content(newContent: string,type:String,addSuccessProduct?:boolean) {
     this.content = newContent;
-    this.hasError = hasError;
+    this.type = type;
+    this.addSuccessProduct = addSuccessProduct;
   }
 }

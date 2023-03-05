@@ -1,27 +1,49 @@
+import { Emitters } from './../../emitters/emitters';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {JwtHelperService} from '@auth0/angular-jwt';
-import * as jwt from 'jsonwebtoken';
-export interface LoginResponse {
-  access_token: string;
-}
+import { JwtHelperService } from '@auth0/angular-jwt';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private http: HttpClient) { }
+  private apiUrl = 'http://localhost:8000/api';
+  private jwtHelper = new JwtHelperService();
+  private token: string | any;
+  authenticated : boolean = false;
 
-  public setToken(token:string){
-    if(!token){
-      this.removeToken();
-      return;
-    }
-    localStorage.setItem('token',token);
+  user(){
+    return this.http.get(`${this.apiUrl}/user`,{withCredentials:true})
+  }
+  constructor(private http: HttpClient) {}
+  register(value: object){
+    return this.http.post(`${this.apiUrl}/register`,value,{withCredentials:true});
+  }
+  login(value:object): Observable<boolean> {
+    return this.http.post(`${this.apiUrl}/login`, value,{withCredentials:true})
+      .pipe(
+        map(result => {
+          this.token = result;
+          localStorage.setItem('access_token', this.token.token);
+          console.log( this.token.token);
+          return true;
+        })
+      );
   }
 
-  public removeToken(){
-    localStorage.removeItem('token');
+  logout(): Observable<any>{
+    this.token = null;
+    localStorage.removeItem('access_token');
+    return this.http.post(`${this.apiUrl}/logout`, {},{withCredentials:true});
+  }
+  data: any
+  isAdmin(): boolean {
+    return false;
+  }
+  public isLoggedIn() {
+    const token = localStorage.getItem('token');
+    return !this.jwtHelper.isTokenExpired(token);
   }
 }

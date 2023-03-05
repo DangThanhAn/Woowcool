@@ -71,7 +71,52 @@
         <button class="btn btn-success" type="submit">Thanh toán</button>
       </form>
     </div>
-    <!-- <app-button contentButton="Tìm hiểu thêm"></app-button> -->
+    <div class="cart-section">
+      <div class="title">
+        Hình thức thanh toán
+      </div>
+      <div>
+        <form><label for="payment-COD" class="payment-method__item active"><span
+              class="payment-method__item-custom-checkbox custom-radio"><input type="radio" id="payment-COD"
+                name="payment-method" autocomplete="off" value="COD"> <span class="checkmark"></span></span> <span
+              class="payment-method__item-icon-wrapper"><img src="https://www.coolmate.me/images/COD.svg"
+                alt="COD <br>Thanh toán khi nhận hàng"></span> <span class="payment-method__item-name">COD <br>Thanh
+              toán khi nhận hàng</span></label><label for="payment-momo" class="payment-method__item"><span
+              class="payment-method__item-custom-checkbox custom-radio"><input type="radio" id="payment-momo"
+                name="payment-method" autocomplete="off" value="momo"> <span class="checkmark"></span></span> <span
+              class="payment-method__item-icon-wrapper"><img src="https://www.coolmate.me/images/momo-icon.png"
+                alt="Thanh Toán MoMo"></span> <span class="payment-method__item-name">Thanh Toán
+              MoMo</span></label><label for="payment-zalopay" class="payment-method__item"><span
+              class="payment-method__item-custom-checkbox custom-radio"><input type="radio" id="payment-zalopay"
+                name="payment-method" autocomplete="off" value="zalopay"> <span class="checkmark"></span></span> <span
+              class="payment-method__item-icon-wrapper"><img src="https://www.coolmate.me/images/logo-zalopay.svg"
+                alt="Ví điện tử ZaloPay"></span>
+            <span class="payment-method__item-name">Ví điện tử ZaloPay</span></label><label for="payment-shopeepay"
+            class="payment-method__item"><span class="payment-method__item-custom-checkbox custom-radio"><input
+                type="radio" id="payment-shopeepay" name="payment-method" autocomplete="off" value="shopeepay"> <span
+                class="checkmark"></span></span> <span class="payment-method__item-icon-wrapper"><img
+                src="https://mcdn.coolmate.me/image/September2021/195dbf69c0ac36f26fbd_(1).png"
+                alt="Ví ShopeePay <br><i>Giảm thêm 50k cho khách hàng lần đầu mở ví và thanh toán bằng ShopeePay</i>"></span>
+            <span class="payment-method__item-name">Ví ShopeePay <br><i>Giảm thêm 50k cho khách hàng lần
+                đầu mở ví và thanh toán bằng ShopeePay</i></span></label><label for="payment-vnpay"
+            class="payment-method__item"><span class="payment-method__item-custom-checkbox custom-radio"><input
+                type="radio" id="payment-vnpay" name="payment-method" autocomplete="off" value="vnpay"> <span
+                class="checkmark"></span></span> <span class="payment-method__item-icon-wrapper"><img
+                src="https://www.coolmate.me/images/vnpay.png"
+                alt="Thẻ ATM / Internet Banking<br>Thẻ tín dụng (Credit card) / Thẻ ghi nợ (Debit card)<br>VNPay QR"></span>
+            <span class="payment-method__item-name">Thẻ ATM / Internet Banking<br>Thẻ tín dụng (Credit
+              card) / Thẻ ghi nợ (Debit card)<br>VNPay QR</span></label><label for="payment-9pay"
+            class="payment-method__item"><span class="payment-method__item-custom-checkbox custom-radio"><input
+                type="radio" id="payment-9pay" name="payment-method" autocomplete="off" value="9pay"> <span
+                class="checkmark"></span></span> <span class="payment-method__item-icon-wrapper"><img
+                src="https://mcdn.coolmate.me/uploads/May2022/9pay.svg" alt="Ví điện tử 9Pay"></span>
+            <span class="payment-method__item-name">Ví điện tử 9Pay</span></label></form> <!---->
+      </div>
+      <p class="cart-return-text">
+        Nếu bạn không hài lòng với sản phẩm của chúng tôi? Bạn hoàn toàn có thể trả lại sản phẩm.
+        Tìm hiểu thêm <a href="/page/chinh-sach-doi-tra" target="_blank"><b>tại đây</b></a>.
+      </p>
+    </div>
   </div>
   <!-- End nội dung trang bên phải -->
   <div class="content--right">
@@ -103,7 +148,8 @@
               <div class="action--bottom">
                 <div class="action--count">
                   <a style="cursor: pointer;" class="quantity__reduce" (click)="countSub(item.id)">-</a>
-                  <input type="number" value="{{item.quanlity}}" max="99" min="1" class="quantity__control" [(ngModel)]="item.quanlity">
+                  <input type="number" value="{{item.quanlity}}" max="99" min="1" class="quantity__control"
+                    [(ngModel)]="item.quanlity">
                   <a style="cursor: pointer;" class="quantity__augure" (click)="countAdd(item.id)">+</a>
                 </div>
                 <div class="action--price">{{item.price*item.quanlity | FormatVndPipe}}</div>
@@ -112,10 +158,12 @@
           </div>
         </div>
       </div>
+
+
       <!-- Thông tin giảm giá -->
       <div class="discount">
-        <!-- <app-textfield [contentPlacehoder] ="'Nhập mã giảm giá'" [widthExp]="'370px'" style="z-index: 1;">
-        </app-textfield> -->
+        <app-textfield [contentPlacehoder]="'Nhập mã giảm giá'" style="z-index: 1;width:70%">
+        </app-textfield>
         <button class="btn--apply">Áp dụng</button>
       </div>
       <!-- Thanh toán -->

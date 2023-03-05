@@ -420,47 +420,6 @@
       "colorCurrent": "Đen",
       "sizeCurrent": "L",
       "id": 5
-    },
-    {
-      "productID": 1,
-      "productName": "Áo thun Marvel Oversize Graffiti Warrior King",
-      "color": [
-        {
-          "colorText": "Tím",
-          "colorImg": "https://media.coolmate.me/cdn-cgi/image/width=160,height=160,quality=80,format=auto/uploads/November2022/mau-tim-1-new_97.jpg"
-        },
-        {
-          "colorText": "Đen",
-          "colorImg": "https://media.coolmate.me/cdn-cgi/image/width=160,height=160,quality=80,format=auto/uploads/November2022/mau-den-black-panther_42.jpg"
-        }
-      ],
-      "size": [
-        "S",
-        "M",
-        "L",
-        "XL"
-      ],
-      "sale": "Mua 2 được giảm thêm 10%",
-      "imgUrl": [
-        [
-          "https://media.coolmate.me/cdn-cgi/image/width=672,height=990,quality=85,format=auto/uploads/November2022/ao-thun-black-panther-warriorking1_61.jpg",
-          "https://media.coolmate.me/cdn-cgi/image/width=672,height=990,quality=80/image/November2022/ao-thun-Marvel-Oversize-Graffiti-Warrior-King-1_2_21.jpg",
-          "https://media.coolmate.me/cdn-cgi/image/width=672,height=990,quality=80/image/November2022/ao-thun-Marvel-Oversize-Graffiti-Warrior-King-1_2_21.jpg"
-        ],
-        [
-          "https://media.coolmate.me/cdn-cgi/image/quality=100/uploads/November2022/ao-thun-black-panther-warrior-king222.jpg",
-          "https://media.coolmate.me/cdn-cgi/image/quality=100/uploads/November2022/ao-thun-Marvel-Oversize-Graffiti-Warrior-King-1_22_50.jpg",
-          "https://media.coolmate.me/cdn-cgi/image/quality=100/uploads/November2022/ao-thun-Marvel-Oversize-Graffiti-Warrior-King-1_22_50.jpg"
-        ]
-      ],
-      "quanlityAvailable": 100,
-      "price": 259000,
-      "decription": "",
-      "cataloryID": "1",
-      "quanlity": 3,
-      "colorCurrent": "Tím",
-      "sizeCurrent": "M",
-      "id": 6
     }
   ]
 }

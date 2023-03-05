@@ -20,9 +20,14 @@ import { AllProductComponent } from './pages/all-product/all-product.component';
 import { LayoutComponent } from './layout/layout.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
-import { ToastMessageComponent } from './components/toast-message/toast-message.component';
+// import { ToastMessageComponent } from './components/toast-message/toast-message.component';
 import { FormatVndPipe } from './pipes/format-vnd.pipe';
-
+import { TextfieldComponent } from './components/textfield/textfield.component';
+import { ShareComponentModule } from './modules/share-component/share-component.module';
+import { BlogComponent } from './pages/blog/blog.component';
+import { CoolxprintComponent } from './pages/coolxprint/coolxprint.component';
+import { AboutCoolmateComponent } from './pages/about-coolmate/about-coolmate.component';
+import { RisingComponent } from './pages/rising/rising.component';
 
 @NgModule({
   declarations: [
@@ -36,8 +41,13 @@ import { FormatVndPipe } from './pipes/format-vnd.pipe';
     LayoutComponent,
     CartComponent,
     ProductDetailsComponent,
-    ToastMessageComponent,
-    FormatVndPipe
+    // ToastMessageComponent,
+    FormatVndPipe,
+    TextfieldComponent,
+    BlogComponent,
+    CoolxprintComponent,
+    AboutCoolmateComponent,
+    RisingComponent,
   ],
   imports: [
     CommonModule,
@@ -49,6 +59,7 @@ import { FormatVndPipe } from './pipes/format-vnd.pipe';
     FormsModule,HttpClientModule,BrowserAnimationsModule,ReactiveFormsModule,
     ButtonModule,
     AuthModule,
+    ShareComponentModule
 
   ],
   providers: [],

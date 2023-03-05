@@ -130,4 +130,16 @@ a {
 .notify.error {
   border: 2px solid #ff3102;
   box-shadow: none;
+
+}
+.notify.success {
+  border: 2px solid #00FF00;
+  box-shadow: none;
+
+}
+.notify__message.text-color-success{
+  color: #00FF00 ;
+}
+.notify__message.text-color-error{
+  color: #ff3102 ;
 }

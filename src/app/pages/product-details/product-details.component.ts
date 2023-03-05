@@ -77,7 +77,7 @@ export class ProductDetailsComponent implements OnInit,AfterViewInit {
     this.size = event.target.value.toUpperCase();
     this.product.sizeCurrent = this.size;
     this.result = true;
-    this.toastMessageComponent?.changeH4Content("Đã thêm vào giỏ hàng",false);
+    this.toastMessageComponent?.changeH4Content("Đã thêm vào giỏ hàng",'',true);
 
   }
 
@@ -91,7 +91,7 @@ export class ProductDetailsComponent implements OnInit,AfterViewInit {
   showError(){
     this.isShowToast = true;
     this.returnValue();
-    this.toastMessageComponent?.changeH4Content("Vui lòng chọn biến thể",true);
+    this.toastMessageComponent?.changeH4Content("Vui lòng chọn biến thể",'error',false);
   }
   returnValue(){
     setTimeout(() => {
@@ -121,7 +121,7 @@ export class ProductDetailsComponent implements OnInit,AfterViewInit {
     })
     this.isShowToast = true;
     this.returnValue();
-    this.toastMessageComponent?.changeH4Content("Đã thêm vào giỏ hàng",false);
+    this.toastMessageComponent?.changeH4Content("Đã thêm vào giỏ hàng",'',true);
 
   }
 

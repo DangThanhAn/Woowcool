@@ -1,5 +1,7 @@
+import { ToastMessageComponent } from 'src/app/components/toast-message/toast-message.component';
+import { AuthService } from './../auth.service';
 import { FormBuilder } from '@angular/forms';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-register',
@@ -8,10 +10,17 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private formBuilder : FormBuilder) { }
+  constructor(
+    private formBuilder : FormBuilder,
+    private authService : AuthService,
+
+    ) { }
 
   ngOnInit(): void {
   }
+  @ViewChild(ToastMessageComponent) toastMessageComponent: ToastMessageComponent | undefined;
+  isShowToast = false;
+
   checkoutForm = this.formBuilder.group({
     // name : this.formBuilder.control(''),
     // name: ['',[Validators.required,Validators.minLength(3)]],
@@ -20,12 +29,22 @@ export class RegisterComponent implements OnInit {
     email: '',
     password: '',
     repassword: '',
+    role: 'user',
 
     // address : this.formBuilder.control(''),
   });
 
   onSubmit():void{
-    console.log(this.checkoutForm.value);
+    this.authService.register(this.checkoutForm.value).subscribe(()=>{
+      this.isShow=false;
+      this.toastMessageComponent?.changeH4Content("Đăng kí thành công",'success',false);
+      this.isShowToast = true;
+      setTimeout(() => {
+        this.isShowToast = false;
+      }, 2000);
+
+    });
+
     this.checkoutForm.reset();
   }
   @Output() returnDefaultVal = new EventEmitter();

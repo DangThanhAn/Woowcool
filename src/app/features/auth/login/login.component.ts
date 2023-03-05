@@ -32,7 +32,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder : FormBuilder,
     private authService : AuthService,
-    private router: Router) { }
+    private router: Router
+    ) { }
 
   listUser: any;
   @HostBinding('@fadeOut') get fadeOut() {
@@ -59,28 +60,40 @@ export class LoginComponent implements OnInit {
    */
   accountFalse: boolean = false; // biến thông báo tài khoản hoặc mật khẩu không đúng
   checkEmpty?:boolean = this.email?.pristine;
+  // onSubmit():void{
+  //   if (this.email?.invalid == false && this.password?.invalid == false){
+  //     let userCurrent = this.checkoutForm.value;
+  //     let arrSearch = this.listUser.find((temp: { email: string | null | undefined; }) => temp.email == userCurrent.email);
+  //     if(arrSearch == undefined){
+  //       this.accountFalse = true;
+  //     }else{
+  //       if(userCurrent.password == arrSearch.password){
+  //         this.router.navigate(['/', 'dashbroad','login']).then(nav => {
+  //           console.log("Router đến trang chủ thành công",nav);
+  //           this.closePopup();
+  //         });
+  //         this.checkoutForm.reset();
+  //       }
+  //       else{
+  //         this.accountFalse = true;
+  //       }
+  //     }
+  //   }else{
+  //     console.log("Thông tin vừa nhập còn thiếu");
+  //     console.log(this.checkEmpty);
+  //   }
+  // }
+
   onSubmit():void{
-    if (this.email?.invalid == false && this.password?.invalid == false){
-      let userCurrent = this.checkoutForm.value;
-      let arrSearch = this.listUser.find((temp: { email: string | null | undefined; }) => temp.email == userCurrent.email);
-      if(arrSearch == undefined){
-        this.accountFalse = true;
-      }else{
-        if(userCurrent.password == arrSearch.password){
-          this.router.navigate(['/', 'dashbroad','login']).then(nav => {
-            console.log("Router đến trang chủ thành công",nav);
-            this.closePopup();
-          });
-          this.checkoutForm.reset();
-        }
-        else{
-          this.accountFalse = true;
+    this.authService.login(this.checkoutForm.getRawValue()).subscribe(
+      result => {
+        if(result){
+          this.isShow = false;
+          this.router.navigate(['/']);
+          window.location.reload();
         }
       }
-    }else{
-      console.log("Thông tin vừa nhập còn thiếu");
-      console.log(this.checkEmpty);
-    }
+    )
   }
 
 
