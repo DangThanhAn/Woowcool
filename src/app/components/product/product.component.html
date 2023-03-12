@@ -1,6 +1,6 @@
 <!-- <div class="grid__column" style="position:relative;"> -->
   <div class="collection-thumbnail" *ngIf="isCollectionImg">
-    <img src="https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/January2023/QNGroup_1.png"
+    <img src="{{srcCollectionImg}}"
       alt="Quần Nam">
   </div>
   <div class="collection-loadmore" *ngIf="isLoadmore" style="cursor: pointer">
@@ -15,14 +15,14 @@
   </div>
   <div class="product-grid product option-changed" *ngIf="isProduct">
     <div class="product-grid__thumbnail"
-    [routerLink]="['/product-details', product.productID]"
+    [routerLink]="['/product-details', product.productId]"
      *ngIf="product">
       <div class="product-grid__image">
         <a>
           <img loading="lazy" class="home-banner"
-            src="{{product.imgUrl[0].at(0)}}">
+            src="{{product.images[0].imgUrl}}">
           <img loading="lazy" class="hover"
-            src="{{product.imgUrl[0].at(1)}}">
+            src="{{product.images[1].imgUrl}}">
         </a>
       </div>
       <span class="product-grid__tags product-grid__tags--bán chạy" *ngIf="isBestSeller">Bán chạy</span>
@@ -49,10 +49,10 @@
       <div class="product-grid__select">
         <form>
           <div class="option-select">
-            <label class="option-select__item" *ngFor="let item of product.size">
-              <input  type="radio" name="size" value="{{item}}">
+            <label class="option-select__item" *ngFor="let item of product.sizes">
+              <input  type="radio" name="size" value="{{item.sizeText}}">
               <span class="checkmark">
-                {{item}}
+                {{item.sizeText}}
               </span>
             </label>
           </div>
@@ -63,7 +63,7 @@
       <div class="product-grid__options" *ngIf="isProductAtDashboard">
         <div class="options-color" >
           <div class="option-color__item"
-           *ngFor="let item of product.color; let i = index"
+           *ngFor="let item of product.colors; let i = index"
            [ngClass]="{'is-current': selectedIndex === i}"
            >
             <span class="checkmark"
@@ -74,7 +74,7 @@
         </div>
       </div>
       <h3 class="product-grid__title">
-        <a  [routerLink]="['/product-details', product.productID]">
+        <a  [routerLink]="['/product-details', product.productId]">
           {{product.productName}}
         </a>
       </h3>
@@ -83,7 +83,7 @@
           <ins>{{product.price | FormatVndPipe}}</ins>
         </div>
       </div>
-      <span class="product-grid__hint">
+      <span class="product-grid__hint" *ngIf="product.sale.toString() != ''">
         <div>
           <span class="product-pricing-hint text--primary">{{product.sale}}</span>
         </div>

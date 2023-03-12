@@ -7,6 +7,7 @@ import { Product } from './../../models/product';
 })
 export class ProductComponent {
   constructor() { }
+  @Input() srcCollectionImg : string ='';
   @Input() isCollectionImg = false;
   @Input() isLoadmore = false;
   @Input() isProduct = true;

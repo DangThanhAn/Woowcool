@@ -76,16 +76,16 @@
                       <a class="mega--menu__title">Danh mục</a>
                       <ul class="mega--menu__list">
                         <li>
-                          <a> Áo Nam</a>
+                          <a [routerLink]="['filter-product/ao-nam']">Áo Nam</a>
                         </li>
                         <li class="sub-title">
-                          <a> Áo sơ mi</a>
+                          <a class="sub-title" [routerLink]="['filter-product/ao-so-mi']"> Áo sơ mi</a>
                         </li>
                         <li class="sub-title">
-                          <a> Áo polo - thun</a>
+                          <a class="sub-title" [routerLink]="['filter-product/ao-polo']"> Áo polo</a>
                         </li>
                         <li last-child class="sub-title">
-                          <a> Áo thể thao</a>
+                          <a class="sub-title" [routerLink]="['filter-product/ao-thun']"> Áo thun</a>
                         </li>
                         <li last-child class="">
                           <a>Quần nam</a>
@@ -209,7 +209,7 @@
             </div>
 
           <a [routerLink]="['/cart']" routerLinkActive="router-link-active"><img
-              src="https://www.coolmate.me/images/header/icon-cart.svg" alt="Icon mini cart"></a>
+              src="https://www.coolmate.me/images/header/icon-cart-new.svg" alt="Icon mini cart"></a>
         </div>
       </div>
       <div class="header--search">
@@ -228,7 +228,7 @@
         <!-- Thêm nội dung mới tại đây -->
         <ul class="nav--list">
           <li>
-            <a class="nav--link">Áo nam</a>
+            <a class="nav--link" [routerLink]="['filer-product/ao-nam']">Áo nam</a>
           </li>
           <li>
             <a class="nav--link">Quần jeans</a>
@@ -262,7 +262,7 @@
         <div class="header--actions">
           <img src="https://www.coolmate.me/images/header/icon-search.svg" alt="Icon Search"  (click)="clickedSearch()">
           <img src="https://www.coolmate.me/images/header/icon-account.svg" alt="Icon Account" (click)="clickedUser()">
-          <a [routerLink]="['/cart']" routerLinkActive="router-link-active"><img src="https://www.coolmate.me/images/header/icon-cart.svg" alt="Icon mini cart"></a>
+          <a [routerLink]="['/cart']" routerLinkActive="router-link-active"><img src="https://www.coolmate.me/images/header/icon-cart-new.svg" alt="Icon mini cart"></a>
         </div>
       </div>
     </div>

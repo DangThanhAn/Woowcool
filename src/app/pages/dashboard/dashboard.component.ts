@@ -43,14 +43,14 @@ export class DashboardComponent implements OnInit {
     this.productService.getAllProducts().subscribe((data)=>{
       console.log("Sản phẩm lấy từ service: ");
       console.log(data);
-      data.forEach((element: Product) => {
-        if(element.cataloryID == "1"){
-          this.productsWakanda.push(element);
-        }
-        if(element.cataloryID == "2"){
-          this.productsWinter?.push(element);
-        }
-      });
+      // data.forEach((element: Product) => {
+      //   if(element.cataloryID == "1"){
+      //     this.productsWakanda.push(element);
+      //   }
+      //   if(element.cataloryID == "2"){
+      //     this.productsWinter?.push(element);
+      //   }
+      // });
     })
   }
   changeTab(tabIndex:number){

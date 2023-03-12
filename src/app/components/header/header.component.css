@@ -60,7 +60,7 @@ a{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100px;
+  width: 150px;
   height: 20px;
   cursor:pointer;
 }
@@ -121,7 +121,7 @@ li[view-menu ]:hover .mega--menu__product{
   list-style: none;
 }
 .sub-title{
-  color: #8e8e8e;
+  color: #8e8e8e !important;
 }
 .mega--menu__list li:hover{
   color: var(--a-hover-color);

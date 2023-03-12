@@ -20,15 +20,13 @@ const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: '', component: DashboardComponent },
       {path: 'all-product',component: AllProductComponent},
-      {path: 'product-details/:productID', component: ProductDetailsComponent },
+      {path: 'product-details/:productId', component: ProductDetailsComponent },
       {path: 'cart',component: CartComponent},
       {path: 'blog',component: BlogComponent},
       {path: 'coolxprint',component: CoolxprintComponent},
       {path: 'aboutcoolmate',component: AboutCoolmateComponent},
       {path: 'rising',component: RisingComponent},
-
-
-
+      {path: 'filter-product',loadChildren: () => import('./pages/FilterProduct/filter-product.module').then(m => m.FilterProductModule)},
     ]
   },
   {path: 'admin',

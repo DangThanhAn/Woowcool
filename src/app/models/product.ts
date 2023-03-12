@@ -1,15 +1,22 @@
-export interface Product {
-  productID:number ;
+export interface Product{
+  productId:number ;
+  cataloryId:number;
+  productTypeId:number;
+  collectionId:number;
   productName: string ;
   price:number;
-  color:string[];
-  size: string[];
-  imgUrl: string[];
+  quanlity:number;
+  quantityAvailable: number;
   sale:string;
-  description:string;
-  quanlityAvailable: number;
-  cataloryID:string;
+  storageInstructions:string;
+  colors:any[];
+  sizes: any[];
+  images: any[];
+  categories:any[];
+  collections:any[];
+  descriptions:any[];
+
   sizeCurrent?:string;
   colorCurrent?:string;
-  quanlity?:number;
+
 }

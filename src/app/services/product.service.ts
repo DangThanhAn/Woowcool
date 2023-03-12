@@ -1,6 +1,8 @@
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ProductType } from "../models/productType";
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +14,18 @@ export class ProductService {
     private httpClient: HttpClient
   ) {
   }
-  dataUrl:string = "http://localhost:3000/product";
+
+  productTypeUrl:string ='https://localhost:7122/api/ProductTypes';
+  public getProductType(): Observable<any> {
+    return this.httpClient.get<ProductType>(this.productTypeUrl);
+  }
 
   public getAllProducts(): Observable<any> {
-    return this.httpClient.get<any>(this.dataUrl);
+    return this.httpClient.get<any>(this.dataUrlOnline);
+  }
+
+  dataUrlOnline:string = "https://localhost:7122/api/Products";
+  public getAllProductsv1(): Observable<any> {
+    return this.httpClient.get<any>(this.dataUrlOnline);
   }
 }

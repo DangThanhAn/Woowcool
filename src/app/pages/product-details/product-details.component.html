@@ -7,26 +7,21 @@
       </ul>
     </div>
     <!-- Thông tin chi tiết -->
+
     <div class="container container--medium">
       <div class="product--single__wrapper" *ngIf="product">
         <div class="product--single__images">
-          <div *ngFor="let imgUrl of product.imgUrl; let i = index">
+          <div *ngFor="let image of product.images; let i = index">
             <div class="none" [ngClass]="{'isActive': isActive === i}">
               <div class="product--img">
-                <img src="{{imgUrl[0]}}" alt="Ảnh" width="740" height="1090" *ngIf="!imgBindding">
+                <img src="{{image.imgUrl}}" alt="Ảnh" width="740" height="1090" *ngIf="!imgBindding">
                 <img src="{{imgBindding}}">
               </div>
               <div class="product--option">
-                <div class="product--option__item" *ngFor="let item of imgUrl; let i = index"
-                  [ngClass]="{'is-current': isCurrent === i}" (click)="chooseImgItem(i,item)">
-                  <img src="{{item}}" alt="Ảnh">
+                <div class="product--option__item" *ngFor="let item of product.images; let i = index"
+                  [ngClass]="{'is-current': isCurrent === i}" (click)="chooseImgItem(i,item.imgUrl)">
+                  <img src="{{item.imgUrl}}" alt="Ảnh">
                 </div>
-                <!-- <div class="product--option__item"
-                [ngClass]="{'is-current': !isCurrent}"
-                (click)="!isCurrent"
-                  >
-                  <img src="{{item}}" alt="Áo thun Marvel">
-                </div> -->
               </div>
             </div>
             <span class="previous" [ngClass]="{'isActive': isActive === i}"></span>
@@ -43,10 +38,10 @@
               <div class="option__item">
                 <div class="option--title">Màu sắc: <span style="font-weight: bold;">{{colorConvert}}</span></div>
                 <div class="option--select">
-                  <label class="option--select__item" *ngFor="let color of product.color; let i = index">
-                    <input type="radio" name="color" value="{{product.color[i].colorText}}">
+                  <label class="option--select__item" *ngFor="let color of product.colors; let i = index">
+                    <input type="radio" name="color" value="{{product.colors[i].colorText}}">
                     <span class="checkmark " [ngClass]="{'is-active': selectedIndex === i}"
-                      style="margin-right:16px;background-image: url('{{product.color[i].colorImg}}')"
+                      style="margin-right:16px;background-image: url('{{product.colors[i].colorImg}}')"
                       (click)="selectedColor(i)">
                     </span>
                   </label>
@@ -59,9 +54,9 @@
                     <span style="color: #2f5acf;">Hướng dẫn chọn size</span>
                   </div>
                   <div class="choose--size">
-                    <label class="choose--size__item" *ngFor="let size of product.size; let i = index">
-                      <input type="radio" name="size" value="{{size}}" (click)="setSize($event)">
-                      <span class="checkmark" [ngClass]="{'is-choose': this.size === '{{size}}'}">{{size}}</span>
+                    <label class="choose--size__item" *ngFor="let size of product.sizes; let i = index">
+                      <input type="radio" name="size" value="{{size.sizeText}}" (click)="setSize($event)">
+                      <span class="checkmark" [ngClass]="{'is-choose': this.size.sizeText === '{{size.sizeText}}'}">{{size.sizeText}}</span>
                     </label>
                   </div>
                 </div>
@@ -156,17 +151,14 @@
 
     <!-- End  -->
     <!-- Phần mô tả -->
-    <div class="product--decriptions" *ngIf="product">
+    <div class="product--decriptions" *ngIf="this.productType">
       <div class="dct--header">Chi tiết sản phẩm</div>
-      <div class="dct--title">{{product.name}}</div>
+      <div class="dct--title"></div>
       <div class="info--box">
-        Được truyền cảm hứng từ hình ảnh vị vua T'Challa kết hợp với phong cách đường phố graffiti bắt nguồn từ những
-        góc phố của người da màu. Nhà vua T'Challa - vị lãnh đạo của vương quốc Wakanda được phác họa với hình ảnh tự do
-        cùng dòng chữ "WARRIOR KING" thể hiện sự mạnh mẽ, tinh thần chiến đấu mãnh liệt của một chiến binh trước những
-        thù địch đe dọa lên vương quốc của mình.
+        {{this.productType.describe}}
       </div>
       <p><img style="display: block; margin-left: auto; margin-right: auto;"
-          src="https://mcdn.coolmate.me/image/October2022/anh-thiet-ke-ao-in-Graffiti-Warrior-King-den-2_30.jpg" alt=""
+          src="{{this.productType.image}}" alt=""
           width="550"></p>
     </div>
     <!-- End -->
@@ -201,286 +193,6 @@
       </div>
       <div class="reviews-listing">
         <div rel-script="product-reviews-listings" data-current-page="1" data-last-page="16" class="grid">
-          <div class="grid__column six-twelfths mobile--one-whole">
-            <div class="reviews-listing__item">
-              <div class="reviews-listing__rating">
-                <div class="reviews-rating">
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                </div>
-              </div>
-              <div class="reviews-listing__content">
-                <div class="reviews-author">
-                  <div class="reviews-author__name">
-                    Huỳnh Kỷ
-                  </div>
-                  <div class="reviews-author__description">
-                    Xám nhạt / XL
-                  </div>
-                </div>
-                <div class="reviews-listing__description">
-                  <p>
-                    Áo polo cafe chất lượng rất tốt, sẽ mua tiếp tục...
-                  </p>
-                  <span class="reviews-listing__date">
-                    25.02.2023
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="grid__column six-twelfths mobile--one-whole">
-            <div class="reviews-listing__item">
-              <div class="reviews-listing__rating">
-                <div class="reviews-rating">
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                </div>
-              </div>
-              <div class="reviews-listing__content">
-                <div class="reviews-author">
-                  <div class="reviews-author__name">
-                    Vu Duc Long
-                  </div>
-                  <div class="reviews-author__description">
-                    Xám nhạt / 3XL
-                  </div>
-                </div>
-                <div class="reviews-listing__description">
-                  <p>
-                    sản phẩm tốt
-                    giao hàng nhanh
-                  </p>
-                  <span class="reviews-listing__date">
-                    27.02.2023
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="grid__column six-twelfths mobile--one-whole">
-            <div class="reviews-listing__item">
-              <div class="reviews-listing__rating">
-                <div class="reviews-rating">
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                </div>
-              </div>
-              <div class="reviews-listing__content">
-                <div class="reviews-author">
-                  <div class="reviews-author__name">
-                    Vu Duc Long
-                  </div>
-                  <div class="reviews-author__description">
-                    Xanh Navy / 3XL
-                  </div>
-                </div>
-                <div class="reviews-listing__description">
-                  <p>
-                    sản phẩm tốt
-                  </p>
-                  <span class="reviews-listing__date">
-                    27.02.2023
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="grid__column six-twelfths mobile--one-whole">
-            <div class="reviews-listing__item">
-              <div class="reviews-listing__rating">
-                <div class="reviews-rating">
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                </div>
-              </div>
-              <div class="reviews-listing__content">
-                <div class="reviews-author">
-                  <div class="reviews-author__name">
-                    Nguyễn Đình Pháp
-                  </div>
-                  <div class="reviews-author__description">
-                    Xanh Navy / 2XL
-                  </div>
-                </div>
-                <div class="reviews-listing__description">
-                  <p>
-                    sản phẩm tốt, ban đầu nghĩ vải sẽ ko thấm hút tốt nhưng thực tế cho thấy mặc mát và thoát mồ hôi tốt
-                  </p>
-                  <span class="reviews-listing__date">
-                    27.02.2023
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="grid__column six-twelfths mobile--one-whole">
-            <div class="reviews-listing__item">
-              <div class="reviews-listing__rating">
-                <div class="reviews-rating">
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                </div>
-              </div>
-              <div class="reviews-listing__content">
-                <div class="reviews-author">
-                  <div class="reviews-author__name">
-                    Hoài Thương Đặng
-                  </div>
-                  <div class="reviews-author__description">
-                    Đen / XL
-                  </div>
-                </div>
-                <div class="reviews-listing__description">
-                  <p>
-                    Sản phẩm đẹp, mặc mát, thoải mái nhưng hơi mỏng
-                  </p>
-                  <span class="reviews-listing__date">
-                    24.02.2023
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="grid__column six-twelfths mobile--one-whole">
-            <div class="reviews-listing__item">
-              <div class="reviews-listing__rating">
-                <div class="reviews-rating">
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                </div>
-              </div>
-              <div class="reviews-listing__content">
-                <div class="reviews-author">
-                  <div class="reviews-author__name">
-                    Hoài Thương Đặng
-                  </div>
-                  <div class="reviews-author__description">
-                    Xanh Navy / XL
-                  </div>
-                </div>
-                <div class="reviews-listing__description">
-                  <p>
-                    Sản phẩm đẹp, màu giặt không bị phai nhưng hơi mỏng
-                  </p>
-                  <span class="reviews-listing__date">
-                    24.02.2023
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="grid__column six-twelfths mobile--one-whole">
-            <div class="reviews-listing__item">
-              <div class="reviews-listing__rating">
-                <div class="reviews-rating">
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                </div>
-              </div>
-              <div class="reviews-listing__content">
-                <div class="reviews-author">
-                  <div class="reviews-author__name">
-                    Hoài Thương Đặng
-                  </div>
-                  <div class="reviews-author__description">
-                    Xám nhạt / XL
-                  </div>
-                </div>
-                <div class="reviews-listing__description">
-                  <p>
-                    Màu đẹp, mặc mát, vải mềm, dễ chịu
-                  </p>
-                  <span class="reviews-listing__date">
-                    24.02.2023
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="grid__column six-twelfths mobile--one-whole">
-            <div class="reviews-listing__item">
-              <div class="reviews-listing__rating">
-                <div class="reviews-rating">
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                </div>
-              </div>
-              <div class="reviews-listing__content">
-                <div class="reviews-author">
-                  <div class="reviews-author__name">
-                    Huỳnh Thị Tiên
-                  </div>
-                  <div class="reviews-author__description">
-                    Xám nhạt / L
-                  </div>
-                </div>
-                <div class="reviews-listing__description">
-                  <p>
-                    Áo polo vừa size, hài lòng, sẽ mua lại sản phẩm
-                  </p>
-                  <span class="reviews-listing__date">
-                    16.02.2023
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="grid__column six-twelfths mobile--one-whole">
-            <div class="reviews-listing__item">
-              <div class="reviews-listing__rating">
-                <div class="reviews-rating">
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                </div>
-              </div>
-              <div class="reviews-listing__content">
-                <div class="reviews-author">
-                  <div class="reviews-author__name">
-                    Anh Nguyen
-                  </div>
-                  <div class="reviews-author__description">
-                    Xanh Navy / L
-                  </div>
-                </div>
-                <div class="reviews-listing__description">
-                  <p>
-                    Áo mặc thoáng mát, lịch sự khi đi làm, vải tốt.
-                  </p>
-                  <span class="reviews-listing__date">
-                    16.02.2023
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
           <div class="grid__column six-twelfths mobile--one-whole">
             <div class="reviews-listing__item">
               <div class="reviews-listing__rating">

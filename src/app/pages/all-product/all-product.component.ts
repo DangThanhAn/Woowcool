@@ -25,10 +25,8 @@ export class AllProductComponent implements OnInit{
   ];
   products: Product[] = [];
   getProduct(){
-    this.productService.getAllProducts().subscribe((data)=>{
+    this.productService.getAllProductsv1().subscribe((data)=>{
       this.products = data;
-      console.log(this.products);
-
     })
   }
 }

@@ -14,20 +14,19 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ProductComponent } from './components/product/product.component';
+// import { ProductComponent } from './components/product/product.component';
 import { CommonModule } from '@angular/common';
 import { AllProductComponent } from './pages/all-product/all-product.component';
 import { LayoutComponent } from './layout/layout.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
-// import { ToastMessageComponent } from './components/toast-message/toast-message.component';
-import { FormatVndPipe } from './pipes/format-vnd.pipe';
 import { TextfieldComponent } from './components/textfield/textfield.component';
 import { ShareComponentModule } from './modules/share-component/share-component.module';
 import { BlogComponent } from './pages/blog/blog.component';
 import { CoolxprintComponent } from './pages/coolxprint/coolxprint.component';
 import { AboutCoolmateComponent } from './pages/about-coolmate/about-coolmate.component';
 import { RisingComponent } from './pages/rising/rising.component';
+import { SharedPipeModule } from './pipes/shared-pipe.module';
 
 @NgModule({
   declarations: [
@@ -36,18 +35,17 @@ import { RisingComponent } from './pages/rising/rising.component';
     HeaderComponent,
     InputSearchComponent,
     FooterComponent,
-    ProductComponent,
+    // ProductComponent,
     AllProductComponent,
     LayoutComponent,
     CartComponent,
     ProductDetailsComponent,
-    // ToastMessageComponent,
-    FormatVndPipe,
     TextfieldComponent,
     BlogComponent,
     CoolxprintComponent,
     AboutCoolmateComponent,
     RisingComponent,
+
   ],
   imports: [
     CommonModule,
@@ -59,8 +57,8 @@ import { RisingComponent } from './pages/rising/rising.component';
     FormsModule,HttpClientModule,BrowserAnimationsModule,ReactiveFormsModule,
     ButtonModule,
     AuthModule,
-    ShareComponentModule
-
+    ShareComponentModule,
+    SharedPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
