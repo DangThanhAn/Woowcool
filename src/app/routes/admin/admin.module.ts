@@ -15,15 +15,53 @@ import { AdCollectionsComponent } from './ad-pages/ad-collections/ad-collections
 import { AdSettingsComponent } from './ad-pages/ad-settings/ad-settings.component';
 import { AdHeaderComponent } from './ad-components/ad-header/ad-header.component';
 
+
+
+
+import { FormsModule } from '@angular/forms';
+import { TableModule } from 'primeng/table';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
+import { ToastModule } from 'primeng/toast';
+import { ToolbarModule } from 'primeng/toolbar';
+import { RatingModule } from 'primeng/rating';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { DropdownModule } from 'primeng/dropdown';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { DialogModule } from 'primeng/dialog';
+import { ChartModule } from 'primeng/chart';
+import {MenuModule} from 'primeng/menu';
+
 import {OverlayModule} from '@angular/cdk/overlay'
 import {CdkMenuModule} from '@angular/cdk/menu'
+// import Chart from 'chart.js';
 
 @NgModule({
   declarations: [BodyComponent,SidenavComponent,AdUserProfileComponent,AdDashboardComponent,AdminLayoutComponent, AdProductsComponent, AdStatisticsComponent, AdCoupensComponent, AdBlogComponent, AdCollectionsComponent, AdSettingsComponent, AdHeaderComponent],
   imports: [
     CommonModule,AdminRoutingModule,RouterModule,
     CdkMenuModule,
-    OverlayModule
+    OverlayModule,
+
+    TableModule,
+    FileUploadModule,
+    FormsModule,
+    ButtonModule,
+    RippleModule,
+    ToastModule,
+    ToolbarModule,
+    RatingModule,
+    InputTextModule,
+    InputTextareaModule,
+    DropdownModule,
+    RadioButtonModule,
+    InputNumberModule,
+    DialogModule,
+    ChartModule,
+    MenuModule
   ]
 })
 export class AdminModule { }

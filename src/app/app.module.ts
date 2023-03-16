@@ -14,7 +14,6 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
-// import { ProductComponent } from './components/product/product.component';
 import { CommonModule } from '@angular/common';
 import { AllProductComponent } from './pages/all-product/all-product.component';
 import { LayoutComponent } from './layout/layout.component';
@@ -35,7 +34,6 @@ import { SharedPipeModule } from './pipes/shared-pipe.module';
     HeaderComponent,
     InputSearchComponent,
     FooterComponent,
-    // ProductComponent,
     AllProductComponent,
     LayoutComponent,
     CartComponent,

@@ -28,4 +28,24 @@ export class ProductService {
   public getAllProductsv1(): Observable<any> {
     return this.httpClient.get<any>(this.dataUrlOnline);
   }
+
+
+  getProductsSmall() {
+    return this.httpClient.get<any>(this.dataUrlOnline);
+}
+
+getProducts() {
+    return this.httpClient.get<any>(this.dataUrlOnline);
+}
+
+getProductsMixed() {
+    return this.httpClient.get<any>(this.dataUrlOnline);
+}
+
+getProductsWithOrdersSmall() {
+    return this.httpClient.get<any>(this.dataUrlOnline);
+}
+
+
+
 }
