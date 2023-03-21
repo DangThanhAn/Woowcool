@@ -1,3 +1,4 @@
+import { AccountModule } from './pages/account/account.module';
 import { AuthModule } from './features/auth/auth.module';
 import { ButtonModule } from './components/button/button.module';
 import { CarouselModule } from './components/carousel/carousel.module';
@@ -55,6 +56,7 @@ import { SharedPipeModule } from './pipes/shared-pipe.module';
     FormsModule,HttpClientModule,BrowserAnimationsModule,ReactiveFormsModule,
     ButtonModule,
     AuthModule,
+    AccountModule,
     ShareComponentModule,
     SharedPipeModule
   ],

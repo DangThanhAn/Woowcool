@@ -1,0 +1,150 @@
+.order-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  background-color: #2f5acf;
+  border-radius: 16px;
+  padding: 10px 30px;
+  position: relative;
+  z-index: 2;
+}
+.order-header .order-title {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.order-header .order-date {
+  font-size: .8rem;
+}
+.order-header .order-title, .order-header .order-date {
+  margin: 0;
+}
+.order-header .order-status-badge-confirmed {
+  color: #2f5acf;
+}
+.order-header .order-status-badge-confirmed {
+  color: #2f5acf;
+}
+.order-header .order-status-badge {
+  display: block;
+  padding: 0 10px;
+  height: 17px;
+  background-color: white;
+  text-align: center;
+  font-size: 12px;
+  border-radius: 5px;
+  font-weight: 500;
+}
+.title {
+  font-size: 30px;
+  font-weight: 700;
+  margin: 2rem 0 1rem;
+}
+.order-body {
+    border: 1px solid #d9d9d9;
+    background-color: white;
+    margin-top: -16px;
+    border-radius: 0 0 16px 16px;
+    position: relative;
+    z-index: 1;
+    padding-top: 16px;
+}
+.order-item:not(:last-child) {
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.order-item{
+  padding: 1rem 30px;
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+.order-item-thumbnail{
+  position: relative;
+  width: 100px;
+  margin-right: 1rem;
+}
+.order-item-thumbnail::before {
+  content: '';
+  display: block;
+  padding-top: 111.76470588%;
+  height: 0;
+  width: 100%;
+}
+.order-item-info{
+  flex: 1;
+}
+.order-item-title{
+  font-weight: 600;
+}
+.order-item-variant-label{
+  color: #2f5acf;
+}
+.order-item-price{
+  font-weight: 600;
+}
+.btn.btn-sm {
+  height: 31px;
+  font-size: 12px;
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  border-radius: 16px;
+  border: 2px solid #000;
+  background-color: #000;
+  color: #fff;
+  padding: 0 30px;
+  transition: all .2s;
+  cursor: pointer;
+}
+.btn.btn-sm {
+  height: 31px;
+  font-size: 12px;
+}
+.order-footer {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  border: 1px solid #d9d9d9;
+  background-color: #d9d9d9;
+  padding: calc(0.5rem + 16px) 30px 0.5rem;
+  margin-top: -16px;
+  border-radius: 0 0 16px 16px;
+  position: relative;
+  z-index: 0;
+}
+.order-item-thumbnail img{
+    border-radius: 8px;
+}
+.order-item-thumbnail img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+img:not(.home-banner) {
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
+}
+img {
+    text-indent: -9999px;
+    color: transparent;
+}
+img {
+    border-style: none;
+    vertical-align: middle;
+    max-width: 100%;
+    height: auto;
+}
+

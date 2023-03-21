@@ -1,3 +1,4 @@
+import { CollectionService } from './../../../service/collection.service';
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
@@ -6,7 +7,20 @@ import { MenuItem } from 'primeng/api';
 import { Product } from '../../../../models/product';
 import { Subscription } from 'rxjs';
 import { LayoutService } from '../../../service/app.layout.service';
-
+interface ProductType {
+  productTypeId: number;
+  productTypeName: string;
+  describe: string;
+  image: string;
+}
+interface Category {
+  categoryId: number;
+  categoryName: string;
+}
+interface Collection {
+  collectionId: number;
+  collectionName: string;
+}
 @Component({
   selector: 'app-ad-products',
   templateUrl: './ad-products.component.html',
@@ -26,7 +40,9 @@ export class AdProductsComponent implements OnInit{
     product: any = {
 
     };
-
+    categories: Category[] = [];
+    collections: Collection[] = [];
+    productTypes: ProductType[] = [];
     selectedProducts: Product[] = [];
 
     submitted: boolean = false;
@@ -37,10 +53,17 @@ export class AdProductsComponent implements OnInit{
 
     rowsPerPageOptions = [5, 10, 20];
 
-    constructor(private productService: ProductService, private messageService: MessageService) { }
+    constructor(
+      private productService: ProductService,
+      private messageService: MessageService,
+      private collectionService:CollectionService
+      ) { }
 
     ngOnInit() {
         this.productService.getProducts().subscribe((data) => this.products = data);
+        this.collectionService.getCategory().subscribe((data) => this.categories = data);
+        this.collectionService.getCollection().subscribe((data) => this.collections = data);
+        this.collectionService.getProductType().subscribe((data) => this.productTypes = data);
 
         this.cols = [
             { field: 'product', header: 'Product' },
@@ -59,7 +82,7 @@ export class AdProductsComponent implements OnInit{
 
     openNew() {
         // this.product = this.product;
-        this.submitted = false;
+        // this.submitted = false;
         this.productDialog = true;
     }
 
@@ -86,7 +109,7 @@ export class AdProductsComponent implements OnInit{
 
     confirmDelete() {
         this.deleteProductDialog = false;
-        this.products = this.products.filter(val => val.productId !== this.product.productId);
+        this.products = this.products.filter(val => val.id !== this.product.productId);
         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
         this.product = this.product;
     }
@@ -102,7 +125,6 @@ export class AdProductsComponent implements OnInit{
         if (this.product.productName?.trim()) {
             if (this.product.productId) {
                 // @ts-ignore
-                this.product.inventoryStatus = this.product.inventoryStatus.value ? this.product.inventoryStatus.value : this.product.inventoryStatus;
                 this.products[this.findIndexById(this.product.productId)] = this.product;
                 this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
             } else {
@@ -110,7 +132,6 @@ export class AdProductsComponent implements OnInit{
                 // this.product.code = this.createId();
                 this.product.images[0].imgUrl = 'product-placeholder.svg';
                 // @ts-ignore
-                this.product.inventoryStatus = this.product.inventoryStatus ? this.product.inventoryStatus.value : 'INSTOCK';
                 this.products.push(this.product);
                 this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
             }
@@ -124,7 +145,7 @@ export class AdProductsComponent implements OnInit{
     findIndexById(id: number): number {
         let index = -1;
         for (let i = 0; i < this.products.length; i++) {
-            if (this.products[i].productId === id) {
+            if (this.products[i].id === id) {
                 index = i;
                 break;
             }
@@ -142,4 +163,22 @@ export class AdProductsComponent implements OnInit{
     onGlobalFilter(table: Table, event: Event) {
         table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
     }
+
+
+
+    // file
+    uploadedFiles: any[] = [];
+    onUpload(event: any) {
+      for (const file of event.files) {
+          this.uploadedFiles.push(file);
+      }
+
+      this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded' });
+  }
+
+  onBasicUpload() {
+      this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
+  }
+
+
 }

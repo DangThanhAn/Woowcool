@@ -83,60 +83,44 @@
 
       <p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Product Details" [modal]="true" class="p-fluid" >
           <ng-template pTemplate="content">
-              <img src="{{product.images[0].imgUrl}}" [alt]="product.images[0].imgUrl" width="150" class="mt-0 mx-auto mb-5 block shadow-2" *ngIf="product.images[0].imgUrl">
+              <img src="{{product.images[0].imgUrl}}" [alt]="product.images[0].imgUrl" width="150" class="mt-0 mx-auto mb-5 block shadow-2" *ngIf="product.images[0]">
               <div class="field">
-                  <label for="name">Name</label>
+                  <label for="name">Tên sản phẩm</label>
                   <input type="text" pInputText id="name" [(ngModel)]="product.productName" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !product.productName}"/>
                   <small class="ng-dirty ng-invalid" *ngIf="submitted && !product.productName">Name is required.</small>
               </div>
               <div class="field">
-                  <label for="description">Description</label>
-                  <textarea id="description" pInputTextarea [(ngModel)]="product.productType.describe" required rows="3" cols="20"></textarea>
-              </div>
-              <div class="field">
-                  <label for="status">Inventory Status</label>
-                  <p-dropdown [(ngModel)]="product.inventoryStatus" inputId="inventoryStatus" optionValue="label" [options]="statuses" placeholder="Select">
-                      <ng-template pTemplate="selectedItem">
-                          <span *ngIf="product && product.inventoryStatus" [class]="'product-badge status-' + product.inventoryStatus.toString().toLowerCase()">{{product.inventoryStatus}}</span>
-                      </ng-template>
-                      <ng-template let-option pTemplate="item">
-                          <span [class]="'product-badge status-' + option.value">{{option.label}}</span>
-                      </ng-template>
-                  </p-dropdown>
-              </div>
-
-              <div class="field">
-                  <label class="mb-3">Category</label>
-                  <div class="formgrid grid">
-                      <div class="field-radiobutton col-6">
-                          <p-radioButton id="category1" name="category" value="Áo polo" [(ngModel)]="product.category.categoryName"></p-radioButton>
-                          <label for="category1">{{product.category.categoryName}}</label>
-                      </div>
-                      <!-- <div class="field-radiobutton col-6">
-                          <p-radioButton id="category2" name="category" value="Clothing" [(ngModel)]="product.categoryId"></p-radioButton>
-                          <label for="category2">{{product.category.categoryName}}</label>
-                      </div>
-                      <div class="field-radiobutton col-6">
-                          <p-radioButton id="category3" name="category" value="Electronics" [(ngModel)]="product.categoryId"></p-radioButton>
-                          <label for="category3">{{product.category.categoryName}}</label>
-                      </div>
-                      <div class="field-radiobutton col-6">
-                          <p-radioButton id="category4" name="category" value="Fitness" [(ngModel)]="product.categoryId"></p-radioButton>
-                          <label for="category4">{{product.category.categoryName}}</label>
-                      </div> -->
-                  </div>
-              </div>
+                <label for="name">Sale</label>
+                <input type="text" pInputText id="name" [(ngModel)]="product.sale" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !product.sale}"/>
+                <small class="ng-dirty ng-invalid" *ngIf="submitted && !product.sale">Name is required.</small>
+            </div>
 
               <div class="formgrid grid">
                   <div class="field col">
-                      <label for="price">Price</label>
+                      <label for="price">Giá</label>
                       <p-inputNumber id="price" [(ngModel)]="product.price" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
                   </div>
                   <div class="field col">
-                      <label for="quantity">Quantity</label>
+                      <label for="quantity">Số lượng</label>
                       <p-inputNumber id="quantity" [(ngModel)]="product.quantity"></p-inputNumber>
                   </div>
               </div>
+              <div class="field">
+                <label for="name">Sale</label>
+                <input type="text" pInputText id="name" [(ngModel)]="product.sale" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !product.sale}"/>
+                <small class="ng-dirty ng-invalid" *ngIf="submitted && !product.sale">Name is required.</small>
+            </div>
+            <div class="field">
+              <label for="name">Hình ảnh</label>
+              <p-fileUpload name="demo[]" url="./upload.php" (onUpload)="onUpload($event)"
+                          [multiple]="false" accept="image/*" [maxFileSize]="1000000">
+                <ng-template pTemplate="content">
+                    <ul *ngIf="uploadedFiles.length">
+                        <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                    </ul>
+                </ng-template>
+            </p-fileUpload>
+            </div>
           </ng-template>
 
           <ng-template pTemplate="footer">

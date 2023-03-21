@@ -1,0 +1,37 @@
+<div class="account-page">
+  <div class="site-content">
+    <div class="container">
+      <div id="account-page">
+        <div class="grid">
+          <div class="grid__column four-twelfths mobile--one-whole">
+            <div class="account-sidebar">
+              <div class="title flex align--center justify--between">
+                Đặng Ngọc Như
+                <a href="https://www.coolmate.me/page/coolclub-chuong-trinh-khach-hang-than-thiet-cua-coolmate"
+                  target="_blank" class="badge">
+                  COOLCLUB MEMBER
+                </a>
+              </div>
+              <div class="account-sidebar-items">
+                <a
+                *ngFor="let nav of pages"
+                [routerLink]="[nav.routeLink]"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact:true}"
+                class="account-sidebar-item"
+                >
+                  {{nav.label}}
+                </a>
+              </div>
+              <div></div>
+            </div>
+          </div>
+          <div class="grid__column eight-twelfths mobile--one-whole">
+            <router-outlet></router-outlet>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

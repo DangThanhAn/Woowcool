@@ -32,6 +32,7 @@ a{
 }
 :root {
   --bgc-admin:#263238;
+  --surface-card: #ffffff;
   --title-color: #000;
   --message-color: #000;
   --overlay-background-color: #0000004a;
@@ -100,7 +101,6 @@ text-align: center;
     padding-right: 64px;
   }
 }
-
 /* bố cục sản phẩm */
 .grid {
   display: flex;

@@ -30,7 +30,7 @@ export class ProductDetailsComponent implements OnInit,AfterViewInit {
   ngOnInit() {
     // First get the product id from the current route.
     const routeParams = this.route.snapshot.paramMap;
-    const productIDFromRoute = Number(routeParams.get('productId'));
+    const productIDFromRoute = Number(routeParams.get('id'));
     this.getProduct(productIDFromRoute);
     this.getProductType();
   }
@@ -38,7 +38,7 @@ export class ProductDetailsComponent implements OnInit,AfterViewInit {
   getProduct(productIDFromRoute: number) {
     this.productsService.getAllProducts().subscribe((data)=>{
       this.products = data;
-      this.product = this.products.find(x => x.productId == productIDFromRoute);
+      this.product = this.products.find(x => x.id == productIDFromRoute);
       console.log(this.product);
       this.product.quanlity = 1;
       // khởi tạo giá trị mặc định cho màu sắc

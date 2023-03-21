@@ -1,5 +1,5 @@
 export interface Product{
-  productId:number ;
+  id:number ;
   categoryId:number;
   productTypeId:number;
   collectionId:number;
