@@ -32,3 +32,7 @@ interface InventoryStatus {
   describe: string,
   image: string
 }
+export interface Image{
+  productId: number,
+  imgUrl:string
+}

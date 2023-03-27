@@ -34,6 +34,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { DialogModule } from 'primeng/dialog';
 import { ChartModule } from 'primeng/chart';
 import {MenuModule} from 'primeng/menu';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import {OverlayModule} from '@angular/cdk/overlay'
 import {CdkMenuModule} from '@angular/cdk/menu'
@@ -44,7 +46,7 @@ import {CdkMenuModule} from '@angular/cdk/menu'
   imports: [
     CommonModule,AdminRoutingModule,RouterModule,
     CdkMenuModule,
-    OverlayModule,
+    OverlayModule,ReactiveFormsModule,FormsModule,ProgressSpinnerModule,
 
     TableModule,
     FileUploadModule,

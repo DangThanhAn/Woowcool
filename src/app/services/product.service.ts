@@ -1,21 +1,17 @@
+import { Image, Product } from 'src/app/models/product';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ProductType } from "../models/productType";
+import { ProductType } from '../models/productType';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductService {
+  constructor(private httpClient: HttpClient) {}
 
-
-  constructor(
-    private httpClient: HttpClient
-  ) {
-  }
-
-  productTypeUrl:string ='https://localhost:7122/api/ProductTypes';
+  productTypeUrl: string = 'https://localhost:7122/api/ProductTypes';
   public getProductType(): Observable<any> {
     return this.httpClient.get<ProductType>(this.productTypeUrl);
   }
@@ -23,29 +19,36 @@ export class ProductService {
   public getAllProducts(): Observable<any> {
     return this.httpClient.get<any>(this.dataUrlOnline);
   }
+  public postProduct(product:Product): Observable<any> {
+    return this.httpClient.post<any>(this.dataUrlOnline,product);
+  }
+  public putProduct(product:Product): Observable<any> {
+    return this.httpClient.put<any>(`${this.dataUrlOnline}/${product.id}`,product);
+  }
 
-  dataUrlOnline:string = "https://localhost:7122/api/Products";
+  dataUrlOnline: string = 'https://localhost:7122/api/Products';
   public getAllProductsv1(): Observable<any> {
     return this.httpClient.get<any>(this.dataUrlOnline);
   }
 
-
   getProductsSmall() {
     return this.httpClient.get<any>(this.dataUrlOnline);
-}
+  }
 
-getProducts() {
+  getProducts() {
     return this.httpClient.get<any>(this.dataUrlOnline);
-}
+  }
 
-getProductsMixed() {
+  getProductsMixed() {
     return this.httpClient.get<any>(this.dataUrlOnline);
-}
+  }
 
-getProductsWithOrdersSmall() {
+  getProductsWithOrdersSmall() {
     return this.httpClient.get<any>(this.dataUrlOnline);
-}
+  }
 
-
-
+  urlImage ='https://localhost:7122/api/Images';
+  public postImg(image:Image): Observable<any> {
+    return this.httpClient.post<any>(this.urlImage, image);
+  }
 }
