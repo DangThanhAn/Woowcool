@@ -4,6 +4,7 @@ import { InfoComponent } from './info/info.component';
 import { AccountComponent } from './account.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuardService } from 'src/app/features/auth/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -14,8 +15,8 @@ const routes: Routes = [
       {path:'info',component: InfoComponent},
       {path:'orders',component: OrdersComponent},
       {path:'reviews',component: ReviewsComponent},
-
-    ]
+    ],
+    canActivate: [AuthGuardService]
   },
 ];
 

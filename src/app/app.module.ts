@@ -27,6 +27,7 @@ import { CoolxprintComponent } from './pages/coolxprint/coolxprint.component';
 import { AboutCoolmateComponent } from './pages/about-coolmate/about-coolmate.component';
 import { RisingComponent } from './pages/rising/rising.component';
 import { SharedPipeModule } from './pipes/shared-pipe.module';
+import { PermissionModule } from './pages/permission/permission.module';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { SharedPipeModule } from './pipes/shared-pipe.module';
     AuthModule,
     AccountModule,
     ShareComponentModule,
-    SharedPipeModule
+    SharedPipeModule,
+    PermissionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

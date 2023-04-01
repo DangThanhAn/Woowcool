@@ -9,14 +9,11 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8000/api';
+  private apiUrl = 'https://localhost:7122/api/Auth';
   private jwtHelper = new JwtHelperService();
   private token: string | any;
   authenticated : boolean = false;
-
-  user(){
-    return this.http.get(`${this.apiUrl}/user`,{withCredentials:true})
-  }
+  currentUser: any;
   constructor(private http: HttpClient) {}
   register(value: object){
     return this.http.post(`${this.apiUrl}/register`,value,{withCredentials:true});
@@ -27,12 +24,18 @@ export class AuthService {
         map(result => {
           this.token = result;
           localStorage.setItem('access_token', this.token.token);
-          console.log( this.token.token);
           return true;
         })
       );
   }
-
+  getCurrentUser(){
+    let token = localStorage.getItem('access_token');
+    if(token == null || token == ""){
+      token = "";
+    }
+    const decodedToken = this.jwtHelper.decodeToken(token);
+    return decodedToken;
+  }
   logout(): Observable<any>{
     this.token = null;
     localStorage.removeItem('access_token');
@@ -40,10 +43,11 @@ export class AuthService {
   }
   data: any
   isAdmin(): boolean {
+
     return false;
   }
   public isLoggedIn() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('access_token');
     return !this.jwtHelper.isTokenExpired(token);
   }
 }

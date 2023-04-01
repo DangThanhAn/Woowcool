@@ -89,8 +89,12 @@ export class LoginComponent implements OnInit {
       result => {
         if(result){
           this.isShow = false;
-          this.router.navigate(['/']);
-          window.location.reload();
+          const user = this.authService.getCurrentUser();
+          if(user.Role === "admin"){
+            this.router.navigate(['/admin/dashboard'])
+          }else{
+            location.reload();
+          }
         }
       }
     )

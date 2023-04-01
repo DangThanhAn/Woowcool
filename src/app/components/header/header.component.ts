@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/services/user.service';
 import { Emitters } from './../../emitters/emitters';
 import { AuthService } from './../../features/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -9,21 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent {
 
-  constructor(private authService:AuthService) { }
+  constructor(
+    private authService:AuthService,
+    private userService: UserService
+    ) { }
 
   ngOnInit(): void {
-    this.authService.user().subscribe(
-      (res)=>{
-      Emitters.authEmitter.emit(true);
-    },
-      err =>{
-      Emitters.authEmitter.emit(false);
+    // this.logout();
+    this.getUser();
+    this.isAuthenticated = this.authService.isLoggedIn();
+  }
+
+  getUser(){
+    let token = localStorage.getItem('access_token');
+    if(!(token == null || token == "")){
+      this.userService.getUserFromToken(token);
     }
-    );
-    Emitters.authEmitter.subscribe(
-      (auth:boolean) =>{
-        this.isAuthenticated = auth;
-      })
   }
   status ='';
   isLogin = false;
@@ -36,6 +38,7 @@ export class HeaderComponent {
     Emitters.authEmitter.emit(false)
     );
   }
+
   /**
    * Author: DT An
    * 28/12/22

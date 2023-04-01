@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { PermissionRoutingModule } from './permission-routing.module';
 import { PermissionComponent } from './permission.component';
+import {ButtonModule} from 'primeng/button';
 
 
 @NgModule({
@@ -11,7 +12,7 @@ import { PermissionComponent } from './permission.component';
   ],
   imports: [
     CommonModule,
-    PermissionRoutingModule
+    PermissionRoutingModule,ButtonModule
   ]
 })
 export class PermissionModule { }

@@ -9,6 +9,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AllProductComponent } from './pages/all-product/all-product.component';
 import { BlogComponent } from './pages/blog/blog.component';
+import { AdminGuardService } from './features/auth/admin-guard.service';
+import { AuthGuardService } from './features/auth/auth-guard.service';
 
 const routes: Routes = [
   // {path : '',component: DashboardComponent},
@@ -21,17 +23,20 @@ const routes: Routes = [
       { path: '', component: DashboardComponent },
       {path: 'all-product',component: AllProductComponent},
       {path: 'product-details/:id', component: ProductDetailsComponent },
-      {path: 'cart',component: CartComponent},
+      {path: 'cart',component: CartComponent,canActivate: [AuthGuardService]},
       {path: 'blog',component: BlogComponent},
       {path: 'coolxprint',component: CoolxprintComponent},
       {path: 'aboutcoolmate',component: AboutCoolmateComponent},
       {path: 'rising',component: RisingComponent},
       {path: 'filter-product',loadChildren: () => import('./pages/FilterProduct/filter-product.module').then(m => m.FilterProductModule)},
       {path: 'account',loadChildren: () => import('./pages/account/account.module').then(m => m.AccountModule)},
+      {path: 'permission',loadChildren: () => import('./pages/permission/permission.module').then(m => m.PermissionModule)},
     ]
   },
-  {path: 'admin',
-    loadChildren: () => import('src/app/routes/admin/admin.module').then(m => m.AdminModule)
+  {
+    path: 'admin',
+    loadChildren: () => import('src/app/routes/admin/admin.module').then(m => m.AdminModule),canActivate: [AdminGuardService]
+
   }
 ];
 
