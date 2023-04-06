@@ -36,11 +36,10 @@ export class ProductDetailsComponent implements OnInit,AfterViewInit {
   }
 
   getProduct(productIDFromRoute: number) {
-    this.productsService.getAllProducts().subscribe((data)=>{
-      this.products = data;
-      this.product = this.products.find(x => x.id == productIDFromRoute);
+    this.productsService.getProductById(productIDFromRoute).subscribe((data)=>{
+      this.product = data;
       console.log(this.product);
-      this.product.quanlity = 1;
+      this.product.quantityOrder = 1;
       // khởi tạo giá trị mặc định cho màu sắc
       this.colorConvert = this.product.colors[0].colorText;
       this.product.colorCurrent = this.colorConvert;
@@ -91,12 +90,14 @@ export class ProductDetailsComponent implements OnInit,AfterViewInit {
   }
 
   isShowToast:boolean = false;
-  setSize(event:any){
+  isChoose:number|any;
+  setSize(index:number,event:any){
     this.size = event.target.value.toUpperCase();
-    this.product.sizeCurrent = this.size;
+    this.isChoose = index;
+    this.hasError = false;
+    this.product.sizeOrder = this.size;
     this.result = true;
     this.toastMessageComponent?.changeH4Content("Đã thêm vào giỏ hàng",'',true);
-
   }
 
   // Xử lí toast message
@@ -106,8 +107,10 @@ export class ProductDetailsComponent implements OnInit,AfterViewInit {
     this.result = (this.size =="" || this.size ==null) ? this.isShowToast = true : this.isShowToast = false
   }
   // Có lỗi thì show toast
+  hasError:boolean=false;
   showError(){
     this.isShowToast = true;
+    this.hasError = true;
     this.returnValue();
     this.toastMessageComponent?.changeH4Content("Vui lòng chọn biến thể",'error',false);
   }
@@ -121,11 +124,11 @@ export class ProductDetailsComponent implements OnInit,AfterViewInit {
   count:number= 1;
   countSub(){
     this.count--;
-    this.product.quanlity = this.count;
+    this.product.quantityOrder = this.count;
   }
   countAdd(){
     this.count++;
-    this.product.quanlity = this.count;
+    this.product.quantityOrder = this.count;
   }
   // Add cart
   addToCart(product: Product) {

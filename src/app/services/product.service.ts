@@ -19,6 +19,9 @@ export class ProductService {
   public getAllProducts(): Observable<any> {
     return this.httpClient.get<any>(this.dataUrlOnline);
   }
+  public getProductById(id:any): Observable<any> {
+    return this.httpClient.get<any>(`${this.dataUrlOnline}/${id}`);
+  }
   public postProduct(product:Product): Observable<any> {
     return this.httpClient.post<any>(this.dataUrlOnline,product);
   }

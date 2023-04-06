@@ -1,47 +1,90 @@
+import { UserService } from './../../services/user.service';
+import { HttpClient } from '@angular/common/http';
 import { CartService } from '../../services/cart.service';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css']
+  styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
-  inforCustomer : FormGroup | any;
-  dataSource: any;
-
-  totalCoin: number = 0;
-  getItemInCart(){
-    this.cartService.getAllItemsInCart().subscribe({
-      next:(res) =>{
-        this.dataSource = res;
-        // Tính tổng tiền giỏ hàng bằng (số lượng từng sản phẩm * đơn giá)  ==> total
-        this.totalCoin = this.dataSource.reduce((total:number, dataSource:any)=>{
-          return total+ (dataSource.price * dataSource.quanlity);
-        },0);
-        console.log(this.totalCoin);
-      },
-      error:(err)=>{
-        console.log("Co loi khi goi api get data"+err);
-      }
-    })
-  }
-
   constructor(
     private cartService: CartService,
+    private http: HttpClient,
+    private fb: FormBuilder,
+    private UserService: UserService
   ) {}
   ngOnInit(): void {
-    // Sử dụng form
-    this.inforCustomer = new FormGroup({
-      name: new FormControl('',Validators.required),
-      address: new FormControl('',Validators.required),
-      phonenumber: new FormControl('',Validators.required),
-      email: new FormControl('',Validators.required),
-      note: new FormControl(''),
+    this.getUser();
+    this.getDataProvince();
+    this.selectAdderss();
+    this.getCartByOfUser();
+  }
+  dataSource: any;
+  // Sử dụng form
+  inforCustomer = this.fb.group({
+    name: ['', Validators.required],
+    address: ['', Validators.required],
+    phonenumber: ['', Validators.required],
+    email: ['', Validators.required],
+    note: [''],
+    selectedProvince: [''],
+    selectedDistrict: [''],
+    selectedWard: [''],
+  });
+
+  // end form
+  currentUser: any;
+  getUser() {
+    let token = localStorage.getItem('access_token');
+    if (!(token == null || token == '')) {
+      this.currentUser = this.UserService.getUserFromToken(token);
+    }
+    this.inforCustomer.setValue({
+      name: this.currentUser.UserName,
+      address: this.currentUser.Address,
+      phonenumber:this.currentUser.PhoneNumber,
+      email: this.currentUser.Email,
+      note:'',
+      selectedProvince: '',
+      selectedDistrict: '',
+      selectedWard: '',
     });
-    // end form
-    this.getItemInCart();
+  }
+
+  totalCoin: number = 0;
+  listTotal:number[] =[];
+  getCartByOfUser() {
+    this.cartService.getCart(this.currentUser.Id).subscribe({
+      next: (res) => {
+        this.dataSource = res;
+        console.log(this.dataSource);
+        console.log(this.dataSource[0].cartDetails[0].product.images[0].imgUrl);
+        console.log(this.dataSource[0].cartDetails[0].product.price);
+        console.log(this.dataSource[0].cartDetails[0].quantity);
+        this.listTotal.splice(0, this.listTotal.length);
+        for (const iterator of this.dataSource[0].cartDetails) {
+          this.listTotal.push(iterator.product.price * iterator.quantity);
+        }
+        this.totalCoin = this.listTotal.reduce(
+          (total: number, value: number) => {
+            return total + value
+          },
+          0
+        );
+        console.log(this.totalCoin);
+      },
+      error: (err) => {
+        console.log('Co loi khi goi api get data' + err);
+      },
+    });
   }
 
   /**
@@ -49,29 +92,26 @@ export class CartComponent implements OnInit {
    * Author: DT An
    * 14/12/22
    */
-  countAdd(id: number){
-    let currentProduct = this.dataSource.find((x: { id: number; }) => x.id === id);
-    currentProduct.quanlity++;
-    this.cartService.updateAProduct(currentProduct, currentProduct.id).subscribe(()=>{
-      this.getItemInCart(); // cap nhat lai total
-    });
+  countAdd(id: number,quanlity:number) {
+    quanlity++;
+    this.cartService.updateSize(id,quanlity).subscribe(() => {
+      this.getCartByOfUser();
+      });
   }
-  countSub(id: number){
-    let currentProduct = this.dataSource.find((x: { id: number; }) => x.id === id);
-    currentProduct.quanlity--
-    this.cartService.updateAProduct(currentProduct, currentProduct.id).subscribe(()=>{
-      this.getItemInCart(); // cap nhat lai total
-    });
+  countSub(id: number,quanlity:number) {
+    quanlity--;
+    this.cartService.updateSize(id,quanlity).subscribe(() => {
+      this.getCartByOfUser();
+      });
   }
   /**
    * Hàm xóa sản phẩm current
    * Author: DT An
    * 14/12/22
    */
-  deleteAProduct(id: number){
-    let currentProduct = this.dataSource.find((x: { id: number; }) => x.id === id);
-    this.cartService.deleteAProduct(currentProduct.id).subscribe(()=>{
-      this.getItemInCart(); // cap nhat lai gio hang
+  deleteCD(id: number) {
+    this.cartService.deleteCD(id).subscribe(() => {
+      this.getCartByOfUser();
     });
   }
   /**
@@ -80,7 +120,69 @@ export class CartComponent implements OnInit {
    * 2. Navigate tới trang thanh toán thành công và clear giỏ hàng.
    */
   onSubmit(): void {
-    console.log(this.inforCustomer.get('name')?.errors?.required);
     console.warn('Your order has been submitted', this.inforCustomer.value);
+  }
+
+  provinces: any[] = [];
+  selectedProvince: string | any;
+  districts: any[] = [];
+  selectedDistrict: string | any;
+  wards: any[] = [];
+  selectedWard: string | any;
+
+  getDataProvince() {
+    this.http
+      .get<any>('../../../../assets/dataProvince/treeVN.min.json')
+      .subscribe((data) => {
+        this.provinces = [
+          ...new Set(data.map((item: { city: any }) => item.city)),
+        ];
+        console.log(this.provinces);
+      });
+  }
+  getDistrictsByCity(cityName: string) {
+    this.http
+      .get<any>('../../../../assets/dataProvince/treeVN.min.json')
+      .subscribe((data) => {
+        this.districts = [
+          ...new Set(
+            data
+              .filter((item: { city: string }) => item.city === cityName)
+              .map((item: { district: any }) => item.district)
+          ),
+        ];
+        console.log(this.districts);
+      });
+  }
+  getWardsByDistrict(district: string) {
+    this.http
+      .get<any>('../../../../assets/dataProvince/treeVN.min.json')
+      .subscribe((data) => {
+        this.wards = [
+          ...new Set(
+            data
+              .filter(
+                (item: { district: string }) => item.district === district
+              )
+              .map((item: { ward: any }) => item.ward)
+          ),
+        ];
+        console.log(this.wards);
+      });
+  }
+  selectAdderss() {
+    this.inforCustomer.controls['selectedProvince'].valueChanges.subscribe(
+      (selectedProvince) => {
+        if (selectedProvince == null) selectedProvince = '';
+        this.getDistrictsByCity(selectedProvince);
+      }
+    );
+
+    this.inforCustomer.controls['selectedDistrict'].valueChanges.subscribe(
+      (selectedDistrict) => {
+        if (selectedDistrict == null) selectedDistrict = '';
+        this.getWardsByDistrict(selectedDistrict);
+      }
+    );
   }
 }

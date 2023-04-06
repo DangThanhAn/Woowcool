@@ -46,7 +46,7 @@
                     </span>
                   </label>
                 </div>
-                <div class="guide--user" [ngClass]="{'is-error':isShowToast}">
+                <div class="guide--user" [ngClass]="{'is-error':hasError}">
                   <div class="option--heading">
                     <span>Kích thước:
                       <span type="text" style="font-weight: bold;">{{size}}</span>
@@ -55,8 +55,8 @@
                   </div>
                   <div class="choose--size">
                     <label class="choose--size__item" *ngFor="let size of product.sizes; let i = index">
-                      <input type="radio" name="size" value="{{size.sizeText}}" (click)="setSize($event)">
-                      <span class="checkmark" [ngClass]="{'is-choose': this.size.sizeText === '{{size.sizeText}}'}">{{size.sizeText}}</span>
+                      <input type="radio" name="size" value="{{size.sizeText}}" (click)="setSize(i,$event)">
+                      <span class="checkmark" [ngClass]="{'is-choose': isChoose === i}">{{size.sizeText}}</span>
                     </label>
                   </div>
                 </div>

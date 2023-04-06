@@ -7,61 +7,68 @@
         <div class="action">Bạn đã có tài khoản? <a href="#">Đăng nhập ngay</a></div>
       </div>
       <!-- Thông tin nhập vào -->
-      <form [formGroup]="inforCustomer" (ngSubmit)="onSubmit()">
+      <form [formGroup]="inforCustomer" (ngSubmit)="onSubmit()" >
         <div class="grid">
           <div class="grid__column width50">
             <input type="text" formControlName="name"
-              [ngClass]="{'error':inforCustomer.get('name')?.errors?.required && inforCustomer.get('name')?.touched}"
+              [ngClass]="{'error':inforCustomer.get('name')?.errors?.['required'] && inforCustomer.get('name')?.touched}"
               name="" placeholder="Họ tên" class="form-control">
             <div class="alert alert-custom text-danger"
-              *ngIf="inforCustomer.get('name')?.errors?.required && inforCustomer.get('name')?.touched">Vui lòng nhập họ
+              *ngIf="inforCustomer.get('name')?.errors?.['required'] && inforCustomer.get('name')?.touched">Vui lòng nhập họ
               tên!</div>
           </div>
 
           <div class="grid__column width50">
             <input type="tel" name="phonenumber" formControlName="phonenumber"
-              [ngClass]="{'error':inforCustomer.get('phonenumber')?.errors?.required && inforCustomer.get('phonenumber')?.touched}"
+              [ngClass]="{'error':inforCustomer.get('phonenumber')?.errors?.['required'] && inforCustomer.get('phonenumber')?.touched}"
               placeholder="Số điện thoại" class="form-control">
             <div class="alert alert-custom text-danger"
-              *ngIf="inforCustomer.get('phonenumber')?.errors?.required && inforCustomer.get('phonenumber')?.touched">
+              *ngIf="inforCustomer.get('phonenumber')?.errors?.['required'] && inforCustomer.get('phonenumber')?.touched">
               Vui lòng nhập số điện thoại!</div>
           </div>
         </div>
 
         <div class="grid">
           <div class="grid__column"><input type="email"
-              [ngClass]="{'error':inforCustomer.get('email')?.errors?.required && inforCustomer.get('email')?.touched}"
+              [ngClass]="{'error':inforCustomer.get('email')?.errors?.['required'] && inforCustomer.get('email')?.touched}"
               name="" placeholder="Email" class="form-control" formControlName="email">
             <div class="alert alert-custom text-danger"
-              *ngIf="inforCustomer.get('email')?.errors?.required && inforCustomer.get('email')?.touched">Vui lòng nhập
+              *ngIf="inforCustomer.get('email')?.errors?.['required'] && inforCustomer.get('email')?.touched">Vui lòng nhập
               email!</div>
           </div>
         </div>
         <div class="grid">
           <div class="grid__column"><input type="text"
-              [ngClass]="{'error':inforCustomer.get('address')?.errors?.required && inforCustomer.get('address')?.touched}"
+              [ngClass]="{'error':inforCustomer.get('address')?.errors?.['required'] && inforCustomer.get('address')?.touched}"
               name="" placeholder="Địa chỉ (ví dụ: xóm 13, Trực Thái)" class="form-control" formControlName="address">
             <div class="alert alert-custom text-danger"
-              *ngIf="inforCustomer.get('address')?.errors?.required && inforCustomer.get('address')?.touched">Vui lòng
+              *ngIf="inforCustomer.get('address')?.errors?.['required'] && inforCustomer.get('address')?.touched">Vui lòng
               nhập địa chỉ!</div>
           </div>
         </div>
         <div class="grid">
+
           <div class="grid__column width33">
-            <select class="form-select" id="city" aria-label=".form-select-sm">
+            <select class="form-select" id="city" formControlName="selectedProvince">
               <option value="" selected>Chọn tỉnh thành</option>
+              <option value="{{item}}" *ngFor="let item of provinces">{{item}}</option>
             </select>
           </div>
+
           <div class="grid__column width33">
-            <select class="form-select" id="district" aria-label=".form-select-sm">
+            <select class="form-select" id="district" formControlName="selectedDistrict">
               <option value="" selected>Chọn quận huyện</option>
+              <option value="{{item}}" *ngFor="let item of districts" >{{item}}</option>
             </select>
           </div>
+
           <div class="grid__column width33">
-            <select class="form-select " id="ward" aria-label=".form-select-sm">
+            <select class="form-select " id="ward" formControlName="selectedWard">
               <option value="" selected>Chọn phường xã</option>
+              <option value="{{item}}" *ngFor="let item of wards" >{{item}}</option>
             </select>
           </div>
+
         </div>
         <div class="grid">
           <div class="grid__column"><input type="text" name="" placeholder="Ghi chú (ví dụ: Giao hàng giờ hành chính)"
@@ -122,37 +129,37 @@
   <div class="content--right">
     <div class="inf--oder">
       <div class="oder__title title">Giỏ hàng</div>
-      <div class="cart--items">
-        <div class="cart--item" *ngFor="let item of dataSource">
-          <span class="cart--item__remove" (click)="deleteAProduct(item.id)">✕</span>
+      <div class="cart--items" *ngIf="dataSource && dataSource.length > 0">
+        <div class="cart--item" *ngFor="let item of dataSource.at(0).cartDetails;let i = index">
+          <span class="cart--item__remove" (click)="deleteCD(item.cartDetailId)">✕</span>
           <div class="cart--item__img">
-            <img src="{{item.imgUrl[0].at(0)}}" alt="Áo thun Marvel Oversize Black Panther - Outline">
-            <span class="cart--item__count">{{item.quanlity}}</span>
+            <img src="{{item.product.images[0].imgUrl}}" alt="Áo thun Marvel Oversize Black Panther - Outline">
+            <span class="cart--item__count">{{item.quantity}}</span>
           </div>
           <div class="cart--item__details">
             <div class="cart--item__info">
               <div class="cart--item__name">{{item.productName}}</div>
-              <div class="cart--item__option">{{item.colorCurrent}} / {{item.sizeCurrent}}</div>
+              <div class="cart--item__option">{{item.color}} / {{item.size}}</div>
             </div>
             <div class="cart--item__action">
               <label class="choose--size__item ">
                 <input type="radio" name="size" value="m">
-                <span class="checkmark">{{item.colorCurrent}}</span>
+                <span class="checkmark">{{item.color}}</span>
               </label>
               <label class="option">v</label>
               <label class="choose--size__item size">
                 <input type="radio" name="" value="m">
-                <span class="checkmark">{{item.sizeCurrent}}</span>
+                <span class="checkmark">{{item.size}}</span>
               </label>
               <label class="option optsize">v</label>
               <div class="action--bottom">
                 <div class="action--count">
-                  <a style="cursor: pointer;" class="quantity__reduce" (click)="countSub(item.id)">-</a>
-                  <input type="number" value="{{item.quanlity}}" max="99" min="1" class="quantity__control"
-                    [(ngModel)]="item.quanlity">
-                  <a style="cursor: pointer;" class="quantity__augure" (click)="countAdd(item.id)">+</a>
+                  <a style="cursor: pointer;" class="quantity__reduce" (click)="countSub(item.cartDetailId,item.quantity)">-</a>
+                  <input type="number" max="99" min="1"  value="{{item.quantity}}" class="quantity__control"
+                    [(ngModel)]="item.quantity">
+                  <a style="cursor: pointer;" class="quantity__augure" (click)="countAdd(item.cartDetailId,item.quantity)">+</a>
                 </div>
-                <div class="action--price">{{item.price*item.quanlity | FormatVndPipe}}</div>
+                <div class="action--price">{{item.product.price * item.quantity| FormatVndPipe}}</div>
               </div>
             </div>
           </div>

@@ -17,15 +17,8 @@ export class HeaderComponent {
 
   ngOnInit(): void {
     // this.logout();
-    this.getUser();
     this.isAuthenticated = this.authService.isLoggedIn();
-  }
-
-  getUser(){
-    let token = localStorage.getItem('access_token');
-    if(!(token == null || token == "")){
-      this.userService.getUserFromToken(token);
-    }
+    this.userService.getCart(1).subscribe((data)=> console.log(data))
   }
   status ='';
   isLogin = false;

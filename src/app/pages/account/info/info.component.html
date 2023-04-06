@@ -1,237 +1,146 @@
-  <div id="info-tab"><!---->
-    <div class="title">
-      Thông tin tài khoản
-    </div>
-    <div class="grid">
-      <div class="grid__column three-twelfths mobile--one-whole flex align--center">
-        Họ Tên
-      </div>
-      <div class="grid__column seven-twelfths mobile--one-whole">
-        <div class="form-group"><input type="text" name="fullname"
-            placeholder="Họ tên của bạn" class="form-control"> <!----></div>
-      </div>
-    </div>
-    <div class="grid">
-      <div class="grid__column three-twelfths mobile--one-whole flex align--center">
-        Email
-      </div>
-      <div class="grid__column seven-twelfths mobile--one-whole">
-        <div class="form-group"><input type="email" disabled="disabled"
-            name="email" placeholder="Email của bạn" class="form-control"> <!----></div>
-      </div>
-    </div>
-    <div class="grid">
-      <div class="grid__column three-twelfths mobile--one-whole flex align--center">
-        Số điện thoại
-      </div>
-      <div class="grid__column seven-twelfths mobile--one-whole">
-        <div class="form-group"><input type="tel" name="phone"
-            placeholder="SĐT của bạn" class="form-control"> <!----></div>
-      </div>
-    </div>
-    <div class="grid">
-      <div class="grid__column three-twelfths mobile--one-whole flex align--center">
-        Địa chỉ
-      </div>
-      <div class="grid__column seven-twelfths mobile--one-whole">
-        <div class="form-group">
-          <div class="address-block"><!----> <input type="text"
-              name="address" placeholder="Địa chỉ (ví dụ: 103 Vạn Phúc, phường Vạn Phúc)"
-              class="form-control"> <!----></div>
-        </div>
-      </div>
-    </div>
-    <div class="grid">
-      <div class="grid__column three-twelfths mobile--one-whole flex align--center">
-        Tỉnh/Thành
-      </div>
-      <div class="grid__column seven-twelfths mobile--one-whole">
-        <div class="grid">
-          <div class="grid__column four-twelfths mobile--one-whole">
-            <div dir="auto" class="v-select vue-select vs--single vs--searchable"
-              name="nhanh_city">
-              <div id="vs4__combobox" role="combobox" aria-expanded="false" aria-owns="vs4__listbox"
-                aria-label="Search for option" class="vs__dropdown-toggle">
-                <div class="vs__selected-options"> <input placeholder="Chọn Tỉnh/Thành"
-                    aria-autocomplete="list" aria-labelledby="vs4__combobox" aria-controls="vs4__listbox"
-                    type="search" autocomplete="off" class="vs__search"></div>
-                <div class="vs__actions"><button type="button" title="Clear Selected"
-                    aria-label="Clear Selected" class="vs__clear" style="display: none;"><svg
-                      xmlns="http://www.w3.org/2000/svg" width="10" height="10">
-                      <path
-                        d="M6.895455 5l2.842897-2.842898c.348864-.348863.348864-.914488 0-1.263636L9.106534.261648c-.348864-.348864-.914489-.348864-1.263636 0L5 3.104545 2.157102.261648c-.348863-.348864-.914488-.348864-1.263636 0L.261648.893466c-.348864.348864-.348864.914489 0 1.263636L3.104545 5 .261648 7.842898c-.348864.348863-.348864.914488 0 1.263636l.631818.631818c.348864.348864.914773.348864 1.263636 0L5 6.895455l2.842898 2.842897c.348863.348864.914772.348864 1.263636 0l.631818-.631818c.348864-.348864.348864-.914489 0-1.263636L6.895455 5z">
-                      </path>
-                    </svg></button> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="10"
-                    role="presentation" class="vs__open-indicator">
-                    <path
-                      d="M9.211364 7.59931l4.48338-4.867229c.407008-.441854.407008-1.158247 0-1.60046l-.73712-.80023c-.407008-.441854-1.066904-.441854-1.474243 0L7 5.198617 2.51662.33139c-.407008-.441853-1.066904-.441853-1.474243 0l-.737121.80023c-.407008.441854-.407008 1.158248 0 1.600461l4.48338 4.867228L7 10l2.211364-2.40069z">
-                    </path>
-                  </svg>
-                  <div class="vs__spinner" style="display: none;">Loading...</div>
-                </div>
-              </div>
-              <ul id="vs4__listbox" role="listbox" style="display: none; visibility: hidden;"></ul>
-            </div>
-          </div>
-          <div class="grid__column four-twelfths mobile--one-whole">
-            <div dir="auto" class="v-select vue-select vs--single vs--searchable"
-              name="nhanh_district">
-              <div id="vs5__combobox" role="combobox" aria-expanded="false" aria-owns="vs5__listbox"
-                aria-label="Search for option" class="vs__dropdown-toggle">
-                <div class="vs__selected-options"> <input placeholder="Chọn Quận/Huyện"
-                    aria-autocomplete="list" aria-labelledby="vs5__combobox" aria-controls="vs5__listbox"
-                    type="search" autocomplete="off" class="vs__search"></div>
-                <div class="vs__actions"><button type="button" title="Clear Selected"
-                    aria-label="Clear Selected" class="vs__clear" style="display: none;"><svg
-                      xmlns="http://www.w3.org/2000/svg" width="10" height="10">
-                      <path
-                        d="M6.895455 5l2.842897-2.842898c.348864-.348863.348864-.914488 0-1.263636L9.106534.261648c-.348864-.348864-.914489-.348864-1.263636 0L5 3.104545 2.157102.261648c-.348863-.348864-.914488-.348864-1.263636 0L.261648.893466c-.348864.348864-.348864.914489 0 1.263636L3.104545 5 .261648 7.842898c-.348864.348863-.348864.914488 0 1.263636l.631818.631818c.348864.348864.914773.348864 1.263636 0L5 6.895455l2.842898 2.842897c.348863.348864.914772.348864 1.263636 0l.631818-.631818c.348864-.348864.348864-.914489 0-1.263636L6.895455 5z">
-                      </path>
-                    </svg></button> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="10"
-                    role="presentation" class="vs__open-indicator">
-                    <path
-                      d="M9.211364 7.59931l4.48338-4.867229c.407008-.441854.407008-1.158247 0-1.60046l-.73712-.80023c-.407008-.441854-1.066904-.441854-1.474243 0L7 5.198617 2.51662.33139c-.407008-.441853-1.066904-.441853-1.474243 0l-.737121.80023c-.407008.441854-.407008 1.158248 0 1.600461l4.48338 4.867228L7 10l2.211364-2.40069z">
-                    </path>
-                  </svg>
-                  <div class="vs__spinner" style="display: none;">Loading...</div>
-                </div>
-              </div>
-              <ul id="vs5__listbox" role="listbox" style="display: none; visibility: hidden;"></ul>
-            </div>
-          </div>
-          <div class="grid__column four-twelfths mobile--one-whole">
-            <div dir="auto" class="v-select vue-select vs--single vs--searchable"
-              name="nhanh_ward" id="nhanh_ward">
-              <div id="vs6__combobox" role="combobox" aria-expanded="false" aria-owns="vs6__listbox"
-                aria-label="Search for option" class="vs__dropdown-toggle">
-                <div class="vs__selected-options"> <input placeholder="Chọn Phường/Xã"
-                    aria-autocomplete="list" aria-labelledby="vs6__combobox" aria-controls="vs6__listbox"
-                    type="search" autocomplete="off" class="vs__search"></div>
-                <div class="vs__actions"><button type="button" title="Clear Selected"
-                    aria-label="Clear Selected" class="vs__clear" style="display: none;"><svg
-                      xmlns="http://www.w3.org/2000/svg" width="10" height="10">
-                      <path
-                        d="M6.895455 5l2.842897-2.842898c.348864-.348863.348864-.914488 0-1.263636L9.106534.261648c-.348864-.348864-.914489-.348864-1.263636 0L5 3.104545 2.157102.261648c-.348863-.348864-.914488-.348864-1.263636 0L.261648.893466c-.348864.348864-.348864.914489 0 1.263636L3.104545 5 .261648 7.842898c-.348864.348863-.348864.914488 0 1.263636l.631818.631818c.348864.348864.914773.348864 1.263636 0L5 6.895455l2.842898 2.842897c.348863.348864.914772.348864 1.263636 0l.631818-.631818c.348864-.348864.348864-.914489 0-1.263636L6.895455 5z">
-                      </path>
-                    </svg></button> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="10"
-                    role="presentation" class="vs__open-indicator">
-                    <path
-                      d="M9.211364 7.59931l4.48338-4.867229c.407008-.441854.407008-1.158247 0-1.60046l-.73712-.80023c-.407008-.441854-1.066904-.441854-1.474243 0L7 5.198617 2.51662.33139c-.407008-.441853-1.066904-.441853-1.474243 0l-.737121.80023c-.407008.441854-.407008 1.158248 0 1.600461l4.48338 4.867228L7 10l2.211364-2.40069z">
-                    </path>
-                  </svg>
-                  <div class="vs__spinner" style="display: none;">Loading...</div>
-                </div>
-              </div>
-              <ul id="vs6__listbox" role="listbox" style="display: none; visibility: hidden;"></ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="grid mgb--20">
-      <div class="grid__column three-twelfths mobile--one-whole flex align--center">
-        Giới tính
-      </div>
-      <div class="grid__column seven-twelfths mobile--one-whole">
-        <div class="form-group flex"><label for="male"
-            class="custom-radio-label"><span class="custom-radio"><input
-                type="radio" id="male" value="male"> <span class="checkmark"></span></span>
-            <span class="label">
-              Nam
-            </span></label> <label for="female" class="custom-radio-label"><span
-             class="custom-radio"><input type="radio" id="female"
-                value="female"> <span class="checkmark"></span></span> <span
-             class="label">
-              Nữ
-            </span></label></div>
-      </div>
-    </div>
-    <div class="grid mgb--20">
-      <div class="grid__column three-twelfths mobile--one-whole flex align--center">
-        Đăng nhập bằng SĐT
-      </div>
-      <div class="grid__column seven-twelfths mobile--one-whole">
-        <div class="form-group flex"><label for="login_by_phone_true"
-            class="custom-radio-label"><span class="custom-radio"><input
-                type="radio" id="login_by_phone_true" value="true"> <span
-                class="checkmark"></span></span> <span class="label">
-              Bật
-            </span></label> <label for="login_by_phone_false"
-            class="custom-radio-label"><span class="custom-radio"><input
-                type="radio" id="login_by_phone_false" value="false"> <span
-                class="checkmark"></span></span> <span class="label">
-              Tắt
-            </span></label></div>
-      </div>
-    </div>
-    <div class="grid mgb--20">
-      <div class="grid__column three-twelfths mobile--one-whole flex align--center">
-        <div class="bday-label">
-          Ngày sinh <i class="bday-note">(ngày/tháng/năm)</i></div>
-      </div>
-      <div class="grid__column seven-twelfths mobile--one-whole">
-        <div class="xmx-datepicker">
-          <div class="xmx-input-wrapper"><input name="date" type="text" autocomplete="off"
-              placeholder="Nhập ngày sinh của bạn" class="xmx-input"><i class="xmx-icon-calendar"><svg
-                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1em" height="1em">
-                <path
-                  d="M940.218182 107.054545h-209.454546V46.545455h-65.163636v60.50909H363.054545V46.545455H297.890909v60.50909H83.781818c-18.618182 0-32.581818 13.963636-32.581818 32.581819v805.236363c0 18.618182 13.963636 32.581818 32.581818 32.581818h861.090909c18.618182 0 32.581818-13.963636 32.581818-32.581818V139.636364c-4.654545-18.618182-18.618182-32.581818-37.236363-32.581819zM297.890909 172.218182V232.727273h65.163636V172.218182h307.2V232.727273h65.163637V172.218182h176.872727v204.8H116.363636V172.218182h181.527273zM116.363636 912.290909V442.181818h795.927273v470.109091H116.363636z">
-                </path>
-              </svg></i></div>
-        </div>
-        <div class="bday-note">
-          Thông tin ngày sinh chỉ được thay đổi một lần, vui lòng nhập đúng thông tin nhé
-        </div>
-      </div>
-    </div>
-    <div class="grid mgb--20">
-      <div class="grid__column three-twelfths mobile--one-whole flex align--center">
-        Chiều cao
-      </div>
-      <div class="grid__column seven-twelfths mobile--one-whole">
-        <div class="slider-group">
-          <div class="vue-slider vue-slider-ltr"
-            style="padding: 7px 0px; width: 100%; height: 4px;">
-            <div class="vue-slider-rail">
-              <div aria-valuetext="158" class="vue-slider-dot" role="slider" aria-valuenow="158"
-                aria-valuemin="140" aria-valuemax="185" aria-orientation="horizontal" tabindex="0"
-                style="width: 14px; height: 14px; transform: translate(-50%, -50%); top: 50%; left: 40%; transition: left 0.5s ease 0s;">
-                <div class="vue-slider-dot-handle"></div>
-              </div>
-            </div>
-          </div> <span>158cm</span>
-        </div>
-      </div>
-    </div>
-    <div class="grid mgb--20">
-      <div class="grid__column three-twelfths mobile--one-whole flex align--center">
-        Cân nặng
-      </div>
-      <div class="grid__column seven-twelfths mobile--one-whole">
-        <div class="slider-group">
-          <div class="vue-slider vue-slider-ltr"
-            style="padding: 7px 0px; width: 100%; height: 4px;">
-            <div class="vue-slider-rail">
-              <div aria-valuetext="59" class="vue-slider-dot" role="slider" aria-valuenow="59"
-                aria-valuemin="40" aria-valuemax="85" aria-orientation="horizontal" tabindex="0"
-                style="width: 14px; height: 14px; transform: translate(-50%, -50%); top: 50%; left: 42.2222%; transition: left 0.5s ease 0s;">
-                <div class="vue-slider-dot-handle"></div>
-              </div>
-            </div>
-          </div> <span>59kg</span>
-        </div>
-      </div>
-    </div>
-    <div class="grid">
-      <div class="grid__column three-twelfths mobile--one-whole flex align--center"><a
-         href="#" class="password-toggle">
-          Thay đổi mật khẩu
-        </a></div>
-    </div> <!---->
-    <div class="grid">
-      <div class="grid__column three-twelfths mobile--one-whole flex align--center"><button
-         class="btn btn-primary btn-block-sm">
-          Cập nhật tài khoản
-        </button></div>
-    </div> <!---->
+<div id="info-tab" *ngIf="currentUser">
+  <div class="title">
+    Thông tin tài khoản
   </div>
+  <div class="grid">
+    <div class="grid__column three-twelfths mobile--one-whole flex align--center text-bold">
+      Họ Tên
+    </div>
+    <div class="grid__column seven-twelfths mobile--one-whole">
+      <div class="form-group"><input type="text" [(ngModel)]="currentUser.UserName" value="{{currentUser.UserName}}"
+          name="username" placeholder="Họ tên của bạn" class="form-control">
+        <!---->
+      </div>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="grid__column three-twelfths mobile--one-whole flex align--center text-bold">
+      Email
+    </div>
+    <div class="grid__column seven-twelfths mobile--one-whole">
+      <div class="form-group"><input type="email" value="{{currentUser.Email}}" name="email" placeholder="Email của bạn"
+          class="form-control"> <!----></div>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="grid__column three-twelfths mobile--one-whole flex align--center text-bold">
+      Số điện thoại
+    </div>
+    <div class="grid__column seven-twelfths mobile--one-whole">
+      <div class="form-group"><input type="tel" value="{{currentUser.PhoneNumber}}" name="phone"
+          placeholder="SĐT của bạn" class="form-control"> <!---->
+      </div>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="grid__column three-twelfths mobile--one-whole flex align--center text-bold">
+      Địa chỉ
+    </div>
+    <div class="grid__column seven-twelfths mobile--one-whole">
+      <div class="form-group">
+        <div class="address-block"><!----> <input type="text" name="address" value="{{currentUser.Address}}"
+            placeholder="Địa chỉ (ví dụ: 103 Vạn Phúc, phường Vạn Phúc)" class="form-control"> <!----></div>
+      </div>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="grid__column three-twelfths mobile--one-whole flex align--center text-bold">
+      Tỉnh/Thành
+    </div>
+    <div class="grid__column seven-twelfths mobile--one-whole">
+      <div class="grid">
+        <div class="grid__column four-twelfths mobile--one-whole">
+          <select class="form-select" id="city" [(ngModel)]="selectedProvince" (ngModelChange)="getDistrictsByCity(selectedProvince)">
+            <option value="" selected>Chọn tỉnh thành</option>
+            <option value="{{item}}" *ngFor="let item of provinces" [selected]="selectedProvince === item">{{item}}</option>
+          </select>
+        </div>
+
+        <div class="grid__column four-twelfths mobile--one-whole">
+            <select class="form-select" id="district" [(ngModel)]="selectedDistrict" (ngModelChange)="getWardsByDistrict(selectedDistrict)">
+              <option value="" selected>Chọn quận huyện</option>
+              <option value="{{item}}" *ngFor="let item of districts">{{item}}</option>
+            </select>
+      </div>
+
+      <div class="grid__column four-twelfths mobile--one-whole">
+        <select class="form-select " id="ward"  [(ngModel)]="selectedWard">
+          <option value="" selected>Chọn phường xã</option>
+          <option value="{{item}}" *ngFor="let item of wards" >{{item}}</option>
+        </select>
+    </div>
+      </div>
+    </div>
+  </div>
+  <div class="grid mgb--20">
+    <div class="grid__column three-twelfths mobile--one-whole flex align--center text-bold">
+      Giới tính
+    </div>
+    <div class="grid__column seven-twelfths mobile--one-whole">
+      <div class="form-group flex"><label for="male" class="custom-radio-label"><span class="custom-radio"><input
+              type="radio" [(ngModel)]="selectedGender" name="gender" id="male" value="male"> <span
+              class="checkmark"></span></span>
+          <span class="label">
+            Nam
+          </span></label> <label for="female" class="custom-radio-label"><span class="custom-radio"><input type="radio"
+              [(ngModel)]="selectedGender" name="gender" id="female" value="female"> <span
+              class="checkmark"></span></span> <span class="label">
+            Nữ
+          </span></label></div>
+    </div>
+  </div>
+  <div class="grid mgb--20">
+    <div class="grid__column three-twelfths mobile--one-whole flex align--center text-bold">
+      <div class="bday-label">
+        Ngày sinh <i class="bday-note">(ngày/tháng/năm)</i></div>
+    </div>
+    <div class="grid__column seven-twelfths mobile--one-whole">
+      <div class="xmx-datepicker">
+        <div class="xmx-input-wrapper">
+          <input name="date" type="text" autocomplete="off" value="{{currentUser.DateOfBirth}}"
+            placeholder="Nhập ngày sinh của bạn" class="xmx-input">
+        </div>
+      </div>
+      <div class="bday-note">
+        Thông tin ngày sinh chỉ được thay đổi một lần, vui lòng nhập đúng thông tin nhé
+      </div>
+    </div>
+  </div>
+  <div class="grid mgb--20">
+    <div class="grid__column three-twelfths mobile--one-whole flex align--center text-bold">
+      Chiều cao
+    </div>
+    <div class="grid__column seven-twelfths mobile--one-whole">
+      <div class="slider-group" style="display: flex;">
+        <p-slider style="padding: 7px 0px;
+                    width: 100%;
+                    height: 4px;" [(ngModel)]="currentUser.Height" [min]="140" [max]="185" class="w-full"
+          orientation="horizontal"></p-slider>
+        <span style="margin-left: 1rem;
+                    font-weight: 600;
+                    color: #2f5acf;">{{currentUser.Height}}cm</span>
+      </div>
+    </div>
+  </div>
+  <div class="grid mgb--20">
+    <div class="grid__column three-twelfths mobile--one-whole flex align--center text-bold">
+      Cân nặng
+    </div>
+    <div class="grid__column seven-twelfths mobile--one-whole">
+      <div class="slider-group" style="display: flex;">
+        <p-slider style="padding: 7px 0px;width: 100%;height: 4px;" [(ngModel)]="currentUser.Weight" [min]="40"
+          [max]="85" class="w-full" orientation="horizontal"></p-slider>
+        <span style="margin-left: 1rem;
+                    font-weight: 600;
+                    color: #2f5acf;">{{currentUser.Weight}}kg</span>
+      </div>
+
+    </div>
+  </div>
+  <div class="grid">
+    <div class="grid__column three-twelfths mobile--one-whole flex align--center text-bold"><button
+        class="btn btn-primary btn-block-sm">
+        Cập nhật tài khoản
+      </button></div>
+  </div> <!---->
+</div>

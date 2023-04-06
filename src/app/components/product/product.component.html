@@ -15,7 +15,7 @@
   </div>
   <div class="product-grid product option-changed" *ngIf="isProduct">
     <div class="product-grid__thumbnail"
-    [routerLink]="['/product-details', product.productId]"
+    [routerLink]="['/product-details', product.id]"
      *ngIf="product">
       <div class="product-grid__image">
         <a>
@@ -49,7 +49,7 @@
       <div class="product-grid__select">
         <form>
           <div class="option-select">
-            <label class="option-select__item" *ngFor="let item of product.sizes">
+            <label class="option-select__item " *ngFor="let item of product.sizes">
               <input  type="radio" name="size" value="{{item.sizeText}}">
               <span class="checkmark">
                 {{item.sizeText}}
@@ -74,7 +74,7 @@
         </div>
       </div>
       <h3 class="product-grid__title">
-        <a  [routerLink]="['/product-details', product.productId]">
+        <a  [routerLink]="['/product-details', product.id]">
           {{product.productName}}
         </a>
       </h3>
