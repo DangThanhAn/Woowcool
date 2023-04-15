@@ -21,19 +21,17 @@
       <p class="order-heading">
         Thông tin đơn hàng
       </p>
-      <div class="box">
+      <div class="box" *ngIf="mydata">
         <div class="grid">
           <div class="grid__column three-twelfths mobile--one-whole"></div>
           <div class="grid__column six-twelfths mobile--one-whole">
             <div class="order-title">
-              ĐƠN HÀNG #831016520
+              ĐƠN HÀNG #{{mydata[0].orderID}}
             </div>
           </div>
           <div class="grid__column three-twelfths mobile--one-whole">
-            <div class="order-date" data-gtm-vis-recent-on-screen-11288696_98="243"
-              data-gtm-vis-first-on-screen-11288696_98="243" data-gtm-vis-total-visible-time-11288696_98="100"
-              data-gtm-vis-has-fired-11288696_98="1">
-              06:40 22.03.2023
+            <div class="order-date">
+              {{mydata[0].orderDate}}
             </div>
           </div>
         </div>
@@ -48,21 +46,21 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr *ngFor="let data of mydata" >
               <td class="text--left">
-                Quần nỉ nam Jogger Casual co giãn
+               {{data.productName}}
               </td>
-              <td>2</td>
+              <td>{{data.quantity}}</td>
               <td>
-                179.000đ
-                <del style="font-size: 12px;">
+                {{data.price | FormatVndPipe}}
+                <!-- <del style="font-size: 12px;">
                   299.000đ
-                </del>
+                </del> -->
               </td>
               <td>
-                Xám nhạt / L
+                {{data.color }} / {{ data.size}}
               </td>
-              <td>358.000đ</td>
+              <td>{{data.price * data.quantity | FormatVndPipe}}</td>
             </tr>
           </tbody>
           <tfoot>
@@ -77,7 +75,7 @@
                 Tổng giá trị sản phẩm
               </td>
               <td>
-                358.000đ
+                {{mydata[0].totalPrice | FormatVndPipe}}
               </td>
             </tr>
             <tr>
@@ -97,7 +95,7 @@
                 Tổng thanh toán
               </td>
               <td>
-                358.000đ
+                {{mydata[0].totalPrice | FormatVndPipe}}
               </td>
             </tr>
           </tfoot>
@@ -108,21 +106,21 @@
       <p class="order-heading">
         Thông tin nhận hàng
       </p>
-      <div class="box text--left">
+      <div class="box text--left" *ngIf="currentUser">
         <p>
-          Tên người nhận: Đặng Ngọc Như
+          Tên người nhận: {{currentUser.UserName}}
         </p>
         <p>
-          Email: 688972612635227@facebook.com
+          Email: {{currentUser.Email}}
         </p>
         <p>
-          Số điện thoại: 0339541266
+          Số điện thoại: {{currentUser.PhoneNumber}}
         </p>
         <p>
           Hình thức thanh toán: Thanh toán khi nhận hàng (COD)
         </p>
         <p>
-          Địa chỉ nhận hàng: Xóm 13, Trực Thái, Trực Ninh, Nam Định, Huyện Trực Ninh, Nam Định
+          Địa chỉ nhận hàng: {{currentUser.Address}}
         </p>
       </div>
       <div class="ending-text">

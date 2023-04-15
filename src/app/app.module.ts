@@ -28,6 +28,9 @@ import { AboutCoolmateComponent } from './pages/about-coolmate/about-coolmate.co
 import { RisingComponent } from './pages/rising/rising.component';
 import { SharedPipeModule } from './pipes/shared-pipe.module';
 import { PermissionModule } from './pages/permission/permission.module';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import {ScrollTopModule} from 'primeng/scrolltop';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,7 @@ import { PermissionModule } from './pages/permission/permission.module';
     CoolxprintComponent,
     AboutCoolmateComponent,
     RisingComponent,
+    CheckoutComponent,
 
   ],
   imports: [
@@ -60,7 +64,9 @@ import { PermissionModule } from './pages/permission/permission.module';
     AccountModule,
     ShareComponentModule,
     SharedPipeModule,
-    PermissionModule
+    PermissionModule,
+    ProgressSpinnerModule,
+    ScrollTopModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -212,7 +212,7 @@ padding: 5px 0px;
   pointer-events: none;
   visibility: hidden;
   transition: all .3s;
-  z-index: 1;
+  z-index: 10;
 }
 .header-actions__inner {
   color: #000;
@@ -259,4 +259,20 @@ padding: 5px 0px;
   width: 18px;
   height: 20px;
   margin-right: 8px;
+}
+.counts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  position: absolute;
+  right: 73px;
+  top: 42px;
+  width: 15px;
+  height: 15px;
+  background-color: #2f5acf;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  pointer-events: none;
 }

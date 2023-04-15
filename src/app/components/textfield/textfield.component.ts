@@ -7,12 +7,10 @@ import { Component, Input, OnInit, Output, EventEmitter, OnDestroy } from '@angu
   templateUrl: './textfield.component.html',
   styleUrls: ['./textfield.component.css']
 })
-export class TextfieldComponent implements OnInit,OnDestroy
+export class TextfieldComponent implements OnInit
  {
   constructor() { }
-  ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
-  }
+
   @Input() widthExp : string | undefined;
   @Input() contentPlacehoder : string | any;
   @Input()contentLabel:string|any;

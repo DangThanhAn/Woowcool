@@ -17,6 +17,7 @@ export class InputSearchComponent implements OnInit,AfterViewInit {
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe((data) =>{
       this.listProducts = data;
+
     })
   }
   listProducts: Product[] = [];

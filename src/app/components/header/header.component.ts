@@ -1,3 +1,4 @@
+import { CartService } from './../../services/cart.service';
 import { UserService } from 'src/app/services/user.service';
 import { Emitters } from './../../emitters/emitters';
 import { AuthService } from './../../features/auth/auth.service';
@@ -12,13 +13,30 @@ export class HeaderComponent {
 
   constructor(
     private authService:AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private CartService: CartService
     ) { }
 
   ngOnInit(): void {
     // this.logout();
     this.isAuthenticated = this.authService.isLoggedIn();
-    this.userService.getCart(1).subscribe((data)=> console.log(data))
+    // this.userService.getCart(1).subscribe((data)=> console.log(data))
+    this.getUser();
+    this.getNumberSpInCart();
+  }
+  currentUser: any;
+  numberIncart:number=0;
+  getUser() {
+    let token = localStorage.getItem('access_token');
+    if (!(token == null || token == '')) {
+      this.currentUser = this.userService.getUserFromToken(token);
+    }
+
+  }
+  getNumberSpInCart(){
+    this.CartService.GetNumberInCart(this.currentUser.Id).subscribe((res)=>{
+      this.numberIncart = res;
+    })
   }
   status ='';
   isLogin = false;

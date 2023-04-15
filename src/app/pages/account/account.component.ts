@@ -29,4 +29,5 @@ export class AccountComponent implements OnInit {
       this.currentUser = this.userService.getUserFromToken(token);
     }
   }
+  
 }

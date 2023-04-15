@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/services/user.service';
 import { CartService } from '../../services/cart.service';
 import { ProductService } from '../../services/product.service';
 import { Product} from '../../models/product';
@@ -6,6 +7,7 @@ import { ProductType} from '../../models/productType';
 import { AfterViewInit, Component, OnInit ,ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastMessageComponent } from 'src/app/components/toast-message/toast-message.component';
+import { CartDetail } from 'src/app/models/CartDetails';
 
 @Component({
   selector: 'app-product-details',
@@ -22,6 +24,7 @@ export class ProductDetailsComponent implements OnInit,AfterViewInit {
     private productsService:ProductService,
     private router: Router,
     private cartService: CartService,
+    private UserService: UserService,
     )  {
 
    }
@@ -33,6 +36,7 @@ export class ProductDetailsComponent implements OnInit,AfterViewInit {
     const productIDFromRoute = Number(routeParams.get('id'));
     this.getProduct(productIDFromRoute);
     this.getProductType();
+    this.getCartByOfUser();
   }
 
   getProduct(productIDFromRoute: number) {
@@ -133,8 +137,15 @@ export class ProductDetailsComponent implements OnInit,AfterViewInit {
   // Add cart
   addToCart(product: Product) {
     console.log(product);
+    var cartDetail: CartDetail = {
+      cartId: this.cartId,
+      productId: product.id,
+      size: product.sizeOrder || "",
+      color: product.colorCurrent || "",
+      quantity: product.quantityOrder|| 1,
+    };
 
-    this.cartService.addToCart(product).subscribe({
+    this.cartService.addToCart(cartDetail).subscribe({
       next:(res)=>{
         console.log(res);
       },
@@ -146,5 +157,13 @@ export class ProductDetailsComponent implements OnInit,AfterViewInit {
     this.returnValue();
     this.toastMessageComponent?.changeH4Content("Đã thêm vào giỏ hàng",'',true);
   }
-
+  currentUser:any;
+  cartId:number = 0;
+  getCartByOfUser() {
+    let token = localStorage.getItem('access_token');
+    if (!(token == null || token == '')) {
+      this.currentUser = this.UserService.getUserFromToken(token);
+    }
+    this.cartService.getCart(this.currentUser.Id).subscribe((data) => this.cartId=data[0].id);
+  }
 }

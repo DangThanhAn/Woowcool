@@ -1,93 +1,83 @@
 <!-- <div class="grid__column" style="position:relative;"> -->
-  <div class="collection-thumbnail" *ngIf="isCollectionImg">
-    <img src="{{srcCollectionImg}}"
-      alt="Quần Nam">
+<div class="collection-thumbnail" *ngIf="isCollectionImg">
+  <img src="{{srcCollectionImg}}" alt="Quần Nam">
+</div>
+<div class="collection-loadmore" *ngIf="isLoadmore" style="cursor: pointer">
+  <div class="collection-loadmore__wrapper">
+    <span class="collection-loadmore__icon">
+      <img src="https://www.coolmate.me/images/collections/arrows.svg" alt="Icon arrow load">
+    </span>
+    <span class="collection-loadmore__text">
+      Xem thêm
+    </span>
   </div>
-  <div class="collection-loadmore" *ngIf="isLoadmore" style="cursor: pointer">
-    <div class="collection-loadmore__wrapper">
-      <span class="collection-loadmore__icon">
-        <img src="https://www.coolmate.me/images/collections/arrows.svg" alt="Icon arrow load">
-      </span>
-      <span class="collection-loadmore__text">
-        Xem thêm
-      </span>
+</div>
+<div class="product-grid product option-changed" *ngIf="isProduct">
+  <div class="product-grid__thumbnail" [routerLink]="['/product-details', product.id]" *ngIf="product">
+    <div class="product-grid__image">
+      <a>
+        <img loading="lazy" class="home-banner" src="{{product.images[0].imgUrl}}">
+        <img loading="lazy" class="hover" src="{{product.images[1].imgUrl}}">
+      </a>
     </div>
-  </div>
-  <div class="product-grid product option-changed" *ngIf="isProduct">
-    <div class="product-grid__thumbnail"
-    [routerLink]="['/product-details', product.id]"
-     *ngIf="product">
-      <div class="product-grid__image">
-        <a>
-          <img loading="lazy" class="home-banner"
-            src="{{product.images[0].imgUrl}}">
-          <img loading="lazy" class="hover"
-            src="{{product.images[1].imgUrl}}">
-        </a>
-      </div>
-      <span class="product-grid__tags product-grid__tags--bán chạy" *ngIf="isBestSeller">Bán chạy</span>
-      <span class="product-grid__tags product-grid__tags--sale" *ngIf="isSale">Sale</span>
-      <span class="product-grid__tags product-grid__tags--new" *ngIf="isNew">new</span>
-      <div class="product-grid__reviews">
-        <div class="reviews-rating">
-          <div class="product-snippet-shortvideo">
-            <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="10.5" cy="10.5" r="10.5" fill="black" fill-opacity="0.3"></circle>
-              <path
-                d="M15.25 10.567C15.5833 10.7594 15.5833 11.2406 15.25 11.433L7.75 15.7631C7.41667 15.9556 7 15.715 7 15.3301V6.66987C7 6.28497 7.41667 6.04441 7.75 6.23686L15.25 10.567Z"
-                fill="white"></path>
-            </svg>
+    <span class="product-grid__tags product-grid__tags--bán chạy" *ngIf="isBestSeller">Bán chạy</span>
+    <span class="product-grid__tags product-grid__tags--sale" *ngIf="isSale">Sale</span>
+    <span class="product-grid__tags product-grid__tags--new" *ngIf="isNew">new</span>
+    <div class="product-grid__reviews">
+      <div class="reviews-rating">
+        <div class="product-snippet-shortvideo">
+          <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10.5" cy="10.5" r="10.5" fill="black" fill-opacity="0.3"></circle>
+            <path
+              d="M15.25 10.567C15.5833 10.7594 15.5833 11.2406 15.25 11.433L7.75 15.7631C7.41667 15.9556 7 15.715 7 15.3301V6.66987C7 6.28497 7.41667 6.04441 7.75 6.23686L15.25 10.567Z"
+              fill="white"></path>
+          </svg>
 
-          </div>
-          <div class="">4.8</div>
-          <div class="reviews-rating__star"></div>
-          <div class="reviews-rating__number">
-            (1106)
-          </div>
         </div>
-      </div>
-      <div class="product-grid__select">
-        <form>
-          <div class="option-select">
-            <label class="option-select__item " *ngFor="let item of product.sizes">
-              <input  type="radio" name="size" value="{{item.sizeText}}">
-              <span class="checkmark">
-                {{item.sizeText}}
-              </span>
-            </label>
-          </div>
-        </form>
+        <div class="">4.8</div>
+        <div class="reviews-rating__star"></div>
+        <div class="reviews-rating__number">
+          (1106)
+        </div>
       </div>
     </div>
-    <div class="product-grid__content" *ngIf="product">
-      <div class="product-grid__options" *ngIf="isProductAtDashboard">
-        <div class="options-color" >
-          <div class="option-color__item"
-           *ngFor="let item of product.colors; let i = index"
-           [ngClass]="{'is-current': selectedIndex === i}"
-           >
-            <span class="checkmark"
-            style="background-image: url('{{item.colorImg}}');"
-              (click)="selectedColor(i)"
-              ></span>
-          </div>
+    <div class="product-grid__select">
+      <form>
+        <div class="option-select">
+          <label class="option-select__item " *ngFor="let item of product.sizes">
+            <input type="radio" name="size" value="{{item.sizeText}}">
+            <span class="checkmark">
+              {{item.sizeText}}
+            </span>
+          </label>
         </div>
-      </div>
-      <h3 class="product-grid__title">
-        <a  [routerLink]="['/product-details', product.id]">
-          {{product.productName}}
-        </a>
-      </h3>
-      <div class="product-grid__prices">
-        <div class="product-prices">
-          <ins>{{product.price | FormatVndPipe}}</ins>
-        </div>
-      </div>
-      <span class="product-grid__hint" *ngIf="product.sale.toString() != ''">
-        <div>
-          <span class="product-pricing-hint text--primary">{{product.sale}}</span>
-        </div>
-      </span>
+      </form>
     </div>
   </div>
+  <div class="product-grid__content" *ngIf="product">
+    <div class="product-grid__options" *ngIf="isProductAtDashboard">
+      <div class="options-color">
+        <div class="option-color__item" *ngFor="let item of product.colors; let i = index"
+          [ngClass]="{'is-current': selectedIndex === i}">
+          <span class="checkmark" style="background-image: url('{{item.colorImg}}');" (click)="selectedColor(i)"></span>
+        </div>
+      </div>
+    </div>
+    <h3 class="product-grid__title">
+      <a [routerLink]="['/product-details', product.id]">
+        {{product.productName}}
+      </a>
+    </h3>
+    <div class="product-grid__prices">
+      <div class="product-prices">
+        <ins>{{product.price | FormatVndPipe}}</ins>
+      </div>
+    </div>
+    <span class="product-grid__hint" *ngIf="product.sale.toString() != ''">
+      <div>
+        <span class="product-pricing-hint text--primary">{{product.sale}}</span>
+      </div>
+    </span>
+  </div>
+</div>
 <!-- </div> -->

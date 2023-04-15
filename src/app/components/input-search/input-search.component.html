@@ -4,17 +4,17 @@
       class="header-search__control one-whole input__search">
   </label>
   <div class="header-search__filter"><button class="header-search__submit"><img
-        src="https://www.coolmate.me/images/header/icon-search.svg" width="20" height="20" alt="Icon Search"></button>
+        src="https://www.coolmate.me/images/header/icon-search-new.svg" width="20" height="20" alt="Icon Search"></button>
   </div> <a href="#" class="header-search__close"></a>
   <!-- tim kiem -->
   <div class="spotlight-search" [ngClass]="{'is-active': searchText}">
     <div class="spotlight-search__wrapper" [ngClass]="{'is-active': searchText}">
       <a #link *ngFor="let product of listProducts | filter:searchText"
-      [routerLink]="['/product-details', product.productID]"
+      [routerLink]="['/product-details', product.id]"
       class="product-search">
         <div class="product-search__thumbnail">
           <img
-            src="{{product.imgUrl[0].at(0)}}"
+            src="{{product.images[0].imgUrl}}"
             alt="{{product.productName}}">
         </div>
         <div class="product-search__content">
@@ -22,11 +22,13 @@
             {{product.productName}}
           </h4>
           <div class="product-search__prices">
-            <ins>{{product.price}}</ins>
+            <ins>{{product.price | FormatVndPipe}}</ins>
           </div>
         </div>
       </a>
     </div>
-    <div class="text--center" *ngIf=""><i>Không tìm thấy sản phẩm!</i></div>
+    <div class="text--center" *ngIf="!(listProducts | filter:searchText).length">
+      <i>Không tìm thấy sản phẩm!</i>
+    </div>
   </div>
 </div>

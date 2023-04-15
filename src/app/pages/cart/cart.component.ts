@@ -1,3 +1,4 @@
+import { CartDetail } from './../../models/CartDetails';
 import { UserService } from './../../services/user.service';
 import { HttpClient } from '@angular/common/http';
 import { CartService } from '../../services/cart.service';
@@ -8,6 +9,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Order } from 'src/app/models/Order';
+import { OrderDetail } from 'src/app/models/OrderDetail';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -19,7 +23,8 @@ export class CartComponent implements OnInit {
     private cartService: CartService,
     private http: HttpClient,
     private fb: FormBuilder,
-    private UserService: UserService
+    private UserService: UserService,
+    private router: Router
   ) {}
   ngOnInit(): void {
     this.getUser();
@@ -39,6 +44,7 @@ export class CartComponent implements OnInit {
     selectedDistrict: [''],
     selectedWard: [''],
   });
+  selectedPaymentMethod: string = 'COD';
 
   // end form
   currentUser: any;
@@ -50,9 +56,9 @@ export class CartComponent implements OnInit {
     this.inforCustomer.setValue({
       name: this.currentUser.UserName,
       address: this.currentUser.Address,
-      phonenumber:this.currentUser.PhoneNumber,
+      phonenumber: this.currentUser.PhoneNumber,
       email: this.currentUser.Email,
-      note:'',
+      note: '',
       selectedProvince: '',
       selectedDistrict: '',
       selectedWard: '',
@@ -60,26 +66,31 @@ export class CartComponent implements OnInit {
   }
 
   totalCoin: number = 0;
-  listTotal:number[] =[];
+  listTotal: number[] = [];
   getCartByOfUser() {
     this.cartService.getCart(this.currentUser.Id).subscribe({
       next: (res) => {
         this.dataSource = res;
         console.log(this.dataSource);
-        console.log(this.dataSource[0].cartDetails[0].product.images[0].imgUrl);
-        console.log(this.dataSource[0].cartDetails[0].product.price);
-        console.log(this.dataSource[0].cartDetails[0].quantity);
+        // console.log(this.dataSource[0].cartDetails[0].product.images[0].imgUrl);
+        // console.log(this.dataSource[0].cartDetails[0].product.price);
+        // console.log(this.dataSource[0].cartDetails[0].quantity);
         this.listTotal.splice(0, this.listTotal.length);
         for (const iterator of this.dataSource[0].cartDetails) {
           this.listTotal.push(iterator.product.price * iterator.quantity);
         }
         this.totalCoin = this.listTotal.reduce(
           (total: number, value: number) => {
-            return total + value
+            return total + value;
           },
           0
         );
         console.log(this.totalCoin);
+        this.cartService
+          .updateTotalPrice(this.dataSource[0].id, this.totalCoin)
+          .subscribe(() => {
+            console.log('updated');
+          });
       },
       error: (err) => {
         console.log('Co loi khi goi api get data' + err);
@@ -92,17 +103,17 @@ export class CartComponent implements OnInit {
    * Author: DT An
    * 14/12/22
    */
-  countAdd(id: number,quanlity:number) {
+  countAdd(id: number, quanlity: number) {
     quanlity++;
-    this.cartService.updateSize(id,quanlity).subscribe(() => {
+    this.cartService.updateSize(id, quanlity).subscribe(() => {
       this.getCartByOfUser();
-      });
+    });
   }
-  countSub(id: number,quanlity:number) {
+  countSub(id: number, quanlity: number) {
     quanlity--;
-    this.cartService.updateSize(id,quanlity).subscribe(() => {
+    this.cartService.updateSize(id, quanlity).subscribe(() => {
       this.getCartByOfUser();
-      });
+    });
   }
   /**
    * Hàm xóa sản phẩm current
@@ -113,14 +124,6 @@ export class CartComponent implements OnInit {
     this.cartService.deleteCD(id).subscribe(() => {
       this.getCartByOfUser();
     });
-  }
-  /**
-   * Khi click thanh toán sẽ xử lí
-   * 1. Validate form: nếu thông tin nhập còn thiếu thì hiển thị thông báo cho người dùng
-   * 2. Navigate tới trang thanh toán thành công và clear giỏ hàng.
-   */
-  onSubmit(): void {
-    console.warn('Your order has been submitted', this.inforCustomer.value);
   }
 
   provinces: any[] = [];
@@ -137,7 +140,6 @@ export class CartComponent implements OnInit {
         this.provinces = [
           ...new Set(data.map((item: { city: any }) => item.city)),
         ];
-        console.log(this.provinces);
       });
   }
   getDistrictsByCity(cityName: string) {
@@ -151,7 +153,6 @@ export class CartComponent implements OnInit {
               .map((item: { district: any }) => item.district)
           ),
         ];
-        console.log(this.districts);
       });
   }
   getWardsByDistrict(district: string) {
@@ -167,7 +168,6 @@ export class CartComponent implements OnInit {
               .map((item: { ward: any }) => item.ward)
           ),
         ];
-        console.log(this.wards);
       });
   }
   selectAdderss() {
@@ -184,5 +184,71 @@ export class CartComponent implements OnInit {
         this.getWardsByDistrict(selectedDistrict);
       }
     );
+  }
+
+  loading: boolean = false;
+  /**
+   * Khi click thanh toán sẽ xử lí
+   * 1. Validate form: nếu thông tin nhập còn thiếu thì hiển thị thông báo cho người dùng
+   * 2. Navigate tới trang thanh toán thành công và clear giỏ hàng.
+   */
+  onSubmit(): void {
+    this.loading = true;
+    console.warn('Your order has been submitted', this.inforCustomer.value);
+    console.log(this.selectedPaymentMethod);
+    console.log(this.dataSource);
+    // 1. Post thông tin vào bảng order
+    // 2. Post các sản phẩm mua vào order details
+    let currentDate = new Date();
+    let isoDate = currentDate.toISOString();
+    let myOrder: Order = {
+      userId: this.dataSource[0].userId,
+      orderDate: isoDate,
+      totalPrice: this.dataSource[0].totalPrice,
+      status: 'Processing',
+      paymentMethod: this.selectedPaymentMethod,
+    };
+    if (this.dataSource[0].totalPrice > 0) {
+      this.cartService.createOrder(myOrder).subscribe(
+        (newOrder) => {
+          this.dataSource[0].cartDetails.forEach(
+            (element: {
+              productId: any;
+              size: any;
+              color: any;
+              quantity: any;
+            }) => {
+              let myOrderDetails: OrderDetail = {
+                orderId: newOrder.order.id,
+                productId: element.productId,
+                size: element.size,
+                color: element.color,
+                quantity: element.quantity,
+              };
+              this.cartService
+                .createOrderDetails(myOrderDetails)
+                .subscribe(() => {
+                  //1. Xóa thông tin ở bảng giỏ hàng đi
+                  this.cartService
+                    .clearCart(this.dataSource[0].id)
+                    .subscribe(() => {
+                      console.log('delete cart details');
+                    });
+                  //2. Xóa số lượng sản phẩm được đặt đi
+                  this.cartService
+                    .UpdateQuantityAvailible(myOrderDetails)
+                    .subscribe(() => {
+                      //3. Router Chuyển đến trang checkout
+                      this.router.navigate(['/checkout']);
+                    });
+                });
+            }
+          );
+        },
+        (error) => {
+          console.log(error, 'Có lỗi khi đặt hàng');
+        }
+      );
+    }
   }
 }

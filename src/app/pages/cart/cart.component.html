@@ -75,7 +75,14 @@
               class="form-control" formControlName="note">
           </div>
         </div>
-        <button class="btn btn-success" type="submit">Thanh toán</button>
+        <div class="grid">
+          <div class="grid__column" style="display: flex;
+          align-items: center;
+          justify-content: center;">
+            <button class="btn btn-success" type="submit">Thanh toán</button>
+          </div>
+        </div>
+
       </form>
     </div>
     <div class="cart-section">
@@ -83,42 +90,51 @@
         Hình thức thanh toán
       </div>
       <div>
-        <form><label for="payment-COD" class="payment-method__item active"><span
+        <form><label for="payment-COD" class="payment-method__item" [ngClass]="{ 'active': selectedPaymentMethod === 'COD' }"><span
               class="payment-method__item-custom-checkbox custom-radio"><input type="radio" id="payment-COD"
-                name="payment-method" autocomplete="off" value="COD"> <span class="checkmark"></span></span> <span
+                name="payment-method" [(ngModel)]="selectedPaymentMethod" autocomplete="off" value="COD"> <span class="checkmark"></span></span> <span
               class="payment-method__item-icon-wrapper"><img src="https://www.coolmate.me/images/COD.svg"
                 alt="COD <br>Thanh toán khi nhận hàng"></span> <span class="payment-method__item-name">COD <br>Thanh
-              toán khi nhận hàng</span></label><label for="payment-momo" class="payment-method__item"><span
+              toán khi nhận hàng</span></label>
+
+              <label for="payment-momo" class="payment-method__item" [ngClass]="{ 'active': selectedPaymentMethod === 'momo' }"><span
               class="payment-method__item-custom-checkbox custom-radio"><input type="radio" id="payment-momo"
-                name="payment-method" autocomplete="off" value="momo"> <span class="checkmark"></span></span> <span
+                name="payment-method" [(ngModel)]="selectedPaymentMethod" autocomplete="off" value="momo"> <span class="checkmark"></span></span> <span
               class="payment-method__item-icon-wrapper"><img src="https://www.coolmate.me/images/momo-icon.png"
                 alt="Thanh Toán MoMo"></span> <span class="payment-method__item-name">Thanh Toán
-              MoMo</span></label><label for="payment-zalopay" class="payment-method__item"><span
+              MoMo</span></label>
+
+              <label for="payment-zalopay" class="payment-method__item"  [ngClass]="{ 'active': selectedPaymentMethod === 'zalopay' }"><span
               class="payment-method__item-custom-checkbox custom-radio"><input type="radio" id="payment-zalopay"
-                name="payment-method" autocomplete="off" value="zalopay"> <span class="checkmark"></span></span> <span
+                name="payment-method" [(ngModel)]="selectedPaymentMethod" autocomplete="off" value="zalopay"> <span class="checkmark"></span></span> <span
               class="payment-method__item-icon-wrapper"><img src="https://www.coolmate.me/images/logo-zalopay.svg"
                 alt="Ví điện tử ZaloPay"></span>
-            <span class="payment-method__item-name">Ví điện tử ZaloPay</span></label><label for="payment-shopeepay"
-            class="payment-method__item"><span class="payment-method__item-custom-checkbox custom-radio"><input
-                type="radio" id="payment-shopeepay" name="payment-method" autocomplete="off" value="shopeepay"> <span
+            <span class="payment-method__item-name">Ví điện tử ZaloPay</span></label>
+
+            <label for="payment-shopeepay"
+            class="payment-method__item"  [ngClass]="{ 'active': selectedPaymentMethod === 'shopeepay' }"><span class="payment-method__item-custom-checkbox custom-radio"><input type="radio"
+                id="payment-shopeepay" name="payment-method" [(ngModel)]="selectedPaymentMethod" autocomplete="off" value="shopeepay"> <span
                 class="checkmark"></span></span> <span class="payment-method__item-icon-wrapper"><img
                 src="https://mcdn.coolmate.me/image/September2021/195dbf69c0ac36f26fbd_(1).png"
                 alt="Ví ShopeePay <br><i>Giảm thêm 50k cho khách hàng lần đầu mở ví và thanh toán bằng ShopeePay</i>"></span>
             <span class="payment-method__item-name">Ví ShopeePay <br><i>Giảm thêm 50k cho khách hàng lần
-                đầu mở ví và thanh toán bằng ShopeePay</i></span></label><label for="payment-vnpay"
-            class="payment-method__item"><span class="payment-method__item-custom-checkbox custom-radio"><input
-                type="radio" id="payment-vnpay" name="payment-method" autocomplete="off" value="vnpay"> <span
+                đầu mở ví và thanh toán bằng ShopeePay</i></span></label>
+
+            <label for="payment-vnpay"
+            class="payment-method__item"  [ngClass]="{ 'active': selectedPaymentMethod === 'vnpay' }"><span class="payment-method__item-custom-checkbox custom-radio"><input type="radio"
+                id="payment-vnpay" name="payment-method" [(ngModel)]="selectedPaymentMethod" autocomplete="off" value="vnpay"> <span
                 class="checkmark"></span></span> <span class="payment-method__item-icon-wrapper"><img
                 src="https://www.coolmate.me/images/vnpay.png"
                 alt="Thẻ ATM / Internet Banking<br>Thẻ tín dụng (Credit card) / Thẻ ghi nợ (Debit card)<br>VNPay QR"></span>
             <span class="payment-method__item-name">Thẻ ATM / Internet Banking<br>Thẻ tín dụng (Credit
-              card) / Thẻ ghi nợ (Debit card)<br>VNPay QR</span></label><label for="payment-9pay"
-            class="payment-method__item"><span class="payment-method__item-custom-checkbox custom-radio"><input
-                type="radio" id="payment-9pay" name="payment-method" autocomplete="off" value="9pay"> <span
-                class="checkmark"></span></span> <span class="payment-method__item-icon-wrapper"><img
-                src="https://mcdn.coolmate.me/uploads/May2022/9pay.svg" alt="Ví điện tử 9Pay"></span>
+              card) / Thẻ ghi nợ (Debit card)<br>VNPay QR</span></label>
+              <label for="payment-9pay"
+            class="payment-method__item"  [ngClass]="{ 'active': selectedPaymentMethod === '9pay' }"><span class="payment-method__item-custom-checkbox custom-radio"><input type="radio"
+                id="payment-9pay" name="payment-method" [(ngModel)]="selectedPaymentMethod" autocomplete="off" value="9pay"> <span class="checkmark"></span></span>
+            <span class="payment-method__item-icon-wrapper"><img src="https://mcdn.coolmate.me/uploads/May2022/9pay.svg"
+                alt="Ví điện tử 9Pay"></span>
             <span class="payment-method__item-name">Ví điện tử 9Pay</span></label></form> <!---->
-      </div>
+        </div>
       <p class="cart-return-text">
         Nếu bạn không hài lòng với sản phẩm của chúng tôi? Bạn hoàn toàn có thể trả lại sản phẩm.
         Tìm hiểu thêm <a href="/page/chinh-sach-doi-tra" target="_blank"><b>tại đây</b></a>.
@@ -138,17 +154,16 @@
           </div>
           <div class="cart--item__details">
             <div class="cart--item__info">
-              <div class="cart--item__name">{{item.productName}}</div>
+              <div class="cart--item__name">{{item.product.productName}}</div>
               <div class="cart--item__option">{{item.color}} / {{item.size}}</div>
             </div>
             <div class="cart--item__action">
               <label class="choose--size__item ">
-                <input type="radio" name="size" value="m">
+                <input type="radio" name="size" value="">
                 <span class="checkmark">{{item.color}}</span>
               </label>
-              <label class="option">v</label>
               <label class="choose--size__item size">
-                <input type="radio" name="" value="m">
+                <input type="radio" name="" value="">
                 <span class="checkmark">{{item.size}}</span>
               </label>
               <label class="option optsize">v</label>
@@ -197,3 +212,8 @@
     </div>
   </div>
 </div>
+<ng-container *ngIf="loading">
+  <div class="loading-overlay">
+    <p-progressSpinner class="ui-progress-spinner-mask"></p-progressSpinner>
+  </div>
+</ng-container>

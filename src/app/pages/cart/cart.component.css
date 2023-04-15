@@ -286,6 +286,10 @@ flex: 1;
   display: flex;
   justify-content: space-between;
 }
+.button-center {
+  display: flex;
+  justify-content: center;
+}
 @import url('../../../assets/checkout-page.css');
 .payment-method__item {
   display: flex;

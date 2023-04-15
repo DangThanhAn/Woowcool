@@ -4,7 +4,6 @@ import { MoMoComponent } from './mo-mo/mo-mo.component';
 import { ZaloPayComponent } from './zalo-pay/zalo-pay.component';
 import { ShoppePayComponent } from './shoppe-pay/shoppe-pay.component';
 import { VNPayComponent } from './vnpay/vnpay.component';
-import { CheckoutComponent } from './checkout/checkout.component';
 
 
 
@@ -14,7 +13,6 @@ import { CheckoutComponent } from './checkout/checkout.component';
     ZaloPayComponent,
     ShoppePayComponent,
     VNPayComponent,
-    CheckoutComponent
   ],
   imports: [
     CommonModule

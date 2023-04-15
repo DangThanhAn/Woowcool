@@ -20,6 +20,8 @@ export interface Product{
   inventoryStatus?: InventoryStatus;
   sizeCurrent?:string;
   colorCurrent?:string;
+  quantityOrder?:number;
+  sizeOrder?:string;
 
 }
 interface InventoryStatus {

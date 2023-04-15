@@ -1,4 +1,4 @@
-<div class="grid__column eight-twelfths mobile--one-whole">
+<div class="grid__column mobile--one-whole"  *ngIf="!listReview">
   <div>
     <div class="title">
       Đánh giá của bạn<!----></div>
@@ -11,3 +11,85 @@
     </div> <!----> <!---->
   </div>
 </div>
+
+
+<div class="grid__column mobile--one-whole" *ngIf="listReview">
+  <div>
+    <div class="title">
+      Đánh giá của bạn<span>: {{listReview.length}} đánh giá</span></div>
+    <div class="reviews-body">
+      <div class="reviews-wrapper">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Tên sản phẩm</th>
+              <th width="30%">Bình luận</th>
+              <th>Điểm</th>
+              <th width="120px">Trạng thái</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of listReview">
+              <td><a>
+                  {{data.product.productName}}
+                </a></td>
+              <td>
+                {{data.comment}}
+              </td>
+              <td>
+                <div class="stars">
+                  <p-rating [(ngModel)]="data.rating" [cancel]="false"></p-rating>
+                </div>
+              </td>
+              <td>
+                Chờ duyệt
+              </td>
+              <td><button class="btn btn-sm" (click)="editReview(data)">
+                  Sửa
+                </button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div> <!----> <!---->
+  </div>
+</div>
+
+
+<ng-container *ngIf="isShow">
+  <div class="popup">
+    <div class="backdrop"></div>
+    <div class="popup-body popup-md"><span class="close-popup">✕</span>
+      <div class="review-wrapper">
+        <div class="review__heading">
+          <div class="title">
+            Đánh giá của bạn
+          </div>
+        </div> <!----> <!---->
+        <div class="review__stars-wrapper form-group">
+          <div class="review__title">
+            Đánh giá
+          </div>
+          <div class="review__stars">
+            <p-rating [(ngModel)]="ratingStar" [cancel]="false"></p-rating>
+          </div>
+        </div> <!---->
+        <div class="form-group">
+          <div class="review__title">
+            Bình luận
+          </div> <textarea rows="3" [(ngModel)]="contentCommend" placeholder="Nhập bình luận của bạn..." class="form-control"></textarea>
+          <div class=""><i>Bạn ơi giúp mình nhập thêm 10 từ nữa nhé cho đánh giá có giá trị.</i></div>
+        </div>
+        <div class="form-group"><button class="review__submit-btn" (click)="updateReview()"><span>
+              Sửa đánh giá
+            </span></button>
+          <div class="mgt--10 text--center"><a href="/account/reviews" target="_blank">
+              hoặc xem tất cả đánh giá của bạn tại đây
+            </a></div>
+        </div>
+      </div> <!---->
+    </div>
+  </div>
+</ng-container>
+<app-toast-message [isShowToast]="isShowToast"></app-toast-message>

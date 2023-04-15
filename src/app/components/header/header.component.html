@@ -186,7 +186,7 @@
                   <div class="header-account">
                     <ul class="no-style">
                       <li><a href="/account" class="header-account__item"><span class="header-account__icon"><img
-                              src="https://www.coolmate.me/images/header/icon-account.svg" alt="Icon Header Orders"></span>
+                              src="https://www.coolmate.me/images/header/icon-account-new.svg" alt="Icon Header Orders"></span>
                           THÔNG TIN CÁ NHÂN
                         </a></li>
                       <li><a href="/account/orders" class="header-account__item"><span class="header-account__icon"><img
@@ -209,7 +209,10 @@
             </div>
 
           <a [routerLink]="['/cart']" routerLinkActive="router-link-active"><img
-              src="https://www.coolmate.me/images/header/icon-cart-new.svg" alt="Icon mini cart"></a>
+              src="https://www.coolmate.me/images/header/icon-cart-new.svg" alt="Icon mini cart">
+              <span *ngIf="numberIncart != 0" class="counts">{{numberIncart}}</span>
+            </a>
+
         </div>
       </div>
       <div class="header--search">
@@ -260,8 +263,8 @@
           <a href="/"><img src="https://www.coolmate.me/images/logo-coolmate.svg" alt="Logo Coolmate"></a>
         </div>
         <div class="header--actions">
-          <img src="https://www.coolmate.me/images/header/icon-search.svg" alt="Icon Search"  (click)="clickedSearch()">
-          <img src="https://www.coolmate.me/images/header/icon-account.svg" alt="Icon Account" (click)="clickedUser()">
+          <img src="https://www.coolmate.me/images/header/icon-search-new.svg" alt="Icon Search"  (click)="clickedSearch()">
+          <img src="https://www.coolmate.me/images/header/icon-account-new.svg" alt="Icon Account" (click)="clickedUser()">
           <a [routerLink]="['/cart']" routerLinkActive="router-link-active"><img src="https://www.coolmate.me/images/header/icon-cart-new.svg" alt="Icon mini cart"></a>
         </div>
       </div>

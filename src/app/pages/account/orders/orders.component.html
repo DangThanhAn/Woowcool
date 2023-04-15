@@ -1,94 +1,42 @@
-<div class="grid__column eight-twelfths mobile--one-whole">
+<div class="grid__column eight-twelfths mobile--one-whole" *ngIf="ListOrderHistory">
   <div>
     <div class="title">
-      Đơn hàng của bạn<span>: 1 đơn hàng</span></div>
+      Đơn hàng của bạn<span>: {{ListOrderHistory.length}} đơn hàng</span></div>
     <div class="orders-body">
-      <div class="orders-wrapper"><a
-          href="https://www.coolmate.me/get-order/MjgzODQ3NDk1fDY4ODk3MjYxMjYzNTIyN0BmYWNlYm9vay5jb20=?review_token=RLi5fO25tgveryEzv2IgSnkKgOjzlXtHn3ViJIb0dYG6QJeA"
-          class="order">
+      <div class="orders-wrapper">
+        <a *ngFor="let data of ListOrderHistory" class="order">
           <div class="order-header">
             <div>
               <p class="order-title">
-                #283847495
+                #{{data.id}}
               </p>
               <p class="order-date">
-                26.01.2023
+                {{data.orderDate | FormatDatePipe}}
+                {{data.orderDate | FormatTimePipe}}
               </p>
             </div>
-            <div class="order-status-badge order-status-badge-confirmed"><span>Đã
-                xác nhận</span> <!----> <!----></div>
+            <div class="order-status-badge order-status-badge-confirmed"><span>{{data.status}}</span> <!----> <!---->
+            </div>
           </div>
           <div class="order-body">
             <div>
-              <div class="order-item">
-                <div class="order-item-thumbnail"><a
-                    href="/product/ao-thun-nam-dai-tay-cotton-compact-v2" target="_blank"><img
-                      src="https://media.coolmate.me/cdn-cgi/image/quality=80/image/September2022/ao-dai-tay-compact-v2-navy2.jpg"
+              <div class="order-item" *ngFor="let item of data.details ">
+                <div class="order-item-thumbnail"><a><img src="{{item.img}}"
                       alt="Áo thun nam dài tay Cotton Compact V2"></a></div>
-                <div class="order-item-info"><a
-                    href="/product/ao-thun-nam-dai-tay-cotton-compact-v2" target="_blank" class="order-item-title">
-                    Áo thun nam dài tay Cotton Compact V2
+                <div class="order-item-info"><a class="order-item-title">
+                    {{item.productName}}
                   </a>
                   <div class="order-item-quantity">
-                    x 2
+                    x {{item.quantity}}
                   </div>
                   <div class="order-item-variant-label">
-                    Xanh Navy / XL
+                    {{item.color}}/ {{item.size}}
                   </div>
                   <div class="order-item-price">
-                    159.000đ
+                    {{item.price | FormatVndPipe}}
                   </div>
                 </div>
-                <div class="order-item-button"><button class="btn btn-sm"><span
-                    >
-                      Đánh giá sản phẩm
-                    </span></button></div>
-              </div>
-              <div class="order-item">
-                <div class="order-item-thumbnail"><a
-                    href="/product/ao-thun-nam-dai-tay-cotton-compact-v2" target="_blank"><img
-                      src="https://media.coolmate.me/cdn-cgi/image/quality=80/image/September2022/ao-dai-tay-compact-v2-den2.jpg"
-                      alt="Áo thun nam dài tay Cotton Compact V2"></a></div>
-                <div class="order-item-info"><a
-                    href="/product/ao-thun-nam-dai-tay-cotton-compact-v2" target="_blank" class="order-item-title">
-                    Áo thun nam dài tay Cotton Compact V2
-                  </a>
-                  <div class="order-item-quantity">
-                    x 2
-                  </div>
-                  <div class="order-item-variant-label">
-                    Đen / XL
-                  </div>
-                  <div class="order-item-price">
-                    159.000đ
-                  </div>
-                </div>
-                <div class="order-item-button"><button class="btn btn-sm"><span
-                    >
-                      Đánh giá sản phẩm
-                    </span></button></div>
-              </div>
-              <div class="order-item">
-                <div class="order-item-thumbnail"><a
-                    href="/product/quan-ni-nam-jogger-casual-co-gian" target="_blank"><img
-                      src="https://media.coolmate.me/cdn-cgi/image/quality=80/image/September2022/jogger-casual-xam-nhat2_60.jpg"
-                      alt="Quần nỉ nam Jogger Casual co giãn "></a></div>
-                <div class="order-item-info"><a
-                    href="/product/quan-ni-nam-jogger-casual-co-gian" target="_blank" class="order-item-title">
-                    Quần nỉ nam Jogger Casual co giãn
-                  </a>
-                  <div class="order-item-quantity">
-                    x 1
-                  </div>
-                  <div class="order-item-variant-label">
-                    Xám nhạt / L
-                  </div>
-                  <div class="order-item-price">
-                    189.000đ
-                  </div>
-                </div>
-                <div class="order-item-button"><button class="btn btn-sm"><span
-                    >
+                <div class="order-item-button"><button class="btn btn-sm" (click)="showPopupReview(item.id)"><span>
                       Đánh giá sản phẩm
                     </span></button></div>
               </div>
@@ -96,9 +44,69 @@
           </div>
           <div class="order-footer">
             <div>
-              Tổng đơn hàng: <b>657.000đ</b></div>
+              Tổng đơn hàng: <b>{{data.totalPrice | FormatVndPipe}}</b></div>
           </div>
-        </a></div> <!---->
-    </div> <!---->
+        </a>
+      </div>
+    </div>
   </div>
 </div>
+
+
+<ng-container *ngIf="isShow">
+  <div class="popup">
+    <div class="backdrop"></div>
+    <div class="popup-body popup-md"><span class="close-popup">✕</span>
+      <div class="review-wrapper">
+        <div class="review__heading">
+          <div class="title">
+            Đánh giá của bạn
+          </div>
+        </div> <!----> <!---->
+        <div class="review__stars-wrapper form-group">
+          <div class="review__title">
+            Đánh giá
+          </div>
+          <div class="review__stars">
+            <p-rating [(ngModel)]="ratingStar" [cancel]="false"></p-rating>
+          </div>
+        </div> <!---->
+        <div class="form-group">
+          <div class="review__title">
+            Bình luận
+          </div> <textarea rows="3" [(ngModel)]="contentCommend" placeholder="Nhập bình luận của bạn..." class="form-control"></textarea>
+          <div class=""><i>Bạn ơi giúp mình nhập thêm 10 từ nữa nhé cho đánh giá có giá trị.</i></div>
+        </div>
+        <div class="form-group"><button class="review__submit-btn" (click)="sendReview()"><span>
+              Viết đánh giá
+            </span></button>
+          <div class="mgt--10 text--center"><a href="/account/reviews" target="_blank">
+              hoặc xem tất cả đánh giá của bạn tại đây
+            </a></div>
+        </div>
+      </div> <!---->
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="commendSuccess">
+  <div class="popup">
+    <div class="backdrop"></div>
+    <div class="popup-body popup-md"><span class="close-popup">✕</span>
+      <div class="review-wrapper">
+        <div class="review__heading">
+          <div class="title"><span>
+              Đánh giá của bạn đã được ghi nhận
+            </span></div>
+          <div class="review-discount">
+            Coolmate tặng bạn voucher <b>CMTKETMH</b> <br>
+            Giảm 50k cho đơn hàng từ 300k
+            <br>
+            HSD: 14.06.2023
+            <br> <i><small>* Mã đã được lưu vào <b><a>Ví Voucher</a></b> của
+                bạn</small></i>
+          </div>
+        </div>
+      </div> <!---->
+    </div>
+  </div>
+</ng-container>

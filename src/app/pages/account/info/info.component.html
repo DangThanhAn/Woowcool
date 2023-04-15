@@ -97,7 +97,7 @@
     <div class="grid__column seven-twelfths mobile--one-whole">
       <div class="xmx-datepicker">
         <div class="xmx-input-wrapper">
-          <input name="date" type="text" autocomplete="off" value="{{currentUser.DateOfBirth}}"
+          <input name="date" type="text" autocomplete="off" value="{{currentUser.DateOfBirth  | FormatDatePipe}}"
             placeholder="Nhập ngày sinh của bạn" class="xmx-input">
         </div>
       </div>
