@@ -25,7 +25,7 @@
         selectionMode="multiple" [rowHover]="true" dataKey="id">
         <ng-template pTemplate="caption">
           <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-            <h5 class="m-0">Manage Products</h5>
+            <h5 class="m-0">Quản lý sản phẩm</h5>
             <span class="block mt-2 md:mt-0 p-input-icon-left">
               <i class="pi pi-search"></i>
               <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."
@@ -38,14 +38,14 @@
             <th style="width: 3rem">
               <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
             </th>
-            <th pSortableColumn="productId">Code <p-sortIcon field="code"></p-sortIcon></th>
-            <th pSortableColumn="productName">Name <p-sortIcon field="name"></p-sortIcon></th>
-            <th>Image</th>
-            <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
+            <th pSortableColumn="productId">Mã <p-sortIcon field="code"></p-sortIcon></th>
+            <th pSortableColumn="productName">Tên sản phẩm <p-sortIcon field="name"></p-sortIcon></th>
+            <th>Hình ảnh</th>
+            <th pSortableColumn="price">Giá <p-sortIcon field="price"></p-sortIcon></th>
             <th pSortableColumn="quantity">Số lượng <p-sortIcon field="quantity"></p-sortIcon>
             </th>
-            <th pSortableColumn="rating">Reviews <p-sortIcon field="rating"></p-sortIcon></th>
-            <th pSortableColumn="inventoryStatus">Status <p-sortIcon field="inventoryStatus"></p-sortIcon></th>
+            <th pSortableColumn="rating">Đánh giá <p-sortIcon field="rating"></p-sortIcon></th>
+            <th pSortableColumn="inventoryStatus">Trạng thái <p-sortIcon field="inventoryStatus"></p-sortIcon></th>
             <th></th>
           </tr>
         </ng-template>
@@ -55,18 +55,18 @@
               <p-tableCheckbox [value]="product"></p-tableCheckbox>
             </td>
             <td style="width:14%; min-width:10rem;"><span class="p-column-title">Code</span>
-              {{product.code || product.productId}}
+              {{product.code || product.id}}
             </td>
             <td style="width:14%; min-width:10rem;">
               <span class="p-column-title">Name</span>
-              {{product.productName}}
+              {{product.productName }}
             </td>
             <td style="width:14%; min-width:10rem;"><span class="p-column-title">Image</span>
-              <img src="{{product.images[0].imgUrl}}" [alt]="product.productName" width="100" class="shadow-4" />
+              <img src="{{product.images[0].imgUrl}}" [alt]="product.productName" width="80" class="shadow-4" />
             </td>
             <td style="width:14%; min-width:8rem;">
               <span class="p-column-title">Price</span>
-              {{product.price | currency:'VND'}}
+              {{product.price | FormatVndPipe}}
             </td>
             <td style="width:14%; min-width:10rem;">
               <span class="p-column-title">Số lượng</span>
@@ -92,15 +92,15 @@
       </p-table>
     </div>
     <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
-    <p-dialog [(visible)]="productDialog" [style]="{width: '500px'}" header="Chi tiết sản phẩm" [modal]="true"
-      class="p-fluid">
-      <img [src]="link" [alt]="product.productName" width="150" class="mt-0 mx-auto mb-5 block shadow-2"
-        *ngIf="!this.mode">
+      <p-dialog [(visible)]="productDialog" [style]="{width: '500px'}" header="Chi tiết sản phẩm" [modal]="true"
+        class="p-fluid">
+        <img [src]="link" [alt]="product.productName" width="150" class="mt-0 mx-auto mb-5 block shadow-2"
+          *ngIf="!this.mode">
 
         <div class="field">
           <label for="name">Tên sản phẩm</label>
-          <input type="text" [ngModel]="product.productName" formControlName="productName" pInputText id="name" required autofocus
-            [ngClass]="{'ng-invalid ng-dirty' : !this.mode&& !product.productName}" />
+          <input type="text" [ngModel]="product.productName" formControlName="productName" pInputText id="name" required
+            autofocus [ngClass]="{'ng-invalid ng-dirty' : !this.mode&& !product.productName}" />
           <small class="ng-dirty ng-invalid" *ngIf="!this.mode&& !product.productName">Name is required.</small>
         </div>
         <div class="formgrid grid">
@@ -111,36 +111,41 @@
           </div>
           <div class="field col">
             <label for="quantity">Số lượng</label>
-            <p-inputNumber  [ngModel]="product.quantity"  formControlName="quantity" id="quantity"></p-inputNumber>
+            <p-inputNumber [ngModel]="product.quantity" formControlName="quantity" id="quantity"></p-inputNumber>
           </div>
         </div>
         <div class="field" *ngIf="this.mode">
-          <label for="collection" >Bộ sưu tập</label>
-          <p-dropdown [options]="collections" formControlName="collectionId" optionLabel="collectionName" optionValue="collectionId"></p-dropdown>
+          <label for="collection">Bộ sưu tập</label>
+          <p-dropdown [options]="collections" formControlName="collectionId" optionLabel="collectionName"
+            optionValue="collectionId"></p-dropdown>
         </div>
         <div class="field" *ngIf="this.mode">
           <label for="collection">Thể loại</label>
-          <p-dropdown [options]="categories" formControlName="categoryId" optionLabel="categoryName" optionValue="categoryId"></p-dropdown>
+          <p-dropdown [options]="categories" formControlName="categoryId" optionLabel="categoryName"
+            optionValue="categoryId"></p-dropdown>
         </div>
 
         <div class="field" *ngIf="this.mode">
           <label for="collection">Loại sản phẩm</label>
-          <p-dropdown [options]="productTypes" formControlName="productTypeId" optionLabel="productTypeName" optionValue="productTypeId"></p-dropdown>
+          <p-dropdown [options]="productTypes" formControlName="productTypeId" optionLabel="productTypeName"
+            optionValue="productTypeId"></p-dropdown>
         </div>
 
         <div class="field">
           <label for="name">Sale</label>
-          <input type="text"  [ngModel]="product.sale"  formControlName="sale" pInputText id="name" required autofocus
+          <input type="text" [ngModel]="product.sale" formControlName="sale" pInputText id="name" required autofocus
             [ngClass]="{'ng-invalid ng-dirty' : !this.mode && !product.sale}" />
           <small class="ng-dirty ng-invalid" *ngIf="!this.mode&&!product.sale">Sale is required.</small>
         </div>
-        <p-fileUpload *ngIf="this.mode" name="myfile[]" [chooseLabel]="'Chọn'" [cancelLabel]="'Hủy'" [multiple]="true" [customUpload]="true" (uploadHandler)="myUploader($event)"></p-fileUpload>
-      <ng-template pTemplate="footer">
-        <button type="reset" pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-        <button pButton pRipple type="submit" label="Save" icon="pi pi-check" class="p-button-text"></button>
-    </ng-template>
-    </p-dialog>
-  </form>
+        <p-fileUpload *ngIf="this.mode" name="myfile[]" [chooseLabel]="'Chọn'" [cancelLabel]="'Hủy'" [multiple]="true"
+          [customUpload]="true" (uploadHandler)="myUploader($event)"></p-fileUpload>
+        <ng-template pTemplate="footer">
+          <button type="reset" pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
+            (click)="hideDialog()"></button>
+          <button pButton pRipple type="submit" label="Save" icon="pi pi-check" class="p-button-text"></button>
+        </ng-template>
+      </p-dialog>
+    </form>
     <p-dialog [(visible)]="deleteProductDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
       <div class="flex align-items-center justify-content-center">
         <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>

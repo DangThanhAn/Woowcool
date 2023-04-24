@@ -1,1 +1,24 @@
-<p>ad-collections works!</p>
+
+<div class="container-fluid mt-4">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4>Thống kê</h4>
+        </div>
+        <div class="card-body">
+          <div class="cart-body-left">
+            <p class="title-text">Doanh thu</p>
+            <p-chart type="bar" [data]="data1" [options]="options1"></p-chart>
+          </div>
+          <div class="cart-body-right">
+            <p  class="title-text">Tình trạng đơn hàng</p>
+
+            <p-chart type="doughnut" [data]="data" [options]="options"></p-chart>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

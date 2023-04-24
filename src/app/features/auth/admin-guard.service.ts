@@ -13,7 +13,7 @@ export class AdminGuardService {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const user = this.authService.getCurrentUser();
-    if (user && user.Role === 'admin') {
+    if (user && user.role === 'admin') {
       return true;
     } else {
       this.router.navigate(['/permission']);

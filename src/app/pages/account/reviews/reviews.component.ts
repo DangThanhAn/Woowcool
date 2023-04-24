@@ -23,7 +23,7 @@ export class ReviewsComponent implements OnInit {
   }
   listReview:any[]=[];
   getReviewById(){
-    this.UserService.getReviewById(this.currentUser.Id).subscribe((data:any)=>{
+    this.UserService.getReviewById(this.currentUser.id).subscribe((data:any)=>{
       this.listReview = data;
     });
   }

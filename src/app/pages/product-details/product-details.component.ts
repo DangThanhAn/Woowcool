@@ -8,6 +8,7 @@ import { AfterViewInit, Component, OnInit ,ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastMessageComponent } from 'src/app/components/toast-message/toast-message.component';
 import { CartDetail } from 'src/app/models/CartDetails';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-product-details',
@@ -37,6 +38,7 @@ export class ProductDetailsComponent implements OnInit,AfterViewInit {
     this.getProduct(productIDFromRoute);
     this.getProductType();
     this.getCartByOfUser();
+    this.getReview(productIDFromRoute);
   }
 
   getProduct(productIDFromRoute: number) {
@@ -49,11 +51,27 @@ export class ProductDetailsComponent implements OnInit,AfterViewInit {
       this.product.colorCurrent = this.colorConvert;
     });
   }
-
+  ListReview:any[] = [];
+  noData:boolean = false;
+  starAverage:number =0;
+  getReview(productId:number){
+    this.productsService.getReviewOfProduct(productId).subscribe((data)=>{
+      this.ListReview = data;
+      this.ListReview.length > 0 ? this.noData = true : this.noData = false;
+      this.ListReview.forEach(element => {
+        this.productsService.getUserReviewProduct(element.userId).pipe(map( value => value.userName))
+        .subscribe((data)=>{
+          element.username = data;
+        })
+        this.starAverage += element.rating;
+      });
+      console.log(this.ListReview);
+    })
+  }
   getProductType(){
     this.productsService.getProductType().subscribe((data)=>{
       this.productTypes = data;
-      this.productType = this.productTypes.find(x => x.productTypeId == this.product.productTypeId);
+      this.productType = this.productTypes.find(x => x.productTypeId === this.product.productTypeId);
     });
   }
 
@@ -164,6 +182,6 @@ export class ProductDetailsComponent implements OnInit,AfterViewInit {
     if (!(token == null || token == '')) {
       this.currentUser = this.UserService.getUserFromToken(token);
     }
-    this.cartService.getCart(this.currentUser.Id).subscribe((data) => this.cartId=data[0].id);
+    this.cartService.getCart(this.currentUser.id).subscribe((data) => this.cartId=data[0].id);
   }
 }

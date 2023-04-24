@@ -7,7 +7,7 @@
       Họ Tên
     </div>
     <div class="grid__column seven-twelfths mobile--one-whole">
-      <div class="form-group"><input type="text" [(ngModel)]="currentUser.UserName" value="{{currentUser.UserName}}"
+      <div class="form-group"><input type="text" [(ngModel)]="currentUser.userName" value="{{currentUser.userName}}"
           name="username" placeholder="Họ tên của bạn" class="form-control">
         <!---->
       </div>
@@ -18,8 +18,8 @@
       Email
     </div>
     <div class="grid__column seven-twelfths mobile--one-whole">
-      <div class="form-group"><input type="email" value="{{currentUser.Email}}" name="email" placeholder="Email của bạn"
-          class="form-control"> <!----></div>
+      <div class="form-group"><input type="email" [(ngModel)]="currentUser.email" value="{{currentUser.email}}"
+          name="email" placeholder="Email của bạn" class="form-control"> <!----></div>
     </div>
   </div>
   <div class="grid">
@@ -27,8 +27,8 @@
       Số điện thoại
     </div>
     <div class="grid__column seven-twelfths mobile--one-whole">
-      <div class="form-group"><input type="tel" value="{{currentUser.PhoneNumber}}" name="phone"
-          placeholder="SĐT của bạn" class="form-control"> <!---->
+      <div class="form-group"><input type="tel" [(ngModel)]="currentUser.phone"
+          value="{{currentUser.phone}}" name="phone" placeholder="SĐT của bạn" class="form-control"> <!---->
       </div>
     </div>
   </div>
@@ -38,8 +38,9 @@
     </div>
     <div class="grid__column seven-twelfths mobile--one-whole">
       <div class="form-group">
-        <div class="address-block"><!----> <input type="text" name="address" value="{{currentUser.Address}}"
-            placeholder="Địa chỉ (ví dụ: 103 Vạn Phúc, phường Vạn Phúc)" class="form-control"> <!----></div>
+        <div class="address-block"><!----> <input type="text" name="address" [(ngModel)]="currentUser.address"
+            value="{{currentUser.address}}" placeholder="Địa chỉ (ví dụ: 103 Vạn Phúc, phường Vạn Phúc)"
+            class="form-control"> <!----></div>
       </div>
     </div>
   </div>
@@ -50,25 +51,28 @@
     <div class="grid__column seven-twelfths mobile--one-whole">
       <div class="grid">
         <div class="grid__column four-twelfths mobile--one-whole">
-          <select class="form-select" id="city" [(ngModel)]="selectedProvince" (ngModelChange)="getDistrictsByCity(selectedProvince)">
+          <select class="form-select" id="city" [(ngModel)]="selectedProvince"
+            (ngModelChange)="getDistrictsByCity(selectedProvince)">
             <option value="" selected>Chọn tỉnh thành</option>
-            <option value="{{item}}" *ngFor="let item of provinces" [selected]="selectedProvince === item">{{item}}</option>
+            <option value="{{item}}" *ngFor="let item of provinces" [selected]="selectedProvince === item">{{item}}
+            </option>
           </select>
         </div>
 
         <div class="grid__column four-twelfths mobile--one-whole">
-            <select class="form-select" id="district" [(ngModel)]="selectedDistrict" (ngModelChange)="getWardsByDistrict(selectedDistrict)">
-              <option value="" selected>Chọn quận huyện</option>
-              <option value="{{item}}" *ngFor="let item of districts">{{item}}</option>
-            </select>
-      </div>
+          <select class="form-select" id="district" [(ngModel)]="selectedDistrict"
+            (ngModelChange)="getWardsByDistrict(selectedDistrict)">
+            <option value="" selected>Chọn quận huyện</option>
+            <option value="{{item}}" *ngFor="let item of districts">{{item}}</option>
+          </select>
+        </div>
 
-      <div class="grid__column four-twelfths mobile--one-whole">
-        <select class="form-select " id="ward"  [(ngModel)]="selectedWard">
-          <option value="" selected>Chọn phường xã</option>
-          <option value="{{item}}" *ngFor="let item of wards" >{{item}}</option>
-        </select>
-    </div>
+        <div class="grid__column four-twelfths mobile--one-whole">
+          <select class="form-select " id="ward" [(ngModel)]="selectedWard">
+            <option value="" selected>Chọn phường xã</option>
+            <option value="{{item}}" *ngFor="let item of wards">{{item}}</option>
+          </select>
+        </div>
       </div>
     </div>
   </div>
@@ -97,8 +101,9 @@
     <div class="grid__column seven-twelfths mobile--one-whole">
       <div class="xmx-datepicker">
         <div class="xmx-input-wrapper">
-          <input name="date" type="text" autocomplete="off" value="{{currentUser.DateOfBirth  | FormatDatePipe}}"
-            placeholder="Nhập ngày sinh của bạn" class="xmx-input">
+          <input name="date" type="text" autocomplete="off" [(ngModel)]="currentUser.dateOfBirth"
+            value="{{currentUser.dateOfBirth  | FormatDatePipe}}" placeholder="Nhập ngày sinh của bạn"
+            class="xmx-input">
         </div>
       </div>
       <div class="bday-note">
@@ -114,11 +119,11 @@
       <div class="slider-group" style="display: flex;">
         <p-slider style="padding: 7px 0px;
                     width: 100%;
-                    height: 4px;" [(ngModel)]="currentUser.Height" [min]="140" [max]="185" class="w-full"
+                    height: 4px;" [(ngModel)]="currentUser.height" [min]="140" [max]="185" class="w-full"
           orientation="horizontal"></p-slider>
         <span style="margin-left: 1rem;
                     font-weight: 600;
-                    color: #2f5acf;">{{currentUser.Height}}cm</span>
+                    color: #2f5acf;">{{currentUser.height}}cm</span>
       </div>
     </div>
   </div>
@@ -128,19 +133,20 @@
     </div>
     <div class="grid__column seven-twelfths mobile--one-whole">
       <div class="slider-group" style="display: flex;">
-        <p-slider style="padding: 7px 0px;width: 100%;height: 4px;" [(ngModel)]="currentUser.Weight" [min]="40"
+        <p-slider style="padding: 7px 0px;width: 100%;height: 4px;" [(ngModel)]="currentUser.weight" [min]="40"
           [max]="85" class="w-full" orientation="horizontal"></p-slider>
         <span style="margin-left: 1rem;
                     font-weight: 600;
-                    color: #2f5acf;">{{currentUser.Weight}}kg</span>
+                    color: #2f5acf;">{{currentUser.weight}}kg</span>
       </div>
 
     </div>
   </div>
   <div class="grid">
     <div class="grid__column three-twelfths mobile--one-whole flex align--center text-bold"><button
-        class="btn btn-primary btn-block-sm">
+        class="btn btn-primary btn-block-sm" (click)="UpdateInfor()">
         Cập nhật tài khoản
       </button></div>
   </div> <!---->
 </div>
+<app-toast-message [isShowToast]="isShowToast"></app-toast-message>

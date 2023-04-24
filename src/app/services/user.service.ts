@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Review } from '../models/Review';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -42,4 +43,14 @@ export class UserService {
   editReviewById(reviewId:number,myComment:any){
     return this.http.put(`${this.review}/EditReview?id=${reviewId}`,myComment);
   }
+  //Cap nhat thong tin nguoi dung
+  userUrl="https://localhost:7122/api/Users";
+  updateInforUser(userId:number,user:any){
+    return this.http.put(`${this.userUrl}/${userId}`,user);
+  }
+  //get user info by id
+  getInforUserById(userId:number):Observable<any>{
+    return this.http.get(`${this.userUrl}/${userId}`);
+  }
+
 }

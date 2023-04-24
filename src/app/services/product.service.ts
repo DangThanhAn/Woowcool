@@ -54,4 +54,15 @@ export class ProductService {
   public postImg(image:Image): Observable<any> {
     return this.httpClient.post<any>(this.urlImage, image);
   }
+
+  // Get Review sản phẩm
+  urlReview="https://localhost:7122/api/Reviews";
+  getReviewOfProduct(productId:number) {
+    return this.httpClient.get<any>(`${this.urlReview}/GetReviewOfProduct?productId=${productId}`);
+  }
+  // Tên username review sản phẩm đó
+  urlUserReview="https://localhost:7122/api/Users";
+  getUserReviewProduct(userId:number) {
+    return this.httpClient.get<any>(`${this.urlUserReview}/${userId}`);
+  }
 }

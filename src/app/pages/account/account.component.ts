@@ -27,7 +27,10 @@ export class AccountComponent implements OnInit {
     let token = localStorage.getItem('access_token');
     if(!(token == null || token == "")){
       this.currentUser = this.userService.getUserFromToken(token);
+      this.userService.getInforUserById(this.currentUser.id).subscribe((data)=>{
+        this.currentUser = data;
+      })
     }
   }
-  
+
 }

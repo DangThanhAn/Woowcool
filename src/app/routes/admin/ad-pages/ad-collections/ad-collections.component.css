@@ -1,0 +1,16 @@
+.card-body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cart-body-left{
+  flex:8;
+}
+.cart-body-right{
+  flex:2;
+  padding: 36px;
+}
+.title-text{
+  font-size: 24px;
+  font-weight: 200;
+}

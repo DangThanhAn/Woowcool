@@ -31,7 +31,7 @@ export class OrdersComponent implements OnInit {
   }
   ListOrderHistory: HistoryOrder[] = [];
   getOrderHistoryByUserId() {
-    this.UserService.GetAllOrderHistoryByUserId(this.currentUser.Id)
+    this.UserService.GetAllOrderHistoryByUserId(this.currentUser.id)
       .pipe(
         map((data: any) => {
           this.ListOrderHistory = data;
@@ -69,7 +69,7 @@ export class OrdersComponent implements OnInit {
     let isoDate = currentDate.toISOString();
     let myComment = {
       ProductId: this.productIdCurrent,
-      UserId: this.currentUser.Id,
+      UserId: this.currentUser.id,
       Rating: this.ratingStar,
       Comment: this.contentCommend,
       CreatedDate: isoDate,

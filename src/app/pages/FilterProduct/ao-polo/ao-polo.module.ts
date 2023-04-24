@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AoPoloRoutingModule } from './ao-polo-routing.module';
 import { AoPoloComponent } from './ao-polo.component';
 import { ShareComponentModule } from 'src/app/modules/share-component/share-component.module';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { ShareComponentModule } from 'src/app/modules/share-component/share-comp
   imports: [
     CommonModule,
     AoPoloRoutingModule,
-    ShareComponentModule
+    ShareComponentModule,
+    DropdownModule
   ]
 })
 export class AoPoloModule { }

@@ -90,7 +90,7 @@ export class LoginComponent implements OnInit {
         if(result){
           this.isShow = false;
           const user = this.authService.getCurrentUser();
-          if(user.Role === "admin"){
+          if(user.role === "admin"){
             this.router.navigate(['/admin/dashboard'])
           }else{
             location.reload();

@@ -39,6 +39,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import {OverlayModule} from '@angular/cdk/overlay'
 import {CdkMenuModule} from '@angular/cdk/menu'
+import { SharedPipeModule } from 'src/app/pipes/shared-pipe.module';
+import { SplitButtonModule } from 'primeng/splitbutton';
+import { MenuItem } from 'primeng/api';
+import { TieredMenuModule } from 'primeng/tieredmenu';
 // import Chart from 'chart.js';
 
 @NgModule({
@@ -46,9 +50,9 @@ import {CdkMenuModule} from '@angular/cdk/menu'
   imports: [
     CommonModule,AdminRoutingModule,RouterModule,
     CdkMenuModule,
-    OverlayModule,ReactiveFormsModule,FormsModule,ProgressSpinnerModule,
+    OverlayModule,ReactiveFormsModule,FormsModule,ProgressSpinnerModule,SharedPipeModule,
 
-    TableModule,
+    TableModule,TieredMenuModule,
     FileUploadModule,
     FormsModule,
     ButtonModule,
@@ -63,7 +67,8 @@ import {CdkMenuModule} from '@angular/cdk/menu'
     InputNumberModule,
     DialogModule,
     ChartModule,
-    MenuModule
+    MenuModule,
+    SplitButtonModule
   ]
 })
 export class AdminModule { }

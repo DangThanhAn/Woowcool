@@ -4,7 +4,11 @@ import { CommonModule } from '@angular/common';
 
 import { AoNamRoutingModule } from './ao-nam-routing.module';
 import { AoNamComponent } from './ao-nam.component';
+import {DropdownModule} from 'primeng/dropdown';
 
+
+// import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,7 +17,7 @@ import { AoNamComponent } from './ao-nam.component';
   imports: [
     CommonModule,
     AoNamRoutingModule,
-    ShareComponentModule
+    ShareComponentModule,DropdownModule,FormsModule
   ]
 })
 export class AoNamModule { }

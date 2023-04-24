@@ -269,3 +269,7 @@
 .mgt--10 {
   margin-top: 10px;
 }
+.p-rating-icon
+{
+  font-size: 1rem !important;
+}

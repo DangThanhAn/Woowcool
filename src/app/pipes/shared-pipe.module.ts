@@ -3,18 +3,20 @@ import { CommonModule } from '@angular/common';
 import { FormatVndPipe } from './format-vnd.pipe';
 import { FormatDatePipe } from './formatDate.pipe';
 import { FormatTimePipe } from './formatTime.pipe';
+import { FormatStringPipe } from './formatString.pipe';
 
 
 @NgModule({
-  declarations: [		FormatVndPipe,
+  declarations: [			FormatVndPipe,
       FormatDatePipe,
-      FormatTimePipe
+      FormatTimePipe,
+      FormatStringPipe
    ],
   imports: [
     CommonModule,
   ],
   exports: [
-    FormatVndPipe,FormatTimePipe,FormatDatePipe
+    FormatVndPipe,FormatTimePipe,FormatDatePipe,FormatStringPipe
   ]
 })
 export class SharedPipeModule { }

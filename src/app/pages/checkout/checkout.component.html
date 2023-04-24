@@ -31,7 +31,10 @@
           </div>
           <div class="grid__column three-twelfths mobile--one-whole">
             <div class="order-date">
-              {{mydata[0].orderDate}}
+              {{mydata[0].orderDate | FormatTimePipe}}
+
+              {{mydata[0].orderDate | FormatDatePipe}}
+
             </div>
           </div>
         </div>

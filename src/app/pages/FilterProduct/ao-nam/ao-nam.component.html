@@ -11,49 +11,12 @@
           <div class="filter-select">
             <div class="filter-select__item">
               <div class="custom-select">
-                <select name="sub-category">
-                  <option value="">Danh mục</option>
-                  <option value="/collection/ao-polo-nam#">
-                    Áo Polo
-                  </option>
-                  <option value="/collection/ao-so-mi-nam#">
-                    Áo Sơ Mi
-                  </option>
-                  <option value="/collection/ao-the-thao-nam#">
-                    Áo Thun
-                  </option>
-                </select>
-                <div class="select-selected">Danh mục</div>
-                <div class="select-items select-hide">
-                  <div value="/collection/ao-polo-nam#"><span>
-                      Áo Polo
-                    </span></div>
-                  <div value="/collection/ao-so-mi-nam#"><span>
-                      Áo Sơ Mi
-                    </span></div>
-                  <div value="/collection/ao-the-thao-nam#"><span>
-                      Áo Thun
-                    </span></div>
-                </div>
+                <p-dropdown [options]="cities" optionLabel="name" (onChange)="onDropdownChange($event)"></p-dropdown>
               </div>
             </div>
             <div class="filter-select__item">
-              <div class="custom-select"><select name="sort">
-                  <option value="">Sắp xếp</option>
-                  <option value="new" selected="selected">Mới nhất</option>
-                  <option value="bestseller">Bán chạy</option>
-                  <option value="price-asc">Giá thấp đến cao</option>
-                  <option value="price-desc">Giá cao đến thấp</option>
-                  <option value="percent">% giảm giá nhiều</option>
-                </select>
-                <div class="select-selected">Mới nhất</div>
-                <div class="select-items select-hide">
-                  <div value="new"><span>Mới nhất</span></div>
-                  <div value="bestseller"><span>Bán chạy</span></div>
-                  <div value="price-asc"><span>Giá thấp đến cao</span></div>
-                  <div value="price-desc"><span>Giá cao đến thấp</span></div>
-                  <div value="percent"><span>% giảm giá nhiều</span></div>
-                </div>
+              <div class="custom-select">
+                <p-dropdown [options]="sort" optionLabel="value" (onChange)="onDropdownChange1($event)" [(ngModel)]="selectedSortValue"></p-dropdown>
               </div>
             </div>
           </div>
@@ -61,15 +24,29 @@
       </div>
     </div>
   </div>
-
+  <div class="filter-tags" style="display: unset;" *ngIf="selectedSort">
+    <div class="container container--full">
+      <div class="filter-tags__wrapper"><span class="filter-tags__label">
+          Xem theo:
+        </span>
+        <div class="filter-tags__item">
+          <a class="filter-tags__remove" (click)="removeAllFilter()"></a>
+          <span class="filter-tags__text">{{selectedSort}}</span>
+        </div>
+        <div style="margin-left: 10px;"><a style="text-decoration: underline;" (click)="removeAllFilter()">Xoá lọc</a>
+        </div>
+      </div>
+    </div>
+  </div>
   <section class="collections-listings">
     <div class="container container--full">
       <h1 class="collections-listings__heading"></h1>
       <div class="grid grid--five-columns large-grid--four-columns tablet-grid--three-columns mobile-grid--two-columns">
         <app-product [isCollectionImg]="true"
-        [srcCollectionImg]="'https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/June2022/excool.jpg'"
-        class="grid__column" style="position:relative;"></app-product>
-        <app-product *ngFor="let product of products" [product]="product" class="grid__column" style="position:relative;"></app-product>
+          [srcCollectionImg]="'https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/June2022/excool.jpg'"
+          class="grid__column" style="position:relative;"></app-product>
+        <app-product *ngFor="let product of products" [product]="product" class="grid__column"
+          style="position:relative;"></app-product>
       </div>
     </div>
   </section>
@@ -84,13 +61,16 @@
         <ul>
           <li dir="ltr"><a href="https://www.coolmate.me/collection/ao-thun-nam">Áo thun nam</a> là hay còn gọi là
             <strong>áo phông nam</strong> là biểu tượng của sự đơn giản và là “người bạn thân thiết” với các cánh mày
-            râu.</li>
+            râu.
+          </li>
           <li dir="ltr"><a href="https://www.coolmate.me/collection/ao-polo-nam">Áo polo nam</a> là mẫu áo thun có phần
             cổ bẻ, có thiết kế cài khoảng 2 đến 3 phía trên cổ áo. Áo polo còn được biết đến với tên gọi khác là
-            <strong>áo thun có cổ</strong> hoặc<strong> áo phông có cổ</strong>.</li>
+            <strong>áo thun có cổ</strong> hoặc<strong> áo phông có cổ</strong>.
+          </li>
           <li dir="ltr"><a href="https://www.coolmate.me/collection/ao-tank-top-nam">Áo ba lỗ nam</a> hay còn gọi là
             <strong>áo tank top nam</strong> là khái niệm được sử dụng để chỉ những mẫu trang phục sát nách, không có
-            tay áo và được phát triển từ dòng áo thun cổ tròn thông thường.</li>
+            tay áo và được phát triển từ dòng áo thun cổ tròn thông thường.
+          </li>
           <li dir="ltr"><a href="https://www.coolmate.me/collection/ao-so-mi-nam">Áo sơ mi nam</a> là loại hàng may mặc
             bao bọc lấy thân mình và hai cánh tay của cơ thể. Ngày nay <strong>sơ mi</strong> đã có cải tiến thêm có cổ
             và hàng nút phía trước.</li>

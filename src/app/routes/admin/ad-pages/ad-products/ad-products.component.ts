@@ -150,10 +150,10 @@ export class AdProductsComponent implements OnInit {
       } else {
         this.product = this.productEdit;
         this.loading = true;
-        this.product.productName =  this.checkoutForm.get('productName')?.value;
-        this.product.price =  this.checkoutForm.get('price')?.value;
-        this.product.quantity =  this.checkoutForm.get('quantity')?.value;
-        this.product.sale =  this.checkoutForm.get('sale')?.value;
+        this.product.productName = this.checkoutForm.get('productName')?.value;
+        this.product.price = this.checkoutForm.get('price')?.value;
+        this.product.quantity = this.checkoutForm.get('quantity')?.value;
+        this.product.sale = this.checkoutForm.get('sale')?.value;
         this.productService.putProduct(this.product).subscribe(
           () => {
             this.messageService.add({
@@ -260,4 +260,5 @@ export class AdProductsComponent implements OnInit {
   onGlobalFilter(table: Table, event: Event) {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
   }
+
 }

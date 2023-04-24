@@ -2,36 +2,36 @@ export const navbarData =[
   {
     routeLink:'dashboard',
     icon:'fal fa-home',
-    label:'Dashboard'
+    label:'Trang chủ'
   },
   {
     routeLink:'products',
     icon:'fal fa-box-open',
-    label:'Products'
+    label:'Quản lý sản phẩm'
   },
   {
     routeLink:'statistics',
-    icon:'fal fa-chart-bar',
-    label:'Statistics'
+    icon:'fal fa-folder-open',
+    label:'Quản lý danh mục'
   },{
     routeLink:'coupens',
-    icon:'fal fa-tag',
-    label:'Coupens'
+    icon:'fal fa-user',
+    label:'Quản lý tài khoản'
   }
   ,{
     routeLink:'blog',
-    icon:'fal fa-camera',
-    label:'Blog'
+    icon:'fal fa-clipboard-list',
+    label:'Quản lý đơn hàng'
   },
   {
     routeLink:'collections',
-    icon:'fal fa-file',
-    label:'collections'
+    icon:'fal fa-chart-pie',
+    label:'Thống kê'
   }
   ,{
     routeLink:'settings',
     icon:'fal fa-cog',
-    label:'Settings'
+    label:'Cài đặt'
   },
 
 ];

@@ -26,11 +26,12 @@ export class CartComponent implements OnInit {
     private UserService: UserService,
     private router: Router
   ) {}
-  ngOnInit(): void {
-    this.getUser();
-    this.getDataProvince();
-    this.selectAdderss();
-    this.getCartByOfUser();
+  async ngOnInit(): Promise<void> {
+    await this.getUser();
+    await this.getUserPesent();
+    await this.getDataProvince();
+    await this.selectAdderss();
+    await this.getCartByOfUser();
   }
   dataSource: any;
   // Sử dụng form
@@ -53,22 +54,27 @@ export class CartComponent implements OnInit {
     if (!(token == null || token == '')) {
       this.currentUser = this.UserService.getUserFromToken(token);
     }
-    this.inforCustomer.setValue({
-      name: this.currentUser.UserName,
-      address: this.currentUser.Address,
-      phonenumber: this.currentUser.PhoneNumber,
-      email: this.currentUser.Email,
-      note: '',
-      selectedProvince: '',
-      selectedDistrict: '',
-      selectedWard: '',
+  }
+  getUserPesent(){
+    this.UserService.getInforUserById(this.currentUser.id).subscribe((data) => {
+      this.currentUser = data;
+      this.inforCustomer.setValue({
+        name: this.currentUser.userName,
+        address: this.currentUser.address,
+        phonenumber: this.currentUser.phone,
+        email: this.currentUser.email,
+        note: '',
+        selectedProvince: '',
+        selectedDistrict: '',
+        selectedWard: '',
+      });
     });
   }
-
   totalCoin: number = 0;
   listTotal: number[] = [];
   getCartByOfUser() {
-    this.cartService.getCart(this.currentUser.Id).subscribe({
+    console.log("User ",this.currentUser);
+    this.cartService.getCart(this.currentUser.id).subscribe({
       next: (res) => {
         this.dataSource = res;
         console.log(this.dataSource);
@@ -106,6 +112,8 @@ export class CartComponent implements OnInit {
   countAdd(id: number, quanlity: number) {
     quanlity++;
     this.cartService.updateSize(id, quanlity).subscribe(() => {
+      console.log("click add",this.currentUser);
+
       this.getCartByOfUser();
     });
   }

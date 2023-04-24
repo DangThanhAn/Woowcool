@@ -31,6 +31,7 @@ import { PermissionModule } from './pages/permission/permission.module';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import {ScrollTopModule} from 'primeng/scrolltop';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,6 @@ import {ScrollTopModule} from 'primeng/scrolltop';
     AboutCoolmateComponent,
     RisingComponent,
     CheckoutComponent,
-
   ],
   imports: [
     CommonModule,
@@ -66,7 +66,8 @@ import {ScrollTopModule} from 'primeng/scrolltop';
     SharedPipeModule,
     PermissionModule,
     ProgressSpinnerModule,
-    ScrollTopModule
+    ScrollTopModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

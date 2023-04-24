@@ -31,8 +31,9 @@
 
         <div class="product--single__details">
           <h1 class="product--single__title">{{product.productName}}</h1>
-          <div class="product--single__review">Chưa có đánh giá!</div>
-          <div class="product--single__price">{{product.price}}đ</div>
+          <div class="product--single__review" *ngIf="ListReview.length == 0">Chưa có đánh giá!</div>
+          <div class="product--single__review" *ngIf="ListReview.length > 0"> Đã bán (web): {{ListReview.length}}</div>
+          <div class="product--single__price">{{product.price | FormatVndPipe}}</div>
           <div class="product--single__addToCart">
             <div class="product--single__option">
               <div class="option__item">
@@ -164,11 +165,11 @@
     <!-- End -->
   </div>
 </div>
-<section id="reviews" class="product-single__reviews">
+<section id="reviews" class="product-single__reviews" *ngIf="ListReview">
   <div class="container">
     <div class="reviews">
       <div class="reviews__heading">
-        <div class="reviews__title"><span class="reviews__count">159 Đánh giá</span> <span class="reviews__ratings">4.9
+        <div class="reviews__title"><span class="reviews__count">{{ListReview.length}} Đánh giá</span> <span *ngIf="ListReview.length" class="reviews__ratings">{{starAverage/ListReview.length}}
             / 5</span></div>
       </div>
       <div class="reviews__filter">
@@ -191,44 +192,35 @@
             <option value="false">Chưa phản hồi</option>
           </select></div>
       </div>
-      <div class="reviews-listing">
+      <div class="reviews-listing" *ngIf="noData" >
         <div rel-script="product-reviews-listings" data-current-page="1" data-last-page="16" class="grid">
           <div class="grid__column six-twelfths mobile--one-whole">
-            <div class="reviews-listing__item">
+            <div class="reviews-listing__item" *ngFor="let data of ListReview">
               <div class="reviews-listing__rating">
                 <div class="reviews-rating">
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
-                  <div class="reviews-rating__star is-active"></div>
+                  <div class="reviews-rating__star is-active"*ngFor="let item of [1, 2, 3, 4,5].slice(0 , data.rating)"></div>
                 </div>
               </div>
               <div class="reviews-listing__content">
                 <div class="reviews-author">
                   <div class="reviews-author__name">
-                    Anh Nguyen
-                  </div>
-                  <div class="reviews-author__description">
-                    Đỏ / L
+                    {{data.username}}
                   </div>
                 </div>
                 <div class="reviews-listing__description">
                   <p>
-                    Mặc đi chơi, đi làm rất ok, vải ngon nè.
+                    {{data.comment}}
                   </p>
                   <span class="reviews-listing__date">
-                    16.02.2023
+                   {{data.createdDate | FormatDatePipe}}
                   </span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div rel-script="reviews-paginations" class="reviews-pagination"><a href="#"
-            rel-script="reviews-paginations-prev" class="reviews-pagination__prev"></a> <span>1/16</span> <a href="#"
-            rel-script="reviews-paginations-next" class="reviews-pagination__next"></a></div>
-      </div> <!---->
+
+      </div>
     </div>
   </div>
 </section>

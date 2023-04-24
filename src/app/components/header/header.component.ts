@@ -2,7 +2,7 @@ import { CartService } from './../../services/cart.service';
 import { UserService } from 'src/app/services/user.service';
 import { Emitters } from './../../emitters/emitters';
 import { AuthService } from './../../features/auth/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -20,7 +20,6 @@ export class HeaderComponent {
   ngOnInit(): void {
     // this.logout();
     this.isAuthenticated = this.authService.isLoggedIn();
-    // this.userService.getCart(1).subscribe((data)=> console.log(data))
     this.getUser();
     this.getNumberSpInCart();
   }
@@ -31,11 +30,11 @@ export class HeaderComponent {
     if (!(token == null || token == '')) {
       this.currentUser = this.userService.getUserFromToken(token);
     }
-
   }
   getNumberSpInCart(){
-    this.CartService.GetNumberInCart(this.currentUser.Id).subscribe((res)=>{
+    this.CartService.GetNumberInCart(this.currentUser.id).subscribe((res)=>{
       this.numberIncart = res;
+      console.log(this.numberIncart);
     })
   }
   status ='';
@@ -80,9 +79,15 @@ export class HeaderComponent {
    */
   isShowInputSearch:boolean=false;
   clickedSearch(){
-    this.isShowInputSearch = !this.isShowInputSearch;
+    this.isShowInputSearch = true;
   }
   offClick(){
-    this.isShowInputSearch = !this.isShowInputSearch;
+    this.isShowInputSearch = false;
   }
+
+  onContainerClick() {
+    this.isShowInputSearch = true;
+    // Do nothing
+  }
+
 }

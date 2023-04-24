@@ -1,7 +1,8 @@
 import { filter } from 'rxjs/operators';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { HttpClient } from '@angular/common/http';
+import { ToastMessageComponent } from 'src/app/components/toast-message/toast-message.component';
 @Component({
   selector: 'app-info',
   templateUrl: './info.component.html',
@@ -9,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class InfoComponent implements OnInit{
   constructor(private userService: UserService,private http: HttpClient){}
+  @ViewChild(ToastMessageComponent) toastMessageComponent: ToastMessageComponent | undefined;
 
   ngOnInit(){
     this.getUser();
@@ -17,13 +19,31 @@ export class InfoComponent implements OnInit{
   gender: string | any;
   selectedGender:string|any;
   currentUser:any;
+  isShowToast=false;
   getUser(){
     let token = localStorage.getItem('access_token');
     if(!(token == null || token == "")){
       this.currentUser = this.userService.getUserFromToken(token);
-      this.currentUser.Sex == "True" ? this.gender = 'male' : this.gender = 'female';
-      this.selectedGender = this.gender;
+      this.userService.getInforUserById(this.currentUser.id).subscribe((data)=>{
+        this.currentUser = data;
+        this.currentUser.sex == true ? this.gender = 'male' : this.gender = 'female';
+        this.selectedGender = this.gender;
+      })
     }
+  }
+  UpdateInfor(){
+    this.selectedGender  == "male" ? this.currentUser.sex = 'true' : this.currentUser.sex = 'false';
+    this.userService.updateInforUser(this.currentUser.id,this.currentUser).subscribe((data)=>{
+      this.returnValue();
+      this.isShowToast = true;
+      this.toastMessageComponent?.changeH4Content("Cập nhật thành công!",'',false);
+      this.getUser();
+    })
+  }
+  returnValue(){
+    setTimeout(() => {
+      this.isShowToast = false;
+    }, 3000);
   }
 
   provinces: any[] =[];
