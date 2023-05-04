@@ -38,6 +38,10 @@
        <!-- CONTENT PAGE 3 -->
        <ng-container *ngSwitchCase="3">
         <div class="home--tap--wrapper">
+
+          <div class="grid grid--five-columns1 large-grid--four-columns1 tablet-grid--three-columns mobile-grid--two-columns product-list">
+            <app-product [isProductAtDashboard]="true" *ngFor="let product of productsAccessory" [product]="product" class="grid__column" style="position:relative;"></app-product>
+          </div>
         <!-- <app-product [products]="productsAccessory" [bgColor]="'white'" [color]="'black'" [bgColorSale]="'white'" [ColorSale]="'#2f5acf'"></app-product> -->
         </div>
       </ng-container>

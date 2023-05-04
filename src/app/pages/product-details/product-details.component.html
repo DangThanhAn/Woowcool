@@ -57,7 +57,7 @@
                   <div class="choose--size">
                     <label class="choose--size__item" *ngFor="let size of product.sizes; let i = index">
                       <input type="radio" name="size" value="{{size.sizeText}}" (click)="setSize(i,$event)">
-                      <span class="checkmark" [ngClass]="{'is-choose': isChoose === i}">{{size.sizeText}}</span>
+                      <span class="checkmark" [ngClass]="{'is-choose': isChoose === i,'is-disable':isDisable}">{{size.sizeText}}</span>
                     </label>
                   </div>
                 </div>

@@ -68,6 +68,7 @@ import { DropdownModule } from 'primeng/dropdown';
     ProgressSpinnerModule,
     ScrollTopModule,
     DropdownModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

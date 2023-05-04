@@ -1,7 +1,9 @@
+import { CartService } from './../../../services/cart.service';
 import { ToastMessageComponent } from 'src/app/components/toast-message/toast-message.component';
 import { AuthService } from './../auth.service';
 import { FormBuilder } from '@angular/forms';
 import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Cart } from 'src/app/models/Cart';
 
 @Component({
   selector: 'app-register',
@@ -13,6 +15,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private formBuilder : FormBuilder,
     private authService : AuthService,
+    private cartService : CartService,
 
     ) { }
 
@@ -24,8 +27,8 @@ export class RegisterComponent implements OnInit {
   checkoutForm = this.formBuilder.group({
     // name : this.formBuilder.control(''),
     // name: ['',[Validators.required,Validators.minLength(3)]],
-    name:'',
-    phonenumber:'',
+    userName:'',
+    phone:'',
     email: '',
     password: '',
     repassword: '',
@@ -35,14 +38,18 @@ export class RegisterComponent implements OnInit {
   });
 
   onSubmit():void{
-    this.authService.register(this.checkoutForm.value).subscribe(()=>{
-      this.isShow=false;
-      this.toastMessageComponent?.changeH4Content("Đăng kí thành công",'success',false);
-      this.isShowToast = true;
-      setTimeout(() => {
-        this.isShowToast = false;
-      }, 2000);
-
+    this.authService.register(this.checkoutForm.value).subscribe((res : any)=>{
+      let userIdCreate = res.id;
+      let newcart: Cart = { userId : userIdCreate, totalPrice: 0 };
+      this.cartService.createCart(newcart).subscribe(()=>{},
+      ()=>{
+        this.isShow=false;
+        this.toastMessageComponent?.changeH4Content("Đăng kí thành công",'success',false);
+        this.isShowToast = true;
+        setTimeout(() => {
+          this.isShowToast = false;
+        }, 2000);
+      })
     });
 
     this.checkoutForm.reset();

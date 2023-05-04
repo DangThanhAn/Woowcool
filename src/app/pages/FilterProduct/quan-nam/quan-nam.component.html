@@ -1,0 +1,73 @@
+<main class="site-collections">
+  <div class="collections-filter">
+    <div class="container container--full">
+      <div class="collections-filter__wrapper">
+        <div class="collections-filter__inner">
+          <h2 class="collections-filter__heading">
+            Sản phẩm
+          </h2>
+        </div>
+        <div class="collections-filter__selects mobile--hidden">
+          <div class="filter-select">
+            <div class="filter-select__item">
+              <div class="custom-select">
+                <p-dropdown [options]="cities" optionLabel="name" (onChange)="onDropdownChange($event)"></p-dropdown>
+              </div>
+            </div>
+            <div class="filter-select__item">
+              <div class="custom-select">
+                <p-dropdown [options]="sort" optionLabel="value" (onChange)="onDropdownChange1($event)" [(ngModel)]="selectedSortValue"></p-dropdown>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="filter-tags" style="display: unset;" *ngIf="selectedSort">
+    <div class="container container--full">
+      <div class="filter-tags__wrapper"><span class="filter-tags__label">
+          Xem theo:
+        </span>
+        <div class="filter-tags__item">
+          <a class="filter-tags__remove" (click)="removeAllFilter()"></a>
+          <span class="filter-tags__text">{{selectedSort}}</span>
+        </div>
+        <div style="margin-left: 10px;"><a style="text-decoration: underline;" (click)="removeAllFilter()">Xoá lọc</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="collections-listings">
+    <div class="container container--full">
+      <h1 class="collections-listings__heading"></h1>
+      <div class="grid grid--five-columns large-grid--four-columns tablet-grid--three-columns mobile-grid--two-columns">
+        <app-product [isCollectionImg]="true"
+          [srcCollectionImg]="'https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/March2023/image_151thuong.png'"
+          class="grid__column" style="position:relative;"></app-product>
+        <app-product *ngFor="let product of products" [product]="product" class="grid__column"
+          style="position:relative;"></app-product>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container container--medium">
+      <div class="collection-body">
+        <p dir="ltr"><a href="https://www.coolmate.me/collection/quan-nam">Quần nam</a> là loại trang phục giúp che chắn,
+          bảo vệ và làm đẹp phần dưới của cơ thể con người. Ngày nay các loại quần nam càng ngày càng đa dạng về mẫu mã,
+          kiểu dáng cũng như chất liệu, màu sắc.</p>
+        <h2><strong>&nbsp;</strong>Các loại quần nam phổ biến hiện nay</h2>
+        <p dir="ltr"><a href="https://www.coolmate.me/collection/quan-short-nam">Quần short</a>: là mẫu quần có chiều dài
+          ngắn từ trên gối, ngang đùi hoặc ngang gối. Với thiết kế phần ống rộng thoải mái hoặc hơi ôm nhẹ chứ không bó sát.
+          phù hợp với những hoạt động hàng ngày của bạn.</p>
+        <p dir="ltr"><a href="https://www.coolmate.me/collection/quan-jeans-nam">Quần jeans</a>: hay còn được gọi là quần
+          bò, quần rin. Bởi sự bền bỉ và chắc chắn của lớp vải và sự trẻ trung, năng động chính vì vậy quần jeans được rất
+          nhiều mọi người ưa chuộng.</p>
+        <p dir="ltr"><a href="https://www.coolmate.me/collection/quan-dai-nam">Quần dài</a>: có chiều dài hầu hết đến mắt cá
+          chân là loại trang phục giúp che chắn, bảo vệ và làm đẹp phần dưới của cơ thể con người. Ngày nay các loại quần
+          dài nam ngày càng đa dạng về mẫu mã, kiểu dáng cũng như chất liệu, màu sắc.</p>
+      </div>
+       <a href="#" rel-script="collection-body-view-more" class="collection-body-view-more">Xem thêm</a>
+    </div>
+  </section>
+</main>

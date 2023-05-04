@@ -1,3 +1,4 @@
+import { Cart } from './../models/Cart';
 import { OrderDetail } from './../models/OrderDetail';
 import { Order } from './../models/Order';
 import { Observable } from 'rxjs';
@@ -15,6 +16,9 @@ export class CartService {
     private http : HttpClient
   ) { }
   url : string = "https://localhost:7122/api/Cart";
+  public createCart(cart:Cart):Observable<any>{
+    return this.http.post<any>(`${this.url}`,cart);
+  }
   public addToCart(cartDetail: CartDetail):Observable<any>{
     return this.http.post<any>(`${this.urlUpdateSize}/CreateCartDetail`,cartDetail);
   }

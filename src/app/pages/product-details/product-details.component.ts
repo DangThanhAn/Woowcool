@@ -110,9 +110,11 @@ export class ProductDetailsComponent implements OnInit,AfterViewInit {
     this.imgBindding = itemImg;
 
   }
+  isDisable:boolean = false;
 
   isShowToast:boolean = false;
   isChoose:number|any;
+
   setSize(index:number,event:any){
     this.size = event.target.value.toUpperCase();
     this.isChoose = index;

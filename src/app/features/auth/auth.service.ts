@@ -16,7 +16,7 @@ export class AuthService {
   currentUser: any;
   constructor(private http: HttpClient) {}
   register(value: object){
-    return this.http.post(`${this.apiUrl}/register`,value,{withCredentials:true});
+    return this.http.post('https://localhost:7122/api/Users',value,{withCredentials:true});
   }
   login(value:object): Observable<boolean> {
     return this.http.post(`${this.apiUrl}/login`, value,{withCredentials:true})

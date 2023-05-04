@@ -96,6 +96,9 @@ export class LoginComponent implements OnInit {
             location.reload();
           }
         }
+      },
+      error =>{
+        this.accountFalse = true;
       }
     )
   }

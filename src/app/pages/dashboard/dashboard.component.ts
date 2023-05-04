@@ -41,16 +41,20 @@ export class DashboardComponent implements OnInit {
   isActive3:Boolean = false;
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe((data)=>{
-      console.log("Sản phẩm lấy từ service: ");
-      console.log(data);
-      // data.forEach((element: Product) => {
-      //   if(element.cataloryID == "1"){
-      //     this.productsWakanda.push(element);
-      //   }
-      //   if(element.cataloryID == "2"){
-      //     this.productsWinter?.push(element);
-      //   }
-      // });
+      data.forEach((element: Product) => {
+        if(element.collectionId == 1){
+          this.productsWakanda.push(element);
+        }
+        if(element.collectionId == 2){
+          this.productsWinter?.push(element);
+        }
+        if(element.collectionId == 3){
+          this.productsAccessory?.push(element);
+        }
+      });
+      this.productsWakanda = this.productsWakanda.slice(0,4);
+      this.productsWinter = this.productsWinter.slice(0,4);
+      this.productsAccessory = this.productsAccessory.slice(0,4);
     })
   }
   changeTab(tabIndex:number){
