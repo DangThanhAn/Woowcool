@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="form-group">
-          <input id="password" type="text" formControlName="password" placeholder="Mật khẩu"
+          <input id="password" type="password" formControlName="password" placeholder="Mật khẩu"
           [ngClass]="{'error':password?.errors?.['required'] && password?.touched}"
           >
           <div class="alert alert-custom text-danger"

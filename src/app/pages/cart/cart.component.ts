@@ -213,7 +213,7 @@ export class CartComponent implements OnInit {
       userId: this.dataSource[0].userId,
       orderDate: isoDate,
       totalPrice: this.dataSource[0].totalPrice,
-      status: 'Processing',
+      status: 'Đang chờ xử lý',
       paymentMethod: this.selectedPaymentMethod,
     };
     if (this.dataSource[0].totalPrice > 0) {

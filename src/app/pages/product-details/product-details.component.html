@@ -2,8 +2,8 @@
   <div class="container-top">
     <div class="top--nav">
       <ul>
-        <li>Trang chủ</li>
-        <li> / Black panther</li>
+        <li>Trang chủ </li>
+        <li> / Sản phẩm</li>
       </ul>
     </div>
     <!-- Thông tin chi tiết -->
@@ -56,8 +56,11 @@
                   </div>
                   <div class="choose--size">
                     <label class="choose--size__item" *ngFor="let size of product.sizes; let i = index">
-                      <input type="radio" name="size" value="{{size.sizeText}}" (click)="setSize(i,$event)">
-                      <span class="checkmark" [ngClass]="{'is-choose': isChoose === i,'is-disable':isDisable}">{{size.sizeText}}</span>
+                      <input type="radio" name="size" [disabled]="size.quantityAvalible === 0" value="{{size.sizeText}}" (click)="setSize(i,$event)">
+                      <span class="checkmark"
+                      [ngClass]="{'is-choose': isChoose === i,'is-disabled':size.quantityAvalible === 0}"
+
+                      >{{size.sizeText}}</span>
                     </label>
                   </div>
                 </div>
@@ -161,7 +164,17 @@
       <p><img style="display: block; margin-left: auto; margin-right: auto;"
           src="{{this.productType.image}}" alt=""
           width="550"></p>
+          <h3 dir="ltr"><strong>Cách bảo quản&nbsp;</strong><strong>sản phẩm luôn bền bỉ</strong></h3>
+          <blockquote>
+            <ul>
+            <li>Hạn chế dùng chất tẩy mạnh đối với áo và nên giặt bằng tay để đảm bảo độ bền của áo</li>
+            <li dir="ltr">Không đổ trực tiếp bột giặt lên bề mặt áo vì nếu tác dụng tẩy mạnh sẽ làm chiếc áo nhanh bạc màu và ảnh hưởng đến chất liệu&nbsp;</li>
+            <li dir="ltr">Nên hạn chế ngâm áo quá lâu trong bột giặt sẽ làm giảm tuổi thọ của chiếc áo</li>
+            <li dir="ltr">Nên giặt bằng nước lạnh hoặc nước ấm (&lt;40 độ C) vì nếu giặt áo ở tình trạng nước quá nóng sẽ gây nên tình trạng áo bị giãn ra và nhanh hỏng hơn. Bạn có thể tham khảo thêm <a title="cách giặt áo polo nam" href="https://www.coolmate.me/post/cach-giat-ao-polo-nam" target="_blank" rel="noopener">cách giặt áo polo nam</a>.</li>
+            </ul>
+            </blockquote>
     </div>
+
     <!-- End -->
   </div>
 </div>
@@ -169,7 +182,7 @@
   <div class="container">
     <div class="reviews">
       <div class="reviews__heading">
-        <div class="reviews__title"><span class="reviews__count">{{ListReview.length}} Đánh giá</span> <span *ngIf="ListReview.length" class="reviews__ratings">{{starAverage/ListReview.length}}
+        <div class="reviews__title"><span class="reviews__count">{{ListReview.length}} Đánh giá</span> <span *ngIf="ListReview.length" class="reviews__ratings">{{formatRatingAvg(starAverage/ListReview.length)}}
             / 5</span></div>
       </div>
       <div class="reviews__filter">

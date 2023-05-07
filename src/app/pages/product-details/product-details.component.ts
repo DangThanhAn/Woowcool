@@ -117,6 +117,7 @@ export class ProductDetailsComponent implements OnInit,AfterViewInit {
 
   setSize(index:number,event:any){
     this.size = event.target.value.toUpperCase();
+    console.log(index,this.size);
     this.isChoose = index;
     this.hasError = false;
     this.product.sizeOrder = this.size;
@@ -124,6 +125,9 @@ export class ProductDetailsComponent implements OnInit,AfterViewInit {
     this.toastMessageComponent?.changeH4Content("Đã thêm vào giỏ hàng",'',true);
   }
 
+  formatRatingAvg(value:number){
+    return (Math.round(value * 10) / 10).toFixed(1);
+  }
   // Xử lí toast message
   // Nếu chưa chọn size thì show toast message
   result:boolean|any;
@@ -147,11 +151,30 @@ export class ProductDetailsComponent implements OnInit,AfterViewInit {
   // Tăng giảm số lượng sản phẩm
   count:number= 1;
   countSub(){
-    this.count--;
+    if(this.count > 1)
+      this.count--;
     this.product.quantityOrder = this.count;
   }
   countAdd(){
-    this.count++;
+    let checkValidQuantity = 0;
+    this.product.sizes.forEach((element: any) => {
+      if(element.sizeText === this.product.sizeOrder)
+        checkValidQuantity = element.quantityAvalible;
+    });
+
+    if(this.count < checkValidQuantity){
+      this.count++;
+    }else{
+      if(checkValidQuantity === 0){
+        this.isShowToast = true;
+        this.returnValue();
+        this.toastMessageComponent?.changeH4Content("Vui lòng chọn biến thể!",'error',false);
+      }else{
+        this.isShowToast = true;
+        this.returnValue();
+        this.toastMessageComponent?.changeH4Content("Đã đạt số lượng tối đa!",'error',false);
+      }
+    }
     this.product.quantityOrder = this.count;
   }
   // Add cart
