@@ -1,5 +1,6 @@
 <div class="col-12">
   <div class="card">
+    <p-toast></p-toast>
     <h5>Quản lý đơn hàng</h5>
     <p-toast></p-toast>
     <p-table [value]="dataMo" dataKey="name" responsiveLayout="scroll">
@@ -12,7 +13,8 @@
               Trạng thái
           </th>
           <th class="text-center">Phương thức thanh toán</th>
-          <th class="text-center">Tổng tiền</th>
+          <th class="text-left" pSortableColumn="totalPrice">Tổng tiền <p-sortIcon field="totalPrice"></p-sortIcon></th>
+          <th class="text-center">Cập nhật trạng thái đơn hàng</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-dataMo let-expanded="expanded" let-rowIndex="rowIndex">
@@ -25,14 +27,18 @@
           <td >{{dataMo.user.userName}}</td>
           <td >{{dataMo.orderDate | FormatDatePipe}}</td>
           <td class="text-center">
-            <span [class]="'customer-badge status-qualified'">{{dataMo.status}}</span>
+            <span [class]="'customer-badge status-qualified'" [ngClass]="{'status-proposal' : dataMo.status==='Đã hủy','status-new' : dataMo.status==='Đang chờ xử lý' || dataMo.status==='Processing'}">{{dataMo.status}}</span>
           </td>
           <td class="text-center">
             {{dataMo.paymentMethod}}
           </td>
-          <td class="text-center">
+          <td class="text-left">
            {{dataMo.totalPrice | FormatVndPipe}}
           </td>
+           <td class="text-center">
+            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"
+            (click)="updateStatusOrder(dataMo)"></button>
+           </td>
         </tr>
       </ng-template>
 
@@ -40,3 +46,57 @@
     </p-table>
   </div>
 </div>
+
+
+
+<p-dialog [(visible)]="orderItemDialog" [style]="{width: '500px'}" header="Thông tin khách hàng" [modal]="true"
+class="p-fluid">
+  <div class="field">
+    <label for="name">Khách hàng</label>
+    <input disabled type="text" value="{{name}}" pInputText id="name" required autofocus />
+  </div>
+  <div class="formgrid">
+    <div class="field col">
+      <label for="price">Ngày đặt hàng</label>
+      <input disabled type="text" value="{{OrderItem.orderDate | FormatDatePipe}}" pInputText id="name" required autofocus/>
+    </div>
+
+    <div class="field col">
+      <label>Trạng thái</label>
+      <div class="formgrid grid">
+          <div class="field-radiobutton col-6">
+              <p-radioButton name="category" value="Đang chờ xử lý" [(ngModel)]="OrderItem.status"></p-radioButton>
+              <label for="category1">Đang chờ xử lý</label>
+          </div>
+          <div class="field-radiobutton col-6">
+              <p-radioButton name="category" value="Đã xác nhận" [(ngModel)]="OrderItem.status"></p-radioButton>
+              <label for="category2">Đã xác nhận</label>
+          </div>
+          <div class="field-radiobutton col-6">
+            <p-radioButton name="category" value="Đã giao hàng" [(ngModel)]="OrderItem.status"></p-radioButton>
+            <label for="category2">Đã giao hàng</label>
+        </div>
+        <div class="field-radiobutton col-6">
+          <p-radioButton name="category" value="Đã hoàn thành" [(ngModel)]="OrderItem.status"></p-radioButton>
+          <label for="category2">Đã hoàn thành</label>
+      </div>
+      <div class="field-radiobutton col-6">
+        <p-radioButton name="category" value="Đã hủy" [(ngModel)]="OrderItem.status"></p-radioButton>
+        <label for="category2">Đã hủy</label>
+    </div>
+      </div>
+  </div>
+  </div>
+  <div class="field">
+    <label for="Email" >Phương thức thanh toán</label>
+    <input disabled type="text" [(ngModel)]="OrderItem.paymentMethod"  pInputText id="name" required autofocus />
+  </div>
+  <div class="field">
+    <label for="Số điện thoại">Tổng tiền</label>
+    <input disabled type="text" value="{{OrderItem.totalPrice | FormatVndPipe}}"  pInputText id="name" required autofocus/>
+  </div>
+<ng-template pTemplate="footer">
+  <button type="reset" pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+  <button pButton pRipple type="submit" label="Save" icon="pi pi-check" class="p-button-text" (click)="Save(this.OrderItem)"></button>
+</ng-template>
+</p-dialog>

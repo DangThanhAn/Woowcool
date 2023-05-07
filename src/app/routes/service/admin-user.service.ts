@@ -24,5 +24,13 @@ export class AdminUserService {
   public getDataViewMO(): Observable<any> {
     return this.http.get<any>(this.urlOrder);
   }
+  // cập nhật trạng thái đơn hàng
+  public updateStatusOrder(orderId:number,status:string): Observable<any> {
+    return this.http.get<any>(this.urlOrder+"/UpdateStatusOrder?orderId="+orderId+"&status="+status.toString());
+  }
+  // Lấy thông tin chart pie phần statics
+  public GetChartPie(): Observable<any> {
+    return this.http.get<any>(this.urlOrder+"/GetChartPie");
+  }
 }
 

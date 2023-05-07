@@ -1,3 +1,4 @@
+import { AdminUserService } from './../../../service/admin-user.service';
 import { AdminDashboardService } from './../../../service/admin-dashboard.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -14,7 +15,9 @@ export class AdCollectionsComponent implements OnInit{
   data1: any;
 
   options1: any;
-constructor( private AdminDashboardService : AdminDashboardService){
+
+  dataChartPie: any[]= [];
+constructor( private AdminDashboardService : AdminDashboardService,private AdminUserService:AdminUserService){
 
 }
   ngOnInit() {
@@ -22,18 +25,6 @@ constructor( private AdminDashboardService : AdminDashboardService){
       const textColor = documentStyle.getPropertyValue('--text-color');
       const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
       const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
-      this.data = {
-          labels: ['Hủy bỏ', 'Đang xử lý', 'Đã xử lý'],
-          datasets: [
-              {
-                  data: [30, 300, 900],
-                  backgroundColor: [documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500'), documentStyle.getPropertyValue('--green-500')],
-                  hoverBackgroundColor: [documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400'), documentStyle.getPropertyValue('--green-400')]
-              }
-          ]
-      };
-
 
       this.options = {
           cutout: '60%',
@@ -45,8 +36,22 @@ constructor( private AdminDashboardService : AdminDashboardService){
               }
           }
       };
-
-    this.AdminDashboardService.GetRevenueInMonth(4).subscribe((data)=>{
+    this.AdminUserService.GetChartPie().subscribe((res)=>{
+      res.forEach((element: { count: any; }) => {
+        this.dataChartPie.push(element.count)
+      });
+      this.data = {
+        labels: ['Đã giao hàng','Đã hoàn thành','Đã hủy','Đang chờ xử lý', 'Đã xác nhận'],
+        datasets: [
+            {
+                data: this.dataChartPie,
+                backgroundColor: [documentStyle.getPropertyValue('--green-500'),documentStyle.getPropertyValue('--bluegray-500'),documentStyle.getPropertyValue('--red-500'),documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500')],
+                hoverBackgroundColor: [documentStyle.getPropertyValue('--green-400'),documentStyle.getPropertyValue('--bluegray-400'),documentStyle.getPropertyValue('--red-400'),documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400')]
+            }
+        ]
+    };
+    })
+    this.AdminDashboardService.GetRevenueInMonth(5).subscribe((data)=>{
       let revenueInMonth = data;
       this.data1 = {
         labels: ['Tháng 11','Tháng 12', 'Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5'],
