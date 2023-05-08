@@ -65,4 +65,10 @@ export class ProductService {
   getUserReviewProduct(userId:number) {
     return this.httpClient.get<any>(`${this.urlUserReview}/${userId}`);
   }
+
+  // Lấy danh sách sản phẩm gợi ý
+  urlRecommendation = 'https://localhost:7122/api/ProductRecommendations';
+  getListRecommendation(userId:number) {
+    return this.httpClient.get<any>(`${this.urlRecommendation}?userId=${userId}&topK=5`);
+  }
 }

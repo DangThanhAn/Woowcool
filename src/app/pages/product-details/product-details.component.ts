@@ -20,6 +20,8 @@ export class ProductDetailsComponent implements OnInit,AfterViewInit {
   productTypes :ProductType[]=[];
   product :Product|any;
   products: Product[]=[];
+
+  listProductRecommendation: Product[]=[];
   constructor(
     private route: ActivatedRoute,
     private productsService:ProductService,
@@ -39,6 +41,7 @@ export class ProductDetailsComponent implements OnInit,AfterViewInit {
     this.getProductType();
     this.getCartByOfUser();
     this.getReview(productIDFromRoute);
+    this.getRecommendation();
   }
 
   getProduct(productIDFromRoute: number) {
@@ -73,6 +76,12 @@ export class ProductDetailsComponent implements OnInit,AfterViewInit {
       this.productTypes = data;
       this.productType = this.productTypes.find(x => x.productTypeId === this.product.productTypeId);
     });
+  }
+  getRecommendation(){
+    this.productsService.getListRecommendation(this.currentUser.id).subscribe((res)=>{
+      this.listProductRecommendation = res;
+      console.log("getListRecommendation success!",this.listProductRecommendation);
+    })
   }
 
   ngAfterViewInit(): void {

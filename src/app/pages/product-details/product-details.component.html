@@ -124,29 +124,56 @@
           </div>
           <div class="product-single__features">
             <div class="product-features"><a href="#features-listing" class="product-features__heading  is-active "
-                rel-script="features-toggle">
+                >
                 Đặc điểm nổi bật
               </a>
               <div id="features-listing" class="product-features__listing" style="display: block">
                 <div class="product-features__item">
-                  Là sản phẩm của sự hợp tác giữa Coolmate và Disney - đơn vị sở hữu bản quyền Marvel
-                </div>
-                <div class="product-features__item">
                   Chất liệu 100% Cotton tạo sự mềm mại ngay lần đầu chạm
-                </div>
-                <div class="product-features__item">
-                  Định lượng vải 245gsm dày dặn
                 </div>
                 <div class="product-features__item">
                   Phù hợp với: đi làm, đi chơi, mặc ở nhà
                 </div>
-                <div class="product-features__item">
-                  Kiểu dáng: oversize dáng rộng
-                </div>
-                <div class="product-features__item">
-                  Tự hào sản xuất tại Việt Nam
+              </div>
+            </div>
+          </div>
+          <div rel-script="product-related" style="padding-top: 15px;" class="product-related">
+            <h4 class="product-related__title">
+              Sản phẩm bạn có thể thích
+            </h4>
+            <div
+              class="product-related__listings">
+              <div class="product-related__item" *ngFor="let productRecommend of listProductRecommendation">
+                <div class="product-grid product option-changed">
+                  <div class="product-grid__thumbnail not-sale-tag">
+                    <div class="product-grid__image">
+                      <a
+                        href="/product-details/{{productRecommend.id}}">
+                        <img loading="lazy"
+                          src="{{productRecommend.images[0].imgUrl}}"
+                          alt="img err">
+                      </a>
+                    </div>
+                  </div>
+                  <div class="product-grid__content">
+                    <h3 class="product-grid__title">
+                      <a
+                        href="/product-details/{{productRecommend.id}}">
+                        {{productRecommend.productName}}
+                      </a>
+                    </h3>
+                    <div class="product-grid__prices">
+                      <div class="product-prices">
+                        <!-- <span style="color: red;margin-left: 10px;">-21%</span> -->
+                        <!-- <del>239.000đ</del> -->
+                        <ins>{{productRecommend.price | FormatVndPipe}} </ins>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
+
+
             </div>
           </div>
         </div>
