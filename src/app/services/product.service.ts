@@ -49,6 +49,11 @@ export class ProductService {
   getProductsWithOrdersSmall() {
     return this.httpClient.get<any>(this.dataUrlOnline);
   }
+  // Lấy danh sách sản phẩm nổi bật
+  GetListFeaturedProducts(topK:number) {
+    return this.httpClient.get<any>(this.dataUrlOnline+'/GetListFeaturedProducts?topK='+topK);
+  }
+
 
   urlImage ='https://localhost:7122/api/Images';
   public postImg(image:Image): Observable<any> {

@@ -1,8 +1,12 @@
+import { InfoPaymentMomoService } from './../../services/paymentService.service';
 import { CartDetail } from './../../models/CartDetails';
 import { UserService } from './../../services/user.service';
 import { HttpClient } from '@angular/common/http';
 import { CartService } from '../../services/cart.service';
 import { Component, OnInit } from '@angular/core';
+import * as CryptoJS from 'crypto-js';
+
+
 import {
   FormBuilder,
   FormControl,
@@ -24,6 +28,7 @@ export class CartComponent implements OnInit {
     private http: HttpClient,
     private fb: FormBuilder,
     private UserService: UserService,
+    private paymentService: InfoPaymentMomoService,
     private router: Router
   ) {}
   async ngOnInit(): Promise<void> {
@@ -91,6 +96,8 @@ export class CartComponent implements OnInit {
           },
           0
         );
+        let payShipping = this.totalCoin > 200000 ? 0 : 25000;
+        this.totalCoin+=payShipping;
         console.log(this.totalCoin);
         this.cartService
           .updateTotalPrice(this.dataSource[0].id, this.totalCoin)
@@ -103,6 +110,8 @@ export class CartComponent implements OnInit {
       },
     });
   }
+
+
 
   /**
    * Hàm tăng giảm số lượng
@@ -194,6 +203,60 @@ export class CartComponent implements OnInit {
     );
   }
 
+  /**
+   * Với paymentMethod là momo
+   */
+  qrCode: string | any;
+  paymentWithMomo(amount: number,orderId: string,orderInfo: string){
+    const partnerCode = 'MOMO1234567';
+    const accessKey = '12345678912345678912';
+    const secretKey = 'YOUR_SECRET_KEY';
+    const requestId = '123123';
+
+    const returnUrl = '/checkout';
+    const notifyUrl = '/admin';
+
+    const rawSignature = `partnerCode=${partnerCode}&accessKey=${accessKey}&requestId=${requestId}`;
+    const hmacSignature = CryptoJS.HmacSHA256(rawSignature, secretKey);
+    const signature = CryptoJS.enc.Hex.stringify(hmacSignature);
+    console.log(signature);
+
+    const requestBody = {
+      partnerCode,
+      accessKey,
+      requestId,
+      amount: amount.toString(),
+      orderId: orderId.toString(),
+      orderInfo: orderInfo,
+      returnUrl,
+      notifyUrl,
+      extraData: '',
+      requestType: 'captureMoMoWallet'
+    };
+    console.log(requestBody);
+
+    const headers = {
+      'Content-Type': 'application/json',
+      'X-Request-Id': requestId,
+      'X-Partner-Code': partnerCode,
+      'X-Access-Key': accessKey,
+      'X-Signature': signature.toString()
+    };
+    console.log(headers);
+    console.log(requestBody);
+    this.http.post('/api/transactionProcessor', requestBody, { headers })
+      .subscribe((response: any) => {
+        if (response.errorCode === 0) {
+          this.qrCode = `https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=${response.payUrl}`;
+          console.log(this.qrCode);
+
+        } else {
+          alert('Failed to create MoMo QR code: ' + response.localMessage);
+        }
+      });
+
+  }
+
   loading: boolean = false;
   /**
    * Khi click thanh toán sẽ xử lí
@@ -216,47 +279,60 @@ export class CartComponent implements OnInit {
       status: 'Đang chờ xử lý',
       paymentMethod: this.selectedPaymentMethod,
     };
+
     if (this.dataSource[0].totalPrice > 0) {
-      this.cartService.createOrder(myOrder).subscribe(
-        (newOrder) => {
-          this.dataSource[0].cartDetails.forEach(
-            (element: {
-              productId: any;
-              size: any;
-              color: any;
-              quantity: any;
-            }) => {
-              let myOrderDetails: OrderDetail = {
-                orderId: newOrder.order.id,
-                productId: element.productId,
-                size: element.size,
-                color: element.color,
-                quantity: element.quantity,
-              };
-              this.cartService
-                .createOrderDetails(myOrderDetails)
-                .subscribe(() => {
-                  //1. Xóa thông tin ở bảng giỏ hàng đi
+      if(this.selectedPaymentMethod === 'momo'){
+        this.paymentService.setCartData(this.dataSource);
+        setTimeout(() => {
+          this.router.navigate(['/payment/momo']);
+        }, 2500);
+      }else{
+        setTimeout(() => {
+          this.cartService.createOrder(myOrder).subscribe(
+            (newOrder) => {
+              this.dataSource[0].cartDetails.forEach(
+                (element: {
+                  productId: any;
+                  size: any;
+                  color: any;
+                  quantity: any;
+                }) => {
+                  let myOrderDetails: OrderDetail = {
+                    orderId: newOrder.order.id,
+                    productId: element.productId,
+                    size: element.size,
+                    color: element.color,
+                    quantity: element.quantity,
+                  };
                   this.cartService
-                    .clearCart(this.dataSource[0].id)
+                    .createOrderDetails(myOrderDetails)
                     .subscribe(() => {
-                      console.log('delete cart details');
+                      //1. Xóa thông tin ở bảng giỏ hàng đi
+                      this.cartService
+                        .clearCart(this.dataSource[0].id)
+                        .subscribe(() => {
+                          console.log('delete cart details');
+                        });
+                      //2. Xóa số lượng sản phẩm được đặt đi
+                      this.cartService
+                        .UpdateQuantityAvailible(myOrderDetails)
+                        .subscribe(() => {
+                          //3. Router Chuyển đến trang checkout
+                          this.router.navigate(['/checkout']);
+                        });
                     });
-                  //2. Xóa số lượng sản phẩm được đặt đi
-                  this.cartService
-                    .UpdateQuantityAvailible(myOrderDetails)
-                    .subscribe(() => {
-                      //3. Router Chuyển đến trang checkout
-                      this.router.navigate(['/checkout']);
-                    });
-                });
+                }
+              );
+            },
+            (error) => {
+              console.log(error, 'Có lỗi khi đặt hàng');
+            },
+            () =>{
+              this.loading = false;
             }
           );
-        },
-        (error) => {
-          console.log(error, 'Có lỗi khi đặt hàng');
-        }
-      );
+        }, 2500);
+      }
     }
   }
 }

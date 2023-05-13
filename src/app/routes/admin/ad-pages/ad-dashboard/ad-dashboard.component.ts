@@ -45,7 +45,7 @@ export class AdDashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.initChart();
-    this.ProductService.getProductsSmall().subscribe((data) => {
+    this.ProductService.GetListFeaturedProducts(10).subscribe((data) => {
       this.products = data;
     });
     this.getDataInfo();

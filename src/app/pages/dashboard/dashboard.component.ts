@@ -42,9 +42,6 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe((data)=>{
       data.forEach((element: Product) => {
-        if(element.collectionId == 1){
-          this.productsWakanda.push(element);
-        }
         if(element.collectionId == 2){
           this.productsWinter?.push(element);
         }
@@ -52,10 +49,10 @@ export class DashboardComponent implements OnInit {
           this.productsAccessory?.push(element);
         }
       });
-      this.productsWakanda = this.productsWakanda.slice(0,4);
       this.productsWinter = this.productsWinter.slice(0,4);
       this.productsAccessory = this.productsAccessory.slice(0,4);
-    })
+    });
+    this.GetListFeaturedProducts();
   }
   changeTab(tabIndex:number){
     if(tabIndex == 2){
@@ -72,6 +69,11 @@ export class DashboardComponent implements OnInit {
       this.isActive3 = false;
     }
     this.tabIndex = tabIndex;
+  }
+  GetListFeaturedProducts(){
+    this.productService.GetListFeaturedProducts(4).subscribe((data)=>{
+      this.productsWakanda = data;
+    })
   }
 
 }

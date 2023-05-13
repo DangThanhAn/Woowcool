@@ -1,0 +1,10 @@
+{
+  "/api": {
+    "target": "https://test-payment.momo.vn",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": "/gw_payment"
+    }
+  }
+}

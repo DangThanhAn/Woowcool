@@ -41,7 +41,7 @@ constructor( private AdminDashboardService : AdminDashboardService,private Admin
         this.dataChartPie.push(element.count)
       });
       this.data = {
-        labels: ['Đã giao hàng','Đã hoàn thành','Đã hủy','Đang chờ xử lý', 'Đã xác nhận'],
+        labels: ['Đã giao hàng','Đã hoàn thành','Đã hủy', 'Đã xác nhận','Đang chờ xử lý'],
         datasets: [
             {
                 data: this.dataChartPie,

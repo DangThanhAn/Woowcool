@@ -66,13 +66,13 @@
 
   <div class="col-12 xl:col-6">
     <div class="card">
-      <h5>Recent Sales</h5>
+      <h5>Sản phẩm nổi bật</h5>
       <p-table [value]="products" [paginator]="true" [rows]="5" responsiveLayout="scroll">
         <ng-template pTemplate="header">
           <tr>
-            <th>Image</th>
-            <th pSortableColumn="productName">Name <p-sortIcon field="name"></p-sortIcon></th>
-            <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
+            <th>Hình ảnh</th>
+            <th pSortableColumn="productName">Tên <p-sortIcon field="name"></p-sortIcon></th>
+            <th pSortableColumn="price">Giá <p-sortIcon field="price"></p-sortIcon></th>
             <th>View</th>
           </tr>
         </ng-template>
@@ -83,7 +83,7 @@
                 width="50">
             </td>
             <td style="width: 35%; min-width: 7rem;">{{product.productName}}</td>
-            <td style="width: 35%; min-width: 8rem;">{{product.price | currency:'USD'}}</td>
+            <td style="width: 35%; min-width: 8rem;">{{product.price | FormatVndPipe}}</td>
             <td style="width: 15%;">
               <button pButton pRipple type="button" icon="pi pi-search"
                 class="p-button p-component p-button-text p-button-icon-only"></button>

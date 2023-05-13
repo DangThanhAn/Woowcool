@@ -33,6 +33,7 @@ const routes: Routes = [
       {path: 'filter-product',loadChildren: () => import('./pages/FilterProduct/filter-product.module').then(m => m.FilterProductModule)},
       {path: 'account',loadChildren: () => import('./pages/account/account.module').then(m => m.AccountModule)},
       {path: 'permission',loadChildren: () => import('./pages/permission/permission.module').then(m => m.PermissionModule)},
+      {path: 'payment',loadChildren: () => import('./features/payment/payment.module').then(m => m.PaymentModule)},
     ]
   },
   {

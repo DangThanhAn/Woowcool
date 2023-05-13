@@ -201,7 +201,7 @@
         </div>
         <div class="pricing-info__item">
           <p>Phí giao hàng</p>
-          <p>Miễn phí</p>
+          <p>{{this.totalCoin < 200000 ? (25000 | FormatVndPipe)  : 'Miễn phí'}}</p>
         </div>
         <div class="divider"></div>
         <div class="pricing-info__item">
@@ -212,8 +212,11 @@
     </div>
   </div>
 </div>
+
 <ng-container *ngIf="loading">
   <div class="loading-overlay">
-    <p-progressSpinner class="ui-progress-spinner-mask"></p-progressSpinner>
+    <div class="loading-spinner">
+      <p-progressSpinner></p-progressSpinner>
+    </div>
   </div>
 </ng-container>

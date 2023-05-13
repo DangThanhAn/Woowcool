@@ -32,6 +32,8 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import {ScrollTopModule} from 'primeng/scrolltop';
 import { DropdownModule } from 'primeng/dropdown';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+
 
 @NgModule({
   declarations: [
@@ -67,7 +69,8 @@ import { DropdownModule } from 'primeng/dropdown';
     PermissionModule,
     ProgressSpinnerModule,
     ScrollTopModule,
-    DropdownModule
+    DropdownModule,
+    NgxQRCodeModule
 
   ],
   providers: [],
