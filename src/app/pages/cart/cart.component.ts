@@ -275,11 +275,19 @@ export class CartComponent implements OnInit {
     let myOrder: Order = {
       userId: this.dataSource[0].userId,
       orderDate: isoDate,
-      totalPrice: this.dataSource[0].totalPrice,
+      totalPrice: this.totalCoin,
+      //totalPrice: this.dataSource[0].totalPrice,
       status: 'Đang chờ xử lý',
       paymentMethod: this.selectedPaymentMethod,
     };
 
+    console.log(myOrder);
+    console.log(this.totalCoin);
+    
+    
+
+    debugger
+    
     if (this.dataSource[0].totalPrice > 0) {
       if(this.selectedPaymentMethod === 'momo'){
         this.paymentService.setCartData(this.dataSource);
@@ -336,3 +344,5 @@ export class CartComponent implements OnInit {
     }
   }
 }
+
+

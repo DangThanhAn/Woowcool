@@ -19,6 +19,9 @@ export class AdminDashboardService {
   public GetRevenue(): Observable<any> {
     return this.http.get<any>(`${this.urlAdminDashboard}/GetRevenue`);
   }
+  public GetRevenueToday(): Observable<any> {
+    return this.http.get<any>(`${this.urlAdminDashboard}/GetRevenueToday`);
+  }
   public GetRevenueInMonth(month:number): Observable<any> {
     return this.http.get<any>(`${this.urlAdminDashboard}/GetRevenueInMonth?month=${month}`);
   }

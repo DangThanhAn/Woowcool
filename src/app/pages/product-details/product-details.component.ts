@@ -37,13 +37,14 @@ export class ProductDetailsComponent implements OnInit,AfterViewInit {
     // First get the product id from the current route.
     const routeParams = this.route.snapshot.paramMap;
     const productIDFromRoute = Number(routeParams.get('id'));
+    this.idProduct = productIDFromRoute;
     this.getProduct(productIDFromRoute);
     this.getProductType();
     this.getCartByOfUser();
     this.getReview(productIDFromRoute);
     this.getRecommendation();
   }
-
+  idProduct = 0;
   getProduct(productIDFromRoute: number) {
     this.productsService.getProductById(productIDFromRoute).subscribe((data)=>{
       this.product = data;
@@ -59,6 +60,7 @@ export class ProductDetailsComponent implements OnInit,AfterViewInit {
   starAverage:number =0;
   getReview(productId:number){
     this.productsService.getReviewOfProduct(productId).subscribe((data)=>{
+      console.log("get review success");
       this.ListReview = data;
       this.ListReview.length > 0 ? this.noData = true : this.noData = false;
       this.ListReview.forEach(element => {
@@ -80,6 +82,14 @@ export class ProductDetailsComponent implements OnInit,AfterViewInit {
   getRecommendation(){
     this.productsService.getListRecommendation(this.currentUser.id).subscribe((res)=>{
       this.listProductRecommendation = res;
+      if(res){
+        this.listProductRecommendation.forEach(element => {
+          if(element.id == this.idProduct){
+            this.listProductRecommendation = this.listProductRecommendation.filter(element => element.id !== this.idProduct);
+          }
+
+        });
+      }
       console.log("getListRecommendation success!",this.listProductRecommendation);
     })
   }
@@ -200,14 +210,17 @@ export class ProductDetailsComponent implements OnInit,AfterViewInit {
     this.cartService.addToCart(cartDetail).subscribe({
       next:(res)=>{
         console.log(res);
+        this.isShowToast = true;
+        this.returnValue();
+        this.toastMessageComponent?.changeH4Content("Đã thêm vào giỏ hàng",'',true);
       },
       error:(err)=>{
         console.log(err);
+        this.isShowToast = true;
+        this.returnValue();
+        this.toastMessageComponent?.changeH4Content("Vui lòng đăng nhập để sử dụng!",'error',false);
       }
     })
-    this.isShowToast = true;
-    this.returnValue();
-    this.toastMessageComponent?.changeH4Content("Đã thêm vào giỏ hàng",'',true);
   }
   currentUser:any;
   cartId:number = 0;

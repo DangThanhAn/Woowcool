@@ -92,6 +92,8 @@ export class AdProductsComponent implements OnInit {
     price: ['', Validators.required],
     quantity: ['', Validators.required],
     sale: ['', Validators.required],
+    linkImg1: ['', Validators.required],
+    linkImg2: ['', Validators.required],
     collectionId: ['', Validators.required],
     categoryId: ['', Validators.required],
     productTypeId: ['', Validators.required],
@@ -154,6 +156,8 @@ export class AdProductsComponent implements OnInit {
         this.product.price = this.checkoutForm.get('price')?.value;
         this.product.quantity = this.checkoutForm.get('quantity')?.value;
         this.product.sale = this.checkoutForm.get('sale')?.value;
+        this.product.linkImg1 = this.checkoutForm.get('linkImg1')?.value;
+        this.product.linkImg2 = this.checkoutForm.get('linkImg2')?.value;
         this.productService.putProduct(this.product).subscribe(
           () => {
             this.messageService.add({
@@ -217,6 +221,9 @@ export class AdProductsComponent implements OnInit {
     this.link = this.product.images[0].imgUrl;
     this.productDialog = true;
     this.productEdit = this.product;
+    this.productEdit.linkImg1 = this.product.images[0].imgUrl;
+    this.productEdit.linkImg2 = this.product.images[1].imgUrl;
+    debugger
   }
 
   deleteSelectedProducts() {

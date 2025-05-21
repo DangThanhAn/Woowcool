@@ -69,7 +69,7 @@ export class ReviewsComponent implements OnInit {
       this.isShow = false;
       this.returnValue();
       this.isShowToast = true;
-      this.toastMessageComponent?.changeH4Content("Sửa thành công",'',false);
+      this.toastMessageComponent?.changeH4Content("Sửa thành công",'success',true);
       this.getReviewById();
     })
   }

@@ -29,7 +29,7 @@
     <div class="header" >
       <div class="header--inner" *ngIf="!isShowInputSearch">
         <div class="header--logo">
-          <a href="/"><img src="https://www.coolmate.me/images/logo-coolmate.svg" alt="Logo Coolmate"></a>
+          <a href="/"><img src="https://scontent.fhan15-2.fna.fbcdn.net/v/t39.30808-6/289156289_100715196036189_5647688626605392606_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeERAS6SjZNhPCYNJmteF1sMyJKi-jtsSwrIkqL6O2xLCkiT2FWPgFVXNbppSjYICahwfRUtUxvELa42Hfcrfm_t&_nc_ohc=Es2Yt30N88QQ7kNvwHG7M3W&_nc_oc=AdnX-zbJd8W1E7QQ3eEQDQcFUdLLvN92TTHMQDWqqlTJNG0_fF34AatlqfOcubUUPIV_v8AhaN2jbiMtRjcUwT6L&_nc_zt=23&_nc_ht=scontent.fhan15-2.fna&_nc_gid=244QQyj8tP4Zy4z_6PEOeg&oh=00_AfLxoAgH4rsiK37iu5lFHxnitcr_VOHtdS2jBgD8apSQuA&oe=68328F8B" alt="Logo FitA"></a>
         </div>
         <div class="header--menu">
           <ul class="list--menu">
@@ -39,101 +39,27 @@
                 <div class="mega--menu__wrapper">
                   <div class="mega--menu__inner">
                     <div class="mega--menu__item">
-                      <a class="mega--menu__title">Nhu cầu</a>
+                      <a class="mega--menu__title" [routerLink]="['filter-product/ao-nam']">Áo Nam</a>
                       <ul class="mega--menu__list">
-                        <li>
-                          <a style="color: red;">CoolGift
-                          </a>
+                        <li class="sub-title">
+                          <a class="sub-title" [routerLink]="['filter-product/ao-tanktop']"> Áo TankTop</a>
                         </li>
-                        <li>
-                          <a>Đồ thu - đông
-                            <span style="display: block; font-size: 80%; margin-top: -1%; font-weight: normal; width: 100%;">Fall-Winter Collection</span>
-                          </a>
+                        <li class="sub-title">
+                          <a class="sub-title" [routerLink]="['filter-product/ao-the thao']"> Áo Thể thao</a>
                         </li>
-                        <li>
-                          <a>Mặc nhà & Mặc trong
-                            <span style="display: block; font-size: 80%; margin-top: -1%; font-weight: normal; width: 100%;">Homewear & Underwear</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a>Mặc hằng ngày
-                            <span style="display: block; font-size: 80%; margin-top: -1%; font-weight: normal; width: 100%;">Casualwear</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a>Đồ thể thao
-                            <span style="display: block; font-size: 80%; margin-top: -1%; font-weight: normal; width: 100%;">Activewear</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a>Phụ kiện
-                            <span style="display: block; font-size: 80%; margin-top: -1%; font-weight: normal; width: 100%;">Accessories</span>
-                          </a>
+                        <li last-child class="sub-title">
+                          <a class="sub-title" [routerLink]="['filter-product/ao-polo']"> Áo Polo</a>
                         </li>
                       </ul>
                     </div>
                     <div class="mega--menu__item">
-                      <a class="mega--menu__title">Danh mục</a>
+                      <a class="mega--menu__title" [routerLink]="['filter-product/quan-nam']">Quần nam</a>
                       <ul class="mega--menu__list">
-                        <li>
-                          <a [routerLink]="['filter-product/ao-nam']">Áo Nam</a>
-                        </li>
-                        <li class="sub-title">
-                          <a class="sub-title" [routerLink]="['filter-product/ao-so-mi']"> Áo sơ mi</a>
-                        </li>
-                        <li class="sub-title">
-                          <a class="sub-title" [routerLink]="['filter-product/ao-polo']"> Áo polo</a>
+                        <li last-child class="sub-title">
+                          <a class="sub-title" [routerLink]="['filter-product/quan-short']">Quần Short</a>
                         </li>
                         <li last-child class="sub-title">
-                          <a class="sub-title" [routerLink]="['filter-product/ao-thun']"> Áo thun</a>
-                        </li>
-                        <li last-child class="">
-                          <a [routerLink]="['filter-product/quan-nam']">Quần nam</a>
-                        </li>
-                        <li last-child class="sub-title">
-                          <a class="sub-title" [routerLink]="['filter-product/quan-jean']">Quần jeans</a>
-                        </li>
-                        <li last-child class="sub-title">
-                          <a class="sub-title" [routerLink]="['filter-product/quan-kaki']">Quần dài</a>
-                        </li>
-                        <li last-child class="sub-title">
-                          <a [routerLink]="['filter-product/phu-kien']">Phụ kiện</a>
-                        </li>
-                        <li last-child class="sub-title">
-                          <a class="sub-title" [routerLink]="['filter-product/mu-non']"> Mũ (nón)</a>
-                        </li>
-                        <li last-child class="sub-title">
-                          <a class="sub-title" [routerLink]="['filter-product/tat-vo']"> Tất (vớ)</a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="mega--menu__item">
-                      <a class="mega--menu__title">Bộ sưu tập</a>
-                      <ul class="mega--menu__list">
-                        <li>
-                          <a> Vũ trụ áo Marvel
-                            <span style="display: block; font-size: 80%; margin-top: -1%; font-weight: normal; width: 100%;">Bước vào thế giới siêu anh hùng</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a>Clean Vietnam
-                            <span style="display: block; font-size: 80%; margin-top: -1%; font-weight: normal; width: 100%;">Sự kết hợp wowcool & vietmax</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a>Wowcool Basics
-                            <span style="display: block; font-size: 80%; margin-top: -1%; font-weight: normal; width: 100%;">Mua sắm tiết kiệm với giá tốt</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a>Care & Share
-                            <span style="display: block; font-size: 80%; margin-top: -1%; font-weight: normal; width: 100%;">10% doanh thu cho các bé</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a>Sản phẩm bền vững
-                            <span style="display: block; font-size: 80%; margin-top: -1%; font-weight: normal; width: 100%;">Sản phẩm thân thiện với môi trường</span>
-                          </a>
+                          <a class="sub-title" [routerLink]="['filter-product/quan-jogger']">Quần Jogger</a>
                         </li>
                       </ul>
                     </div>
@@ -168,16 +94,16 @@
               </div>
             </li>
             <li class="list--menu__item">
-              <a [routerLink]="['/rising']">84RISING*</a>
+              <a [routerLink]="['/rising']">New Arrival</a>
             </li>
             <li class="list--menu__item">
-              <a [routerLink]="['/coolxprint']">Coolxprint</a>
+              <a [routerLink]="['/coolxprint']">Sale Off</a>
             </li>
             <li class="list--menu__item">
               <a [routerLink]="['/blog']">Blog</a>
             </li>
             <li class="list--menu__item">
-              <a [routerLink]="['/aboutcoolmate']">Về Coolmate</a>
+              <a [routerLink]="['/aboutcoolmate']">Về FitA</a>
             </li>
 
           </ul>
@@ -201,7 +127,7 @@
                         </a></li>
                       <li><a href="/account/coolsubs" class="header-account__item"><span class="header-account__icon"><img
                               src="https://www.coolmate.me/images/header/icon-coolsub-new.svg" alt="Icon Header Coolsub"></span>
-                          COOLSUB
+                          FITSUB
                         </a></li>
                       <li><a href="/" class="header-account__item" (click)="logout()"><span
                             class="header-account__icon"><img src="https://www.coolmate.me/images/header/icon-logout-new.svg"

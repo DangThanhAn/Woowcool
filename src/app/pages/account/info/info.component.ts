@@ -36,7 +36,7 @@ export class InfoComponent implements OnInit{
     this.userService.updateInforUser(this.currentUser.id,this.currentUser).subscribe((data)=>{
       this.returnValue();
       this.isShowToast = true;
-      this.toastMessageComponent?.changeH4Content("Cập nhật thành công!",'',false);
+      this.toastMessageComponent?.changeH4Content("Cập nhật thành công!",'success',true);
       this.getUser();
     })
   }

@@ -28,6 +28,7 @@ export class AdDashboardComponent implements OnInit, OnDestroy {
   OrderInDay: number | any;
 
   Revenue: number | any;
+  RevenueToday: number | any;
 
   Customers: number | any;
 
@@ -67,6 +68,9 @@ export class AdDashboardComponent implements OnInit, OnDestroy {
     this.AdminDashboardService.GetRevenue().subscribe((data)=>{
       this.Revenue = data;
     });
+    this.AdminDashboardService.GetRevenueToday().subscribe((data)=>{
+      this.RevenueToday = data;
+    });
     this.AdminDashboardService.GetReview().subscribe((data)=>{
       this.Reviews = data;
     });
@@ -86,7 +90,7 @@ export class AdDashboardComponent implements OnInit, OnDestroy {
           datasets: [
             {
               label: 'Doanh thu',
-              data: [19456500, 35289000, 15550000, 10550000, 40000000, 10000000, revenueInMonth],
+              data: [19456500, 35289000, 15550000, 18025420, 40000000, 10000000, revenueInMonth],
               fill: false,
               backgroundColor: documentStyle.getPropertyValue('--bluegray-700'),
               borderColor: documentStyle.getPropertyValue('--bluegray-700'),

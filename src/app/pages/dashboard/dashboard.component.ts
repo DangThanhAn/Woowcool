@@ -17,22 +17,22 @@ export class DashboardComponent implements OnInit {
    images = [
     {
       imageSrc:
-        'https://media.coolmate.me/cdn-cgi/image/width=1920,quality=90,format=auto/uploads/February2023/Banner_valentine.jpg',
+        '../../../assets/imgdashboard/banner1.jpg',
       imageAlt: 'nature1',
     },
     {
       imageSrc:
-      'https://media.coolmate.me/cdn-cgi/image/width=1920,quality=90,format=auto/uploads/February2023/2Banner-Ant-Man-Collection_1.jpg',
+      '../../../assets/imgdashboard/banner2.jpg',
       imageAlt: 'nature2',
     },
     {
       imageSrc:
-        'https://media.coolmate.me/cdn-cgi/image/width=1920,quality=90,format=auto/uploads/November2022/Banner-Coolmate-Active-opt-1s.jpg',
+        '../../../assets/imgdashboard/banner3.jpg',
       imageAlt: 'person1',
     },
     {
       imageSrc:
-        'https://media.coolmate.me/cdn-cgi/image/width=1920,quality=90,format=auto/uploads/November2022/black-panther-hero-banner-des.jpg',
+        '../../../assets/imgdashboard/banner4.jpg',
       imageAlt: 'person2',
     },
   ]

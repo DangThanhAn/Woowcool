@@ -45,7 +45,6 @@
             <th pSortableColumn="quantity">Số lượng <p-sortIcon field="quantity"></p-sortIcon>
             </th>
             <th pSortableColumn="rating">Đánh giá <p-sortIcon field="rating"></p-sortIcon></th>
-            <th pSortableColumn="inventoryStatus">Trạng thái <p-sortIcon field="inventoryStatus"></p-sortIcon></th>
             <th></th>
           </tr>
         </ng-template>
@@ -74,10 +73,6 @@
             </td>
             <td style="width:14%; min-width: 10rem;"><span class="p-column-title">Reviews</span>
               <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating>
-            </td>
-            <td style="width:14%; min-width: 10rem;"><span class="p-column-title">Status</span>
-              <span
-                [class]="'product-badge status-' + (product.inventoryStatus ? product.inventoryStatus.toLowerCase() : '')">{{product.inventoryStatus}}</span>
             </td>
             <td>
               <div class="flex">
@@ -139,6 +134,18 @@
         </div>
         <p-fileUpload *ngIf="this.mode" name="myfile[]" [chooseLabel]="'Chọn'" [cancelLabel]="'Hủy'" [multiple]="true"
           [customUpload]="true" (uploadHandler)="myUploader($event)"></p-fileUpload>
+            <div class="field">
+          <label for="name">Link Image</label>
+          <input type="text" [ngModel]="product.linkImg1" formControlName="linkImg1" pInputText id="name" required autofocus
+            [ngClass]="{'ng-invalid ng-dirty' : !this.mode && !product.linkImg1}" />
+          <small class="ng-dirty ng-invalid" *ngIf="!this.mode&&!product.linkImg1">Link Image is required.</small>
+        </div>
+          <div class="field">
+          <label for="name">Link Image</label>
+          <input type="text" [ngModel]="product.linkImg2" formControlName="linkImg2" pInputText id="name" required autofocus
+            [ngClass]="{'ng-invalid ng-dirty' : !this.mode && !product.linkImg2}" />
+          <small class="ng-dirty ng-invalid" *ngIf="!this.mode&&!product.linkImg2">Link Image is required.</small>
+        </div>
         <ng-template pTemplate="footer">
           <button type="reset" pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
             (click)="hideDialog()"></button>
