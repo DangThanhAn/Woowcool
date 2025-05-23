@@ -17,11 +17,10 @@ export class AllProductComponent implements OnInit{
     this.getProduct();
   }
   imgCollections:string[] = [
-    'https://mcdn.coolmate.me/image/October2022/mceclip2_22.png',
-    'https://mcdn.coolmate.me/image/December2022/mceclip0_60.png',
-    'https://mcdn.coolmate.me/image/December2022/mceclip1_76.png',
-    'https://mcdn.coolmate.me/image/December2022/mceclip4_36.png',
-    'https://mcdn.coolmate.me/image/December2022/mceclip2_45.png'
+    
+    '../../../assets/imgdashboard/Capture2.JPG',
+    '../../../assets/imgdashboard/Capture1.JPG',
+    '../../../assets/imgdashboard/Capture3.jpg'
   ];
   products: Product[] = [];
   getProduct(){
