@@ -19,6 +19,8 @@ export class AoSoMiComponent implements OnInit{
       map(response => response.filter((product: { categoryId: number; }) => product.categoryId == 2))
     ).subscribe(data =>{
       this.products = data;
+      console.log(data);
+      
     })
   }
 

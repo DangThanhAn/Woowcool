@@ -27,17 +27,17 @@ export class AoPoloComponent implements OnInit{
   poloActive: Product[] = [];
   getProduct(){
     this.ProductService.getAllProductsv1().pipe(
-      map(response => response.filter((product: { categoryId: number; }) => product.categoryId == 1))
+      map(response => response.filter((product: { categoryId: number; }) => product.categoryId == 3))
     ).subscribe(data =>{
       this.products = data;
       this.products.forEach(element => {
-        if(element.productTypeId == 1){
+        if(element.productTypeId == 5){
           this.poloCafe.push(element)
         }
-        if(element.productTypeId == 2){
-          this.poloExcool.push(element)
-        }
-        if(element.productTypeId == 3){
+        // if(element.productTypeId == 2){
+        //   this.poloExcool.push(element)
+        // }
+        if(element.productTypeId == 11){
           this.poloActive.push(element)
         }
       });

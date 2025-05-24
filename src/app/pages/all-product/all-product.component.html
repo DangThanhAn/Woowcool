@@ -3,9 +3,13 @@
     <div class="col-md-12 col-sm-12">
       <main class="site-collections">
         <div class="site-collections-filter">
-          <a class="site-collections-filter__items" *ngFor="let img of imgCollections">
-            <span><img src="{{img}}" alt=""></span>
+          <a class="site-collections-filter__items" *ngFor="let img of imgCollections; let i = index">
+            <span (click)="goToFilterProduct(i)">
+              <img [src]="img" alt="">
+            </span>
           </a>
+
+
         </div>
         <div class="collections-filter"></div>
         <section class="collections-listings">
@@ -23,9 +27,10 @@
               class="grid grid--five-columns large-grid--four-columns tablet-grid--three-columns mobile-grid--two-columns product-list">
               <!-- vòng lặp  -->
               <app-product [isCollectionImg]="true"
-              [srcCollectionImg]="'https://media.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/March2023/namMaskao_group.jpg'"
-               class="grid__column" style="position:relative;"></app-product>
-              <app-product *ngFor="let product of products" [product]="product" class="grid__column" style="position:relative;"></app-product>
+                [srcCollectionImg]="'https://media3.coolmate.me/cdn-cgi/image/width=672,height=990,quality=80,format=auto/uploads/August2024/ao-thun.jpg'"
+                class="grid__column" style="position:relative;"></app-product>
+              <app-product *ngFor="let product of products" [product]="product" class="grid__column"
+                style="position:relative;"></app-product>
               <app-product [isLoadmore]="true" class="grid__column" style="position:relative;"></app-product>
               <!-- end vòng lặp -->
             </div>

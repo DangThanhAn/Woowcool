@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { ProductService } from './../../services/product.service';
 import { Product } from './../../models/product';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-all-product',
@@ -10,7 +11,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AllProductComponent implements OnInit{
   constructor(private httpClient:HttpClient,
-    private productService:ProductService){
+    private productService:ProductService,
+  private router: Router){
 
   }
   ngOnInit(): void {
@@ -22,6 +24,16 @@ export class AllProductComponent implements OnInit{
     '../../../assets/imgdashboard/Capture1.JPG',
     '../../../assets/imgdashboard/Capture3.jpg'
   ];
+
+  goToFilterProduct(index : number) {
+      this.router.navigate([this.imgCollectionRouter[index]]);
+  }
+  
+  imgCollectionRouter:string [] = [
+    '/filter-product/ao-nam',
+    '/filter-product/quan-nam',
+    '/filter-product/phu-kien'
+  ]
   products: Product[] = [];
   getProduct(){
     this.productService.getAllProductsv1().subscribe((data)=>{

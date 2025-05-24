@@ -98,7 +98,7 @@ li[view-menu ]:hover .mega--menu__product{
 }
 .mega--menu__inner{
   display: flex;
-  max-width: 870px;
+  max-width: 605px;
   width: 100%;
   margin: 0 auto;
 }

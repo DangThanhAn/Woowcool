@@ -29,8 +29,8 @@ export class QuanNamComponent {
   constructor(private ProductService : ProductService,private router: Router) {
     this.cities = [
         {name: 'Danh mục', code: 'default'},
-        {name: 'Quần jean', code: 'quan-jean'},
-        {name: 'Quần kaki', code: 'quan-kaki'}
+        {name: 'Quần Jogger', code: 'quan-jogger'},
+        {name: 'Quần Short', code: 'quan-short'}
     ];
     this.sort = [
       {key:'bestseller',value:'Mới nhất'},
@@ -42,11 +42,11 @@ export class QuanNamComponent {
 onDropdownChange(event: any) {
   let selectedValue = event.value.code;
   switch (selectedValue) {
-    case 'quan-jean':
-      this.router.navigate(['filter-product/quan-jean']);
+    case 'quan-jogger':
+      this.router.navigate(['filter-product/quan-jogger']);
       break;
-    case 'quan-kaki':
-      this.router.navigate(['/filter-product/quan-kaki']);
+    case 'quan-short':
+      this.router.navigate(['/filter-product/quan-short']);
       break
     default:
       break;

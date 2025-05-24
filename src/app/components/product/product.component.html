@@ -16,8 +16,9 @@
   <div class="product-grid__thumbnail" [routerLink]="['/product-details', product.id]" *ngIf="product">
     <div class="product-grid__image">
       <a>
-        <img loading="lazy" class="home-banner" src="{{product.images[0].imgUrl}}">
-        <img loading="lazy" class="hover" src="{{product.images[1].imgUrl}}">
+        <img *ngIf="product?.images?.length > 0" loading="lazy" class="home-banner" [src]="product.images[0].imgUrl" />
+
+        <img *ngIf="product?.images?.length > 1" loading="lazy" class="hover" [src]="product.images[1].imgUrl" />
       </a>
     </div>
     <span class="product-grid__tags product-grid__tags--bán chạy" *ngIf="isBestSeller">Bán chạy</span>

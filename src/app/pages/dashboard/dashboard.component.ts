@@ -50,6 +50,8 @@ export class DashboardComponent implements OnInit {
         }
       });
       this.productsWinter = this.productsWinter.slice(0,4);
+      console.log(this.productsAccessory);
+      
       this.productsAccessory = this.productsAccessory.slice(0,4);
     });
     this.GetListFeaturedProducts();

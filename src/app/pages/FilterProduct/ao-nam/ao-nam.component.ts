@@ -29,8 +29,8 @@ export class AoNamComponent implements OnInit{
     this.cities = [
         {name: 'Danh mục', code: 'default'},
         {name: 'Áo polo', code: 'ao-polo'},
-        {name: 'Áo sơ mi', code: 'ao-so-mi'},
-        {name: 'Áo thun', code: 'ao-thun'}
+        {name: 'Áo Tank Top', code: 'ao-tank-top'},
+        {name: 'Áo Thể Thao', code: 'ao-the-thao'}
     ];
     this.sort = [
       {key:'bestseller',value:'Mới nhất'},
@@ -45,11 +45,11 @@ onDropdownChange(event: any) {
     case 'ao-polo':
       this.router.navigate(['filter-product/ao-polo']);
       break;
-    case 'ao-so-mi':
-      this.router.navigate(['/filter-product/ao-so-mi']);
+    case 'ao-tank-top':
+      this.router.navigate(['/filter-product/ao-tank-top']);
       break;
-    case 'ao-thun':
-      this.router.navigate(['filter-product/ao-thun']);
+    case 'ao-the-thao':
+      this.router.navigate(['filter-product/ao-the-thao']);
       break;
     default:
       break;

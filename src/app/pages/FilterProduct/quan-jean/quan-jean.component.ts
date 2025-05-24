@@ -16,7 +16,7 @@ export class QuanJeanComponent implements OnInit{
   products: Product[] = [];
   getProduct(){
     this.ProductService.getAllProductsv1().pipe(
-      map(response => response.filter((product: { categoryId: number; }) => product.categoryId == 5))
+      map(response => response.filter((product: { categoryId: number; }) => product.categoryId == 4))
     ).subscribe(data =>{
       this.products = data;
     })
