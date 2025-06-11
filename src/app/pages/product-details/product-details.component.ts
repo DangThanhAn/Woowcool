@@ -197,38 +197,136 @@ export class ProductDetailsComponent implements OnInit,AfterViewInit {
     this.product.quantityOrder = this.count;
   }
   // Add cart
+
   addToCart(product: Product) {
-    console.log(product);
+  console.log(product);
+
+  // Check login
+  const token = localStorage.getItem('access_token');
+  if (token && token !== '') {
+    // Đã đăng nhập → gọi API như cũ
+    this.currentUser = this.UserService.getUserFromToken(token);
+    
     var cartDetail: CartDetail = {
       cartId: this.cartId,
       productId: product.id,
       size: product.sizeOrder || "",
       color: product.colorCurrent || "",
-      quantity: product.quantityOrder|| 1,
+      quantity: product.quantityOrder || 1,
     };
 
     this.cartService.addToCart(cartDetail).subscribe({
-      next:(res)=>{
+      next: (res) => {
         console.log(res);
         this.isShowToast = true;
         this.returnValue();
-        this.toastMessageComponent?.changeH4Content("Đã thêm vào giỏ hàng",'',true);
+        this.toastMessageComponent?.changeH4Content("Đã thêm vào giỏ hàng", '', true);
       },
-      error:(err)=>{
+      error: (err) => {
         console.log(err);
         this.isShowToast = true;
         this.returnValue();
-        this.toastMessageComponent?.changeH4Content("Vui lòng đăng nhập để sử dụng!",'error',false);
+        this.toastMessageComponent?.changeH4Content("Đã xảy ra lỗi!", 'error', false);
       }
-    })
+    });
+  } else {
+    // Chưa đăng nhập → Lưu vào localStorage
+    this.addToGuestCart(product);
   }
+}
+
+
+addToGuestCart(product: Product) {
+  const cart = JSON.parse(localStorage.getItem('guest_cart') || JSON.stringify({
+    id: 0, // hoặc random/mặc định
+    userId: 0, // guest nên là 0 hoặc null
+    totalPrice: 0,
+    quantity: 0,
+    cartDetails: [],
+    user: null
+  }));
+
+  // Tìm xem sản phẩm với size + color đã tồn tại chưa
+  const existingIndex = cart.cartDetails.findIndex((item: any) =>
+    item.productId === product.id &&
+    item.size === product.sizeOrder &&
+    item.color === product.colorCurrent
+  );
+
+  const price = product.price || 0;
+  const quantityToAdd = product.quantityOrder || 1;
+
+  if (existingIndex > -1) {
+    cart.cartDetails[existingIndex].quantity += quantityToAdd;
+  } else {
+    cart.cartDetails.push({
+      cartDetailId: Date.now(), // tạo ID tạm thời
+      cartId: cart.id,
+      productId: product.id,
+      size: product.sizeOrder || '',
+      color: product.colorCurrent || '',
+      price: price,
+      quantity: quantityToAdd,
+      product: product // Lưu toàn bộ object product
+    });
+  }
+
+  // Cập nhật lại tổng số lượng và giá
+  cart.quantity = cart.cartDetails.reduce((sum: number, item: any) => sum + item.quantity, 0);
+  cart.totalPrice = cart.cartDetails.reduce((sum: number, item: any) => sum + item.quantity * item.price, 0);
+
+  // Lưu lại vào localStorage
+  localStorage.setItem('guest_cart', JSON.stringify(cart));
+
+  // Thông báo UI
+  this.isShowToast = true;
+  this.returnValue();
+  this.toastMessageComponent?.changeH4Content("Đã thêm vào giỏ hàng (khách)", '', true);
+}
+
+
+
+  // addToCart(product: Product) {
+  //   console.log(product);
+  //   var cartDetail: CartDetail = {
+  //     cartId: this.cartId,
+  //     productId: product.id,
+  //     size: product.sizeOrder || "",
+  //     color: product.colorCurrent || "",
+  //     quantity: product.quantityOrder|| 1,
+  //   };
+
+  //   this.cartService.addToCart(cartDetail).subscribe({
+  //     next:(res)=>{
+  //       console.log(res);
+  //       this.isShowToast = true;
+  //       this.returnValue();
+  //       this.toastMessageComponent?.changeH4Content("Đã thêm vào giỏ hàng",'',true);
+  //     },
+  //     error:(err)=>{
+  //       console.log(err);
+  //       this.isShowToast = true;
+  //       this.returnValue();
+  //       this.toastMessageComponent?.changeH4Content("Vui lòng đăng nhập để sử dụng!",'error',false);
+  //     }
+  //   })
+  // }
+
+
+
   currentUser:any;
   cartId:number = 0;
   getCartByOfUser() {
+
     let token = localStorage.getItem('access_token');
     if (!(token == null || token == '')) {
       this.currentUser = this.UserService.getUserFromToken(token);
+      this.cartService.getCart(this.currentUser.id).subscribe((data) => this.cartId=data[0].id);
+    }else{
+      this.cartId = 0;
     }
-    this.cartService.getCart(this.currentUser.id).subscribe((data) => this.cartId=data[0].id);
+
   }
+
+
 }

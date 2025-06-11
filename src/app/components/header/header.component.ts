@@ -32,11 +32,25 @@ export class HeaderComponent {
     }
   }
   getNumberSpInCart(){
-    this.CartService.GetNumberInCart(this.currentUser.id).subscribe((res)=>{
-      this.numberIncart = res;
-      console.log(this.numberIncart);
-    })
+    if(this.currentUser){
+      this.CartService.GetNumberInCart(this.currentUser.id).subscribe((res)=>{
+        this.numberIncart = res;
+        console.log(this.numberIncart);
+      })
+    }else{
+    const guest_cart = localStorage.getItem('guest_cart');
+   if (guest_cart) {
+      const cartObj = JSON.parse(guest_cart);
+      const cartItems = cartObj.cartDetails || [];
+      this.numberIncart = cartItems.reduce((total: number, item: any) => total + (item.quantity || 0), 0);
+    } else {
+      this.numberIncart = 0;
+    }
+    }
+
   }
+
+
   status ='';
   isLogin = false;
   isNewPassword = false;

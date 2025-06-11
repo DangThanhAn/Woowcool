@@ -30,8 +30,9 @@ export class CartComponent implements OnInit {
     private UserService: UserService,
     private paymentService: InfoPaymentMomoService,
     private router: Router
-  ) {}
+  ) { }
   async ngOnInit(): Promise<void> {
+    
     await this.getUser();
     await this.getUserPesent();
     await this.getDataProvince();
@@ -58,9 +59,30 @@ export class CartComponent implements OnInit {
     let token = localStorage.getItem('access_token');
     if (!(token == null || token == '')) {
       this.currentUser = this.UserService.getUserFromToken(token);
+    } else {
+      this.currentUser = null; // người dùng chưa đăng nhập
     }
   }
-  getUserPesent(){
+
+  // getUserPesent() {
+  //   this.UserService.getInforUserById(this.currentUser.id).subscribe((data) => {
+  //     this.currentUser = data;
+  //     this.inforCustomer.setValue({
+  //       name: this.currentUser.userName,
+  //       address: this.currentUser.address,
+  //       phonenumber: this.currentUser.phone,
+  //       email: this.currentUser.email,
+  //       note: '',
+  //       selectedProvince: '',
+  //       selectedDistrict: '',
+  //       selectedWard: '',
+  //     });
+  //   });
+  // }
+
+  getUserPesent() {
+  if (this.currentUser && this.currentUser.id) {
+    // Người dùng đã đăng nhập
     this.UserService.getInforUserById(this.currentUser.id).subscribe((data) => {
       this.currentUser = data;
       this.inforCustomer.setValue({
@@ -74,74 +96,183 @@ export class CartComponent implements OnInit {
         selectedWard: '',
       });
     });
+  } else {
+    // Guest (chưa đăng nhập)
+    const guestDataStr = localStorage.getItem('guest_info');
+    const guestData = guestDataStr ? JSON.parse(guestDataStr) : null;
+
+    this.inforCustomer.setValue({
+      name: guestData?.name || '',
+      address: guestData?.address || '',
+      phonenumber: guestData?.phonenumber || '',
+      email: guestData?.email || '',
+      note: guestData?.note || '',
+      selectedProvince: guestData?.selectedProvince || '',
+      selectedDistrict: guestData?.selectedDistrict || '',
+      selectedWard: guestData?.selectedWard || '',
+    });
   }
+}
+
+
+
   totalCoin: number = 0;
   listTotal: number[] = [];
   getCartByOfUser() {
-    console.log("User ",this.currentUser);
-    this.cartService.getCart(this.currentUser.id).subscribe({
-      next: (res) => {
-        this.dataSource = res;
-        console.log(this.dataSource);
-        // console.log(this.dataSource[0].cartDetails[0].product.images[0].imgUrl);
-        // console.log(this.dataSource[0].cartDetails[0].product.price);
-        // console.log(this.dataSource[0].cartDetails[0].quantity);
-        this.listTotal.splice(0, this.listTotal.length);
-        for (const iterator of this.dataSource[0].cartDetails) {
-          this.listTotal.push(iterator.product.price * iterator.quantity);
-        }
-        this.totalCoin = this.listTotal.reduce(
-          (total: number, value: number) => {
-            return total + value;
-          },
-          0
-        );
-        let payShipping = this.totalCoin > 200000 ? 0 : 25000;
-        this.totalCoin+=payShipping;
-        console.log(this.totalCoin);
-        this.cartService
-          .updateTotalPrice(this.dataSource[0].id, this.totalCoin)
-          .subscribe(() => {
-            console.log('updated');
-          });
-      },
-      error: (err) => {
-        console.log('Co loi khi goi api get data' + err);
-      },
-    });
+    
+    if (this.currentUser) {
+      this.cartService.getCart(this.currentUser.id).subscribe({
+        next: (res) => {
+          this.dataSource = res;
+          console.log(this.dataSource);
+          // console.log(this.dataSource[0].cartDetails[0].product.images[0].imgUrl);
+          // console.log(this.dataSource[0].cartDetails[0].product.price);
+          // console.log(this.dataSource[0].cartDetails[0].quantity);
+          this.listTotal.splice(0, this.listTotal.length);
+          for (const iterator of this.dataSource[0].cartDetails) {
+            this.listTotal.push(iterator.product.price * iterator.quantity);
+          }
+          this.totalCoin = this.listTotal.reduce(
+            (total: number, value: number) => {
+              return total + value;
+            },
+            0
+          );
+          let payShipping = this.totalCoin > 200000 ? 0 : 25000;
+          this.totalCoin += payShipping;
+          console.log(this.totalCoin);
+          this.cartService
+            .updateTotalPrice(this.dataSource[0].id, this.totalCoin)
+            .subscribe(() => {
+              // console.log('updated');
+              this.dataSource[0].totalPrice = this.totalCoin;
+            });
+        },
+        error: (err) => {
+          console.log('Co loi khi goi api get data' + err);
+        },
+      });
+    } else {
+      const guestCart = JSON.parse(localStorage.getItem('guest_cart') || 'null');
+    if (guestCart && guestCart.cartDetails) {
+      // Tạo cấu trúc giống như dữ liệu API trả về
+      this.dataSource = [guestCart];
+
+      // Tính lại tổng
+      this.totalCoin = this.calculateTotal(guestCart.cartDetails);
+
+      const payShipping = this.totalCoin > 200000 ? 0 : 25000;
+      this.totalCoin += payShipping;
+
+      this.dataSource[0].totalPrice = this.totalCoin;
+    } else {
+      this.dataSource = [];
+      this.totalCoin = 0;
+    }
+    }
   }
 
 
+  calculateTotal(cartDetails: any[]): number {
+  return cartDetails.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+}
 
-  /**
-   * Hàm tăng giảm số lượng
-   * Author: DT An
-   * 14/12/22
-   */
-  countAdd(id: number, quanlity: number) {
-    quanlity++;
-    this.cartService.updateSize(id, quanlity).subscribe(() => {
-      console.log("click add",this.currentUser);
 
+
+
+  // /**
+  //  * Hàm tăng giảm số lượng
+  //  * Author: DT An
+  //  * 14/12/22
+  //  */
+  // countAdd(id: number, quanlity: number) {
+  //   quanlity++;
+  //   this.cartService.updateSize(id, quanlity).subscribe(() => {
+  //     console.log("click add", this.currentUser);
+
+  //     this.getCartByOfUser();
+  //   });
+  // }
+  // countSub(id: number, quanlity: number) {
+  //   quanlity--;
+  //   this.cartService.updateSize(id, quanlity).subscribe(() => {
+  //     this.getCartByOfUser();
+  //   });
+  // }
+  // /**
+  //  * Hàm xóa sản phẩm current
+  //  * Author: DT An
+  //  * 14/12/22
+  //  */
+  // deleteCD(id: number) {
+  //   this.cartService.deleteCD(id).subscribe(() => {
+  //     this.getCartByOfUser();
+  //   });
+  // }
+
+
+  countAdd(id: number, quantity: number) {
+  if (this.currentUser) {
+    // User đã đăng nhập
+    quantity++;
+    this.cartService.updateSize(id, quantity).subscribe(() => {
       this.getCartByOfUser();
     });
+  } else {
+    // Guest
+    const guest_cart = localStorage.getItem('guest_cart');
+    if (guest_cart) {
+      const cart = JSON.parse(guest_cart);
+      const item = cart.cartDetails.find((x: any) => x.cartDetailId === id);
+      if (item) {
+        item.quantity++;
+        localStorage.setItem('guest_cart', JSON.stringify(cart));
+        this.getCartByOfUser(); // reload UI
+      }
+    }
   }
-  countSub(id: number, quanlity: number) {
-    quanlity--;
-    this.cartService.updateSize(id, quanlity).subscribe(() => {
+}
+
+countSub(id: number, quantity: number) {
+  if (this.currentUser) {
+    // User đã đăng nhập
+    quantity--;
+    this.cartService.updateSize(id, quantity).subscribe(() => {
       this.getCartByOfUser();
     });
+  } else {
+    // Guest
+    const guest_cart = localStorage.getItem('guest_cart');
+    if (guest_cart) {
+      const cart = JSON.parse(guest_cart);
+      const item = cart.cartDetails.find((x: any) => x.cartDetailId === id);
+      if (item && item.quantity > 1) {
+        item.quantity--;
+        localStorage.setItem('guest_cart', JSON.stringify(cart));
+        this.getCartByOfUser(); // reload UI
+      }
+    }
   }
-  /**
-   * Hàm xóa sản phẩm current
-   * Author: DT An
-   * 14/12/22
-   */
-  deleteCD(id: number) {
+}
+
+deleteCD(id: number) {
+  if (this.currentUser) {
+    // User đã đăng nhập
     this.cartService.deleteCD(id).subscribe(() => {
       this.getCartByOfUser();
     });
+  } else {
+    // Guest
+    const guest_cart = localStorage.getItem('guest_cart');
+    if (guest_cart) {
+      const cart = JSON.parse(guest_cart);
+      cart.cartDetails = cart.cartDetails.filter((x: any) => x.cartDetailId !== id);
+      localStorage.setItem('guest_cart', JSON.stringify(cart));
+      this.getCartByOfUser(); // reload UI
+    }
   }
+}
+
 
   provinces: any[] = [];
   selectedProvince: string | any;
@@ -203,11 +334,18 @@ export class CartComponent implements OnInit {
     );
   }
 
+  addToGuestCart(product: any, quantity: number, size: string, color: string) {
+  const guestCart = JSON.parse(localStorage.getItem('guest_cart') || '[]');
+  guestCart.push({ product, quantity, size, color });
+  localStorage.setItem('guest_cart', JSON.stringify(guestCart));
+}
+
+
   /**
    * Với paymentMethod là momo
    */
   qrCode: string | any;
-  paymentWithMomo(amount: number,orderId: string,orderInfo: string){
+  paymentWithMomo(amount: number, orderId: string, orderInfo: string) {
     const partnerCode = 'MOMO1234567';
     const accessKey = '12345678912345678912';
     const secretKey = 'YOUR_SECRET_KEY';
@@ -264,8 +402,19 @@ export class CartComponent implements OnInit {
    * 2. Navigate tới trang thanh toán thành công và clear giỏ hàng.
    */
   onSubmit(): void {
+debugger
+    if (this.inforCustomer.invalid) {
+    this.inforCustomer.markAllAsTouched(); // Hiển thị lỗi
+    return; // Chặn submit nếu form chưa hợp lệ
+  }
+
     this.loading = true;
     console.warn('Your order has been submitted', this.inforCustomer.value);
+
+    if (!this.currentUser) {
+      const guestInfo = this.inforCustomer.value;
+      localStorage.setItem('guest_info', JSON.stringify(guestInfo));
+    }
     console.log(this.selectedPaymentMethod);
     console.log(this.dataSource);
     // 1. Post thông tin vào bảng order
@@ -273,28 +422,28 @@ export class CartComponent implements OnInit {
     let currentDate = new Date();
     let isoDate = currentDate.toISOString();
     let myOrder: Order = {
-      userId: this.dataSource[0].userId,
+      userId: this.dataSource[0].userId || null,
       orderDate: isoDate,
-      totalPrice: this.totalCoin,
-      //totalPrice: this.dataSource[0].totalPrice,
+      // totalPrice: this.totalCoin,
+      totalPrice: this.dataSource[0].totalPrice,
       status: 'Đang chờ xử lý',
       paymentMethod: this.selectedPaymentMethod,
     };
 
     console.log(myOrder);
     console.log(this.totalCoin);
-    
+
+
+
     
 
-    debugger
-    
     if (this.dataSource[0].totalPrice > 0) {
-      if(this.selectedPaymentMethod === 'momo'){
+      if (this.selectedPaymentMethod === 'momo') {
         this.paymentService.setCartData(this.dataSource);
         setTimeout(() => {
           this.router.navigate(['/payment/momo']);
         }, 2500);
-      }else{
+      } else {
         setTimeout(() => {
           this.cartService.createOrder(myOrder).subscribe(
             (newOrder) => {
@@ -315,6 +464,10 @@ export class CartComponent implements OnInit {
                   this.cartService
                     .createOrderDetails(myOrderDetails)
                     .subscribe(() => {
+                      if (!this.currentUser) {
+                        localStorage.removeItem('guest_cart');
+                        this.router.navigate(['/checkout']);
+                      }else{
                       //1. Xóa thông tin ở bảng giỏ hàng đi
                       this.cartService
                         .clearCart(this.dataSource[0].id)
@@ -328,6 +481,9 @@ export class CartComponent implements OnInit {
                           //3. Router Chuyển đến trang checkout
                           this.router.navigate(['/checkout']);
                         });
+                      }
+
+                      
                     });
                 }
               );
@@ -335,7 +491,7 @@ export class CartComponent implements OnInit {
             (error) => {
               console.log(error, 'Có lỗi khi đặt hàng');
             },
-            () =>{
+            () => {
               this.loading = false;
             }
           );

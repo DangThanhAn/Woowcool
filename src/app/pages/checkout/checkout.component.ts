@@ -23,7 +23,7 @@ export class CheckoutComponent implements OnInit{
   }
   mydata:any[] = [];
   getDataCheckout(){
-    this.UserService.getDataCheckout(this.currentUser.id).subscribe((data:any)=>{
+    this.UserService.getDataCheckout(this.currentUser ? this.currentUser.id : 0).subscribe((data:any)=>{
       this.mydata = data;
     })
   }
