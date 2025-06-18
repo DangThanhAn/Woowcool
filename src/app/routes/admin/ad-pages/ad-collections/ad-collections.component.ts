@@ -51,10 +51,10 @@ constructor( private AdminDashboardService : AdminDashboardService,private Admin
         ]
     };
     })
-    this.AdminDashboardService.GetRevenueInMonth(5).subscribe((data)=>{
+    this.AdminDashboardService.GetRevenueInMonth(6).subscribe((data)=>{
       let revenueInMonth = data;
       this.data1 = {
-        labels: ['Tháng 11','Tháng 12', 'Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5'],
+        labels: ['Tháng 12','Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6'],
         datasets: [
             {
                 label: 'Lợi nhuận',
