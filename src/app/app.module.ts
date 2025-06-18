@@ -33,6 +33,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import {ScrollTopModule} from 'primeng/scrolltop';
 import { DropdownModule } from 'primeng/dropdown';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { SelectSizeComponent } from './features/pages/select-size/select-size.component';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
     AboutCoolmateComponent,
     RisingComponent,
     CheckoutComponent,
+    SelectSizeComponent,
   ],
   imports: [
     CommonModule,
