@@ -34,12 +34,11 @@
         <div class="header--menu">
           <ul class="list--menu">
             <li view-menu class="list--menu__item">
-              <a [routerLink]="['/all-product']">Sản phẩm</a>
+              <a [routerLink]="['filter-product/ao-nam']">Áo Nam</a>
               <div class="mega--menu__product">
                 <div class="mega--menu__wrapper">
                   <div class="mega--menu__inner">
                     <div class="mega--menu__item">
-                      <a class="mega--menu__title" [routerLink]="['filter-product/ao-nam']">Áo Nam</a>
                       <ul class="mega--menu__list">
                         <li class="sub-title">
                           <a class="sub-title" [routerLink]="['filter-product/ao-tank-top']"> Áo TankTop</a>
@@ -52,8 +51,17 @@
                         </li>
                       </ul>
                     </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+
+            <li view-menu class="list--menu__item">
+              <a [routerLink]="['filter-product/quan-nam']">Quần nam</a>
+              <div class="mega--menu__product">
+                <div class="mega--menu__wrapper">
+                  <div class="mega--menu__inner">
                     <div class="mega--menu__item">
-                      <a class="mega--menu__title" [routerLink]="['filter-product/quan-nam']">Quần nam</a>
                       <ul class="mega--menu__list">
                         <li last-child class="sub-title">
                           <a class="sub-title" [routerLink]="['filter-product/quan-short']">Quần Short</a>
@@ -63,14 +71,13 @@
                         </li>
                       </ul>
                     </div>
-                    <div class="mega--menu__item">
-                      <a class="mega--menu__title" [routerLink]="['filter-product/phu-kien']">Phụ Kiện</a>
-                      <ul class="mega--menu__list">
-                      </ul>
-                    </div>
                   </div>
                 </div>
               </div>
+            </li>
+
+            <li view-menu class="list--menu__item">
+              <a [routerLink]="['filter-product/phu-kien']">Phụ Kiện</a>
             </li>
             
             <li class="list--menu__item">

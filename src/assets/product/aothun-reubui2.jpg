@@ -2887,7 +2887,7 @@ Các mã giảm giá có thể áp dụng:
 <div class="option-heading">
 <span class="option-heading__title">Kích thước Áo: <span class="text--bold" rel="product-option-title-tshirt_size"></span></span>
  <a href="#size-guide" class="option-heading__sizeguide" rel-script="toggle-size-guide">
-Hướng dẫn chọn size
+
 </a>
 </div>
 <div class="option-select option-select--tshirt_size" data-option-id="tshirt_size" data-option-index="2">
