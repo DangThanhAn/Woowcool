@@ -33,8 +33,8 @@
         </div>
         <div class="header--menu">
           <ul class="list--menu">
-            <li view-menu class="list--menu__item">
-              <a [routerLink]="['filter-product/ao-nam']">Áo Nam</a>
+            <!-- <li view-menu class="list--menu__item">
+              <a [routerLink]="['/all-product']">Sản phẩm</a>
               <div class="mega--menu__product">
                 <div class="mega--menu__wrapper">
                   <div class="mega--menu__inner">
@@ -74,12 +74,24 @@
                   </div>
                 </div>
               </div>
+            </li> -->
+            
+            <li class="list--menu__item dropdown">
+              <a class="dropdown-toggle">Sản phẩm</a>
+              <ul class="dropdown-menu">
+               <li><a [routerLink]="['/filter-product/ao-nam']">Áo Nam</a></li>
+                <li><a [routerLink]="['/filter-product/ao-tank-top']">Áo TankTop</a></li>
+                <li><a [routerLink]="['/filter-product/ao-the-thao']">Áo Thể thao</a></li>
+                <li><a [routerLink]="['/filter-product/ao-polo']">Áo Polo</a></li>
+                <li><a [routerLink]="['/filter-product/quan-nam']">Quần nam</a></li>
+                <li><a [routerLink]="['/filter-product/quan-short']">Quần Short</a></li>
+                <li><a [routerLink]="['/filter-product/quan-jogger']">Quần Jogger</a></li>
+                <li><a [routerLink]="['/filter-product/phu-kien']">Phụ Kiện</a></li>
+
+              </ul>
             </li>
 
-            <li view-menu class="list--menu__item">
-              <a [routerLink]="['filter-product/phu-kien']">Phụ Kiện</a>
-            </li>
-            
+
             <li class="list--menu__item">
               <a [routerLink]="['/blog']">Blog</a>
             </li>

@@ -39,16 +39,26 @@ export class ProductDetailsComponent implements OnInit,AfterViewInit {
     const productIDFromRoute = Number(routeParams.get('id'));
     this.idProduct = productIDFromRoute;
     this.getProduct(productIDFromRoute);
-    this.getProductType();
     this.getCartByOfUser();
     this.getReview(productIDFromRoute);
     this.getRecommendation();
   }
   idProduct = 0;
+  showSizeModal: boolean = false;
+
+openSizeGuide() {
+  this.showSizeModal = true;
+}
+
+closeSizeGuide() {
+  this.showSizeModal = false;
+}
+
   getProduct(productIDFromRoute: number) {
     this.productsService.getProductById(productIDFromRoute).subscribe((data)=>{
       this.product = data;
       console.log(this.product);
+      this.getProductType();
       this.product.quantityOrder = 1;
       // khởi tạo giá trị mặc định cho màu sắc
       this.colorConvert = this.product.colors[0].colorText;

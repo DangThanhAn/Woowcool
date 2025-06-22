@@ -81,12 +81,12 @@ export class AdDashboardComponent implements OnInit, OnDestroy {
     const textColorSecondary = documentStyle.getPropertyValue(
       '--text-color-secondary'
     );
-    this.AdminDashboardService.GetOrderInMonth(5).subscribe((data)=>{
+    this.AdminDashboardService.GetOrderInMonth(6).subscribe((data)=>{
       let quantityOrderInMonth = data;
-      this.AdminDashboardService.GetRevenueInMonth(5).subscribe((data)=>{
+      this.AdminDashboardService.GetRevenueInMonth(6).subscribe((data)=>{
         let revenueInMonth = data;
         this.chartData = {
-          labels: ['Tháng 11', 'Tháng 12','Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5'],
+          labels: ['Tháng 12', 'Tháng 1','Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6'],
           datasets: [
             {
               label: 'Doanh thu',

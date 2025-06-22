@@ -37,12 +37,37 @@ export class AdBlogComponent implements OnInit{
     // this.getCollections();
     this.getDataMO();
   }
-  getDataMO(){
-    this.AdminUserService.getDataViewMO().subscribe((data)=>{
-      this.dataMo = data;
-      console.log(this.dataMo);
-    })
-  }
+  getDataMO() {
+  this.AdminUserService.getDataViewMO().subscribe((data: any[]) => {
+    if (data && data.length > 0) {
+      this.dataMo = data.map((item: any) => {
+        item.user = item.user ?? {
+          id: 0,
+          userName: 'Guest',
+          dateOfBirth: null,
+          email: '',
+          sex: null,
+          address: '',
+          city: '',
+          phone: '',
+          role: 'guest',
+          height: null,
+          weight: null,
+          password: null,
+          carts: [],
+          orders: [],
+          reviews: []
+        };
+        return item;
+      });
+    } else {
+      this.dataMo = [];
+    }
+
+    console.log(this.dataMo);
+  });
+}
+
   updateStatusOrder(order:any){
     this.OrderItem = {...order}
     this.name= this.OrderItem.user.userName;
