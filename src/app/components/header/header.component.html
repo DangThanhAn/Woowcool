@@ -77,18 +77,24 @@
             </li> -->
             
             <li class="list--menu__item dropdown">
-              <a class="dropdown-toggle">Sản phẩm</a>
+              <a class="dropdown-toggle" [routerLink]="['/filter-product/ao-nam']">Áo Nam</a>
               <ul class="dropdown-menu">
-               <li><a [routerLink]="['/filter-product/ao-nam']">Áo Nam</a></li>
                 <li><a [routerLink]="['/filter-product/ao-tank-top']">Áo TankTop</a></li>
                 <li><a [routerLink]="['/filter-product/ao-the-thao']">Áo Thể thao</a></li>
                 <li><a [routerLink]="['/filter-product/ao-polo']">Áo Polo</a></li>
-                <li><a [routerLink]="['/filter-product/quan-nam']">Quần nam</a></li>
+              </ul>
+            </li>
+
+            <li class="list--menu__item dropdown">
+              <a class="dropdown-toggle" [routerLink]="['/filter-product/quan-nam']">Quần nam</a>
+              <ul class="dropdown-menu">
                 <li><a [routerLink]="['/filter-product/quan-short']">Quần Short</a></li>
                 <li><a [routerLink]="['/filter-product/quan-jogger']">Quần Jogger</a></li>
-                <li><a [routerLink]="['/filter-product/phu-kien']">Phụ Kiện</a></li>
-
               </ul>
+            </li>
+
+            <li class="list--menu__item ">
+              <a [routerLink]="['/filter-product/phu-kien']">Phụ Kiện</a>
             </li>
 
 
